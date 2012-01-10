@@ -1,0 +1,19 @@
+{% load i18n %}
+<aside id='user_info'>
+    <form class="search" method="post" name="search"
+        target="_self" action="">{% csrf_token %}
+        <ul>
+            <li>
+                <button type="button" id='add_candidate'>{% trans 'Candidate' %}</button>
+            </li>
+            <li>
+                <button type="button" id='add_job'>{% trans 'Job' %}</button>
+            </li>
+            <li>
+                <input id='search' name='search' type='text' value=''>
+            </li>
+            <li class="clear">
+            </li>
+        </ul>
+    </form>
+</aside>

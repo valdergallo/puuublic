@@ -1,0 +1,36 @@
+{% load i18n %}
+{% if not user.is_authenticated %}
+<aside id='box'>
+<form class="signin" method="post" name="signin"
+    target="_self" action="{% url signin %}">{% csrf_token %}
+    <ul>
+        {{ form.non_field_errors }}
+        {% for field in form %}
+        {{ field.errors }}
+        <li>
+        {{ field.label_tag }}
+        {{ field }}
+        </li>
+        {% endfor %}
+
+        <li>
+        <button type="submit">{% trans 'Sign In' %}</button>
+        </li>
+        <li class="clear">
+        </li>
+    </ul>
+
+</form>
+</aside>
+{% else %}
+<aside id='box'>
+<form class="signin" method="post" name="signin"
+    target="_self" action="{% url signin %}">{% csrf_token %}
+    <ul>
+        <li><button type="button" name="candidate_add" id="id_candidate_add" class="btn redirect" rel="{% url candidate_add %}">+ Candidate</button></li>
+        <li><button type="button" name="vaga_add" id="id_vaga_add" class="btn redirect" rel="{% url job_add %}">+ Vaga</button></li>
+        <li><input type="text" value="" name="search" id="id_search" /></li>
+    </ul>    
+</form>
+</aside>
+{% endif %}

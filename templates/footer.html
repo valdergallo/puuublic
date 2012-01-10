@@ -1,0 +1,11 @@
+{% load i18n %}
+{% if user.is_authenticated %}
+<section id='wrapper'>
+   <h4>Como podemos ajudar seu RH a ficar mais prático</h4>
+   <form name='ajax_comment' action="/ajax_comment/" id='ajax_comment'>
+        <textarea id="id_value" rows="5" cols="40" name="value"></textarea>
+        <button type="submit" class="bottum">{% trans 'Enviar' %}   </button>
+       <div class='msg box'>&bnsp;</div>
+    </form>
+</section>
+{% endif %}
