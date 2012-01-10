@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'public',
     'core',
     'friendship',
+    'website',
 )
 
 AUTH_PROFILE_MODULE = 'friendship.UserProfile'
