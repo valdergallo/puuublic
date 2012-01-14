@@ -1,27 +1,27 @@
 footer {
+    padding: 10px 0px;
     margin-top:50px;
     clear: both;
+    bottom:-1px;
     display: block;
-    background:#000;
-    border-top:2px solid #CCC;
-    min-height:30px;
+    border-top:1px solid #DCDBDC;
     bottom:0;
     width:100%;
-    position:relative;
+    position:absolute;
 }
 
-footer section h4 {
-    color:#fff;
-    padding: 10px 0;
+footer nav {
+    width: 960px;
+    display: block;
+    margin: 0px auto;
 }
 
-footer section textarea{
-    width:50%;
-    height:80px;
+footer nav ul {
+    display:inline;
 }
 
-
-footer section textarea, footer section button {
-    display:block;
-    margin:5px 0px;
+footer nav ul li {
+    list-style:none;
+    display:inline-block;
+    padding-right:15px;
 }

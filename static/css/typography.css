@@ -1,7 +1,7 @@
 /*--------------------------------------------------
 Typography
 -------------------------------------------------- */
-h1, h2, h3, h4, h5, h6 { color: #333; font-weight: bold; }
+h1, h2, h3, h4, h5, h6 { color: #2484C6; font-weight: bold; }
 h1, h2, h3 { letter-spacing: -1px; }
 h1 { font-size: 45px; line-height: 1; margin: 0 0 9px; }
 h2 { font-size: 30px; line-height: 1.2; margin: 9px 0; }

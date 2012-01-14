@@ -1,7 +1,8 @@
 # encoding: utf-8
-from django.db import models
 from core.models import DefaultFields, DefaultActiveFields
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
+from django.db import models
 import re
 
 
@@ -57,6 +58,21 @@ class PublicTag(models.Model):
         return self.tag
 
 
+class PublicManager(models.Manager):
+
+    def must_popular(self, page=1, limit=10):
+        query = Public.objects.all().order_by('-rated_count')
+        paginator = Paginator(query, limit)
+        query_list = paginator.page(page)
+        return query_list.object_list
+
+    def lastest_five(self):
+        try:
+            return Public.objects.latest()[0:5]
+        except Public.DoesNotExist:
+            return Public.objects.none()
+
+
 class Public(DefaultFields):
     user = models.ForeignKey(User, related_name='users')
     parent = models.ForeignKey('self', null=True, blank=True, related_name='parents')
@@ -65,12 +81,15 @@ class Public(DefaultFields):
     slug = models.SlugField(max_length=255, null=True, blank=True)
     message = models.TextField()
     image = models.ImageField(upload_to='public/%Y/%m/%d')
+    #replicate count
     rated_count = models.IntegerField(default=0)
-    rated = models.ForeignKey(Rated, null=True, blank=True, related_name='rated')
     watched_count = models.IntegerField(default=0)
-    watched = models.ForeignKey(Watched, null=True, blank=True, related_name='watched')
     liked_count = models.IntegerField(default=0)
-    liked = models.ForeignKey(Liked, null=True, blank=True, related_name='liked')
+
+    objects = PublicManager()
+
+    class Meta:
+        get_latest_by = ('date_created',)
 
     def __unicode__(self):
         return self.title

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block wrapper %}
+
+<h4>O jeito mais legal de contar as novidades
+e ficar por dentro do que te interessa.</h4>
+
+<hr>
+
+<section class="must_popular">
+   <h4>Publicações mais populares</h4> 
+   {% for public in must_popular_public_list %}
+   <article>
+       <figure>
+           <img src="{{ public.image.url }}">
+       </figure>
+       {{ public.title }}
+       <div>
+           no puuublic <a href="#">{{ public.user.username }}</a>
+       </div>
+   </article>
+   {% endfor %}
+</section>
+
+<section class="last_public_list">
+   <h4>Publicações mais recentes</h4> 
+   {% for public in last_public_list %}
+   <article>
+       <figure>
+           <img src="{{ public.image.url }}">
+       </figure>
+       {{ public.title }}
+       <div>
+           no puuublic <a href="#">{{ public.user.username }}</a>
+       </div>
+   </article>
+   {% endfor %}
+</section>
+
+
+{% endblock wrapper %}

@@ -1,11 +1,20 @@
 {% load i18n %}
-{% if user.is_authenticated %}
-<section id='wrapper'>
-   <h4>Como podemos ajudar seu RH a ficar mais prático</h4>
-   <form name='ajax_comment' action="/ajax_comment/" id='ajax_comment'>
-        <textarea id="id_value" rows="5" cols="40" name="value"></textarea>
-        <button type="submit" class="bottum">{% trans 'Enviar' %}   </button>
-       <div class='msg box'>&bnsp;</div>
-    </form>
-</section>
-{% endif %}
+<nav>
+    <ul>
+        <li class="#">
+            <a href="{% url website:novidades %}">{% trans 'Novidades' %}</a>
+        </li>
+        <li class="#">
+            <a href="{% url website:institucional %}">{% trans 'Institucional' %}</a>
+        </li>
+        <li class="#">
+            <a href="{% url website:termos %}">{% trans 'Termos' %}</a>
+        </li>
+        <li class="#">
+            <a href="{% url website:contato %}">{% trans 'Contato' %}</a>
+        </li>
+        <li>
+            Puuublic @ 2012
+        </li>
+    </ul>
+</nav>
