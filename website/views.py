@@ -1,6 +1,7 @@
 # encoding: utf-8
 from django.shortcuts import render
 from public.models import Public
+from friendship.forms import RegisterForm, LoginForm
 
 
 def home(request, page=1):
@@ -8,12 +9,17 @@ def home(request, page=1):
     must_popular_public_list = Public.objects.must_popular(page=page)
     last_public_list = Public.objects.lastest_five()
 
+    register_form = RegisterForm()
+    login_form = LoginForm()
+
     return render(request,
                   "website/home.html",
-                  {
-                   "must_popular_public_list":must_popular_public_list,
-                   "last_public_list":last_public_list,
-                   }
+                    {
+                     "login_form":login_form,
+                     "register_form":register_form,
+                     "must_popular_public_list":must_popular_public_list,
+                     "last_public_list":last_public_list,
+                     }
                   )
 
 

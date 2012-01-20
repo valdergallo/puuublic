@@ -1,23 +1,22 @@
 /**********************************************
-Header
-***********************************************/
+ Header
+ ***********************************************/
 
 header {
     clear: both;
-    border-bottom:1px solid #CCC;
+    border-bottom: 1px solid #CCC;
     position: relative;
-
+    padding: 5px 0px;
+    margin-bottom: 20px;
 }
-
 header nav {
     width: 810px;
     display: block;
     margin: 0px auto;
-    background:url('../image/Logotipo.png') no-repeat left;
+    background: url('../image/Logotipo.png') no-repeat left;
     height: 40px;
-    padding-left:150px;
+    padding-left: 150px;
 }
-
 header nav ul li {
-    list-style:none;
+    list-style: none;
 }

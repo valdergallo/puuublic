@@ -2,41 +2,112 @@
 {% load i18n %}
 
 {% block wrapper %}
-
-<h4>O jeito mais legal de contar as novidades
-e ficar por dentro do que te interessa.</h4>
-
+<section class='left_column'>
+    <h3>O jeito mais legal de contar as novidades
+    e ficar por dentro do que te interessa.</h3>
+    <article>
+        <figure>
+            <img src="{{ STATIC_URL }}image/home-criar.png">
+        </figure>
+        <h4>Você pode criar um puuublic</h4>
+        <div>
+            Crie uma página pública para sua cidade, bairro, colégio,
+            empresa, família, time, artista favorito ou qualquer assunto.
+        </div>
+    </article>
+    <article>
+        <figure>
+            <img src="{{ STATIC_URL }}image/home-divulgar.png">
+        </figure>
+        <h4>Conte as novidade para todos</h4>
+        <div>
+            Publique textos, fotos e vídeos em qualquer puuublic.
+            Conte para todo mundo o que é novidade para você.
+        </div>
+    </article>
+    <article>
+        <figure>
+            <img src="{{ STATIC_URL }}image/home-favoritar.png">
+        </figure>
+        <h4>É mais fácil com os Favoritos</h4>
+        <div>
+            Favorite puuublics e pessoas e receba todas as publicações
+            de seus favoritos e as mais populares em uma única página.
+        </div>
+    </article>
+    <article>
+        <figure>
+            <img src="{{ STATIC_URL }}image/home-publicar.png">
+        </figure>
+        <h4>Divulgue com um clique</h4>
+        <div>
+            Gostou de alguma publicação? Envie para todos
+            os seus leitores com apenas um clique.
+        </div>
+    </article>
+    <article>
+        <h4>Pesquise no Puuublic:</h4>
+        <div>
+            Encontre publicações, puuublics e pessoas.
+        </div>
+        <form action='.' method='post' name='form_search'>
+            <input type='text' name='search' id='id_search'>
+        </form>
+    </article>
+</section>
+<section class='right_column'>
+    <article>
+        <h4>Já tem uma conta no Puuublic?</h4>
+        <div>
+            Digite usuário e senha. <a href='#'>Esqueceu?</a>
+        </div>
+        <ul class='login_user'>
+            {{ login_form.as_ul }}
+            <li>
+                <input type='submit' value='Enviar' class='btn'>
+            </li>
+        </ul>
+    </article>
+    <article>
+        <h4>Ainda não tem uma conta?</h4>
+        <div>
+            Crie uma conta agora mesmo. É rápido e de graça.
+        </div>
+        <ul class="register_form">
+            {{ register_form.as_ul }}
+            <li>
+                <button type='submit' class='send_large'>Enviar</button>
+            </li>
+        </ul>
+    </article>
+</section>
 <hr>
-
 <section class="must_popular">
-   <h4>Publicações mais populares</h4> 
-   {% for public in must_popular_public_list %}
-   <article>
-       <figure>
-           <img src="{{ public.image.url }}">
-       </figure>
-       {{ public.title }}
-       <div>
-           no puuublic <a href="#">{{ public.user.username }}</a>
-       </div>
-   </article>
-   {% endfor %}
+    <h4>Publicações mais populares</h4>
+    {% for public in must_popular_public_list %}
+    <article>
+        <figure>
+            <img src="{{ public.image.url }}">
+        </figure>
+        {{ public.title }}
+        <div>
+            no puuublic <a href="#">{{ public.user.username }}</a>
+        </div>
+    </article>
+    {% endfor %}
 </section>
-
 <section class="last_public_list">
-   <h4>Publicações mais recentes</h4> 
-   {% for public in last_public_list %}
-   <article>
-       <figure>
-           <img src="{{ public.image.url }}">
-       </figure>
-       {{ public.title }}
-       <div>
-           no puuublic <a href="#">{{ public.user.username }}</a>
-       </div>
-   </article>
-   {% endfor %}
+    <h4>Publicações mais recentes</h4>
+    {% for public in last_public_list %}
+    <article>
+        <figure>
+            <img src="{{ public.image.url }}">
+        </figure>
+        {{ public.title }}
+        <div>
+            no puuublic <a href="#">{{ public.user.username }}</a>
+        </div>
+    </article>
+    {% endfor %}
 </section>
-
-
-{% endblock wrapper %}
+{% endblock wrapper %} 

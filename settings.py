@@ -125,7 +125,10 @@ INSTALLED_APPS = (
     'core',
     'friendship',
     'website',
+    'registration',
 )
+
+ACCOUNT_ACTIVATION_DAYS = 7
 
 AUTH_PROFILE_MODULE = 'friendship.UserProfile'
 
