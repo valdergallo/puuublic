@@ -1,0 +1,16 @@
+{% load i18n %}
+{% if messages or request.GET.message %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        {% if request.GET.message %}
+            <li class="{{ request.GET.class|default:'info' }}">
+                {% if request.GET.message == "success-reset" %}{% trans "You will receive an email with link to reset your password." %}{% endif %}
+                {% if request.GET.message == "success-reset-complete" %}{% trans "Password changed successfully." %}{% endif %}
+                {% if request.GET.message == "success-signup" %}{% trans "You will receive an email with link to activate your account." %}{% endif %}
+                {% if request.GET.message == "success-activate" %}{% trans "Account successfully activated." %}{% endif %}
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}

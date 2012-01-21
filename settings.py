@@ -128,9 +128,13 @@ INSTALLED_APPS = (
     'registration',
 )
 
-ACCOUNT_ACTIVATION_DAYS = 7
-
 AUTH_PROFILE_MODULE = 'friendship.UserProfile'
+#registration
+ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_HOST = 'localhost'
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+LOGIN_REDIRECT_URL = '/'
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

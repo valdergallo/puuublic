@@ -1,0 +1,14 @@
+{% load i18n %}{% blocktrans %}Hello,
+
+To activate your account at Startys you need to click on the
+following link:
+
+  http://{{site}}/users/activate/{{activation_key}}/
+
+or cut and paste this URL into your browser.
+
+If you have not made the registration yourself, you can ignore
+this message.
+
+Thanks,
+Startys Team{% endblocktrans %}

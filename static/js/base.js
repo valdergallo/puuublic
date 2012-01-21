@@ -1,5 +1,5 @@
-$(function(){
-   $('.redirect').click(function(){
-        window.location=$(this).attr('rel');
-   });
+$(function() {
+    $('.redirect').click(function() {
+        window.location = $(this).attr('rel');
+    });
 });

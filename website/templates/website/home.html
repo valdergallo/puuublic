@@ -55,30 +55,38 @@
         </form>
     </article>
 </section>
-<section class='right_column'>
+<section class='right_column input_label'>
     <article>
         <h4>Já tem uma conta no Puuublic?</h4>
         <div>
             Digite usuário e senha. <a href='#'>Esqueceu?</a>
         </div>
-        <ul class='login_user'>
-            {{ login_form.as_ul }}
-            <li>
-                <input type='submit' value='Enviar' class='btn'>
-            </li>
-        </ul>
+        <form name='signin_form' method='post' action="">
+            {% csrf_token %}
+            <ul class='login_user'>
+                {{ login_form.as_ul }}
+                <li>
+                    <input type='submit' value='Enviar' class='btn'>
+                </li>
+            </ul>
+        </form>
     </article>
     <article>
         <h4>Ainda não tem uma conta?</h4>
         <div>
             Crie uma conta agora mesmo. É rápido e de graça.
         </div>
-        <ul class="register_form">
-            {{ register_form.as_ul }}
-            <li>
-                <button type='submit' class='send_large'>Enviar</button>
-            </li>
-        </ul>
+        <form name='signup_form' method='post'>
+            {% csrf_token %}
+            <ul class="register_form">
+                {{ register_form.as_ul }}
+                <li>
+                    <button type='submit' class='send_large'>
+                        Enviar
+                    </button>
+                </li>
+            </ul>
+        </form>
     </article>
 </section>
 <hr>
@@ -110,4 +118,13 @@
     </article>
     {% endfor %}
 </section>
-{% endblock wrapper %} 
+{% endblock wrapper %}
+
+{% block js %} <script src="{{ STATIC_URL }}js/jquery.labelify.js"></script>
+<script type="text/javascript" charset="utf-8">
+    $("input").labelify({
+        text : "label"
+    });
+
+</script>
+{% endblock js %} 

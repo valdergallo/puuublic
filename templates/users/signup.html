@@ -1,0 +1,32 @@
+{% extends 'website/base.html' %}
+{% load i18n %}{% load static %}
+
+{% block nav %}{% endblock %} {# remove navigation to avoid distractions #}
+
+{% block main %}
+    <div class="signup">
+        <div class="website-form">
+            <h2 class="brown">{% trans "Fill the following fields and click on signup" %}</h2>
+
+            <form action="" method="post">
+                <ul class="form">
+                    {% csrf_token %}
+                    {{ form.as_ul }}
+                    <li class="terms"><p>{% trans "Clicking on signup button you will agree with our" %} <a
+                            href="{% url website-terms %}" target="_blank">{% trans "usage terms" %}</a>.</p></li>
+                    <li>
+                        <button class="slick red">{% trans "Signup!" %}</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+{#        <div class="signup-hints">#}
+{#            <h2 class="headline">Assinando Startys…</h2>#}
+{#            <ul>#}
+{#                <li>... você pode gerenciar sua empresa de forma simples e rápida</li>#}
+{#                <li>... etc</li>#}
+{#            </ul>#}
+{#        </div>#}
+        <div class="clear"></div>
+    </div>
+{% endblock %}
