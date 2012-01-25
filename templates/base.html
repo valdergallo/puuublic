@@ -7,7 +7,7 @@
         <meta name="description" content="Puuublic">
         <meta name="keywords" content="HTML, tags, commands">
     {% endblock meta %}
-    <title>Puuublic</title>
+    <title>{% block title %}Puuublic {% endblock title %}</title>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css"/>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/header.css" type="text/css"/>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/typography.css" type="text/css"/>
