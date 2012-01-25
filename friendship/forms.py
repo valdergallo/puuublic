@@ -1,10 +1,11 @@
 # encoding: utf-8
 from django import forms
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import authenticate
+from django.contrib.auth.models import User
+
 
 class RegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(), required=True)
 
     class Meta:
         model = User

@@ -2,6 +2,9 @@
 {% load i18n %}
 
 {% block wrapper %}
+{% if user.is_authenticated %}
+Autenticado -.-
+{% else %}
 <section class='left_column'>
     <h3>O jeito mais legal de contar as novidades
     e ficar por dentro do que te interessa.</h3>
@@ -61,13 +64,14 @@
         <div>
             Digite usuário e senha. <a href='#'>Esqueceu?</a>
         </div>
-        <form name='signin_form' method='post' action="">
+        <form name='signin_form' id='id_signin_form' method='POST' action="{% url website:ajax_login %}" onsubmit='return false'>
             {% csrf_token %}
             <ul class='login_user'>
                 {{ login_form.as_ul }}
                 <li>
                     <input type='submit' value='Enviar' class='btn'>
                 </li>
+                <li class='error'></li>
             </ul>
         </form>
     </article>
@@ -76,7 +80,7 @@
         <div>
             Crie uma conta agora mesmo. É rápido e de graça.
         </div>
-        <form name='signup_form' method='post'>
+        <form name='signup_form' method='POST' action='.'>
             {% csrf_token %}
             <ul class="register_form">
                 {{ register_form.as_ul }}
@@ -118,6 +122,7 @@
     </article>
     {% endfor %}
 </section>
+{% endif %}
 {% endblock wrapper %}
 
 {% block js %} <script src="{{ STATIC_URL }}js/jquery.labelify.js"></script>

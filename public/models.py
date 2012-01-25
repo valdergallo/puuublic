@@ -1,9 +1,11 @@
 # encoding: utf-8
-from core.models import DefaultFields, DefaultActiveFields
+import re
+
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db import models
-import re
+
+from core.models import DefaultFields, DefaultActiveFields
 
 
 class Liked(DefaultFields):
@@ -71,7 +73,7 @@ class PublicManager(models.Manager):
             return Public.objects.latest()[0:5]
         except Public.DoesNotExist:
             return Public.objects.none()
-
+            
 
 class Public(DefaultFields):
     user = models.ForeignKey(User, related_name='users')

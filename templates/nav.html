@@ -1,6 +1,17 @@
 {% load i18n %}
 {% if user.is_authenticated %}
-<ul>
-    <li class="#"><a href="{% url website:home %}">{% trans 'Home' %}</a></li>
+<ul class="nav">
+    <li class="#"><a href="{% url website:home %}">{% trans 'Inicio' %}</a></li>
+    <li class="#"><a href="#">{% trans 'Publicar' %}</a></li>
+    <li class="#"><a href="#">{% trans 'Criar Public' %}</a></li>
+    <li class="#"><a href="#">{% trans 'Perfil' %}</a></li>
+    <li class="#"><a href="#">{% trans 'Configurar' %}</a></li>
+    <li class="#"><a href="{% url website:weblogout %}">{% trans 'Sair' %}</a></li>
+    <li class="right">
+    <form action="." method="POST" name="search_public">
+        {{ form_search.as_ul }}
+        <button type="submit" class="btn search">Search</button>
+    </form>
+    </li>
 </ul>
 {% endif %}

@@ -104,13 +104,14 @@ form ul.errorlist {
     padding: 0px;
 }
 form ul.errorlist li {
-    background: #bf2a2a;
-    padding: 5px;
-    color: #fff;
-    font-weight: bolder;
-    width: 30%;
-    margin: 3px 0px;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    padding:0px;
+    margin:0px;
+    clear:both;
+    color:red;
+    display:inline-block;
+}
+
+li.error {
+    clear:both;
+    color:red;
 }
