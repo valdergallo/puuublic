@@ -47,7 +47,7 @@ class PublicTag(models.Model):
 
     @staticmethod
     def add(self, value, public):
-        tags = list(set(re.split(',| |-' , value)))
+        tags = list(set(re.split(',| |-', value)))
         for tag in tags:
             if tag:
                 tag, _ = Tag.objects.get_or_create(tag)
@@ -73,7 +73,7 @@ class PublicManager(models.Manager):
             return Public.objects.latest()[0:5]
         except Public.DoesNotExist:
             return Public.objects.none()
-            
+
 
 class Public(DefaultFields):
     user = models.ForeignKey(User, related_name='users')
@@ -95,6 +95,15 @@ class Public(DefaultFields):
 
     def __unicode__(self):
         return self.title
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('public', (), {
+            'year': self.publication_date.strftime('%Y'),
+            'month': self.publication_date.strftime('%m'),
+            'day': self.publication_date.strftime('%d'),
+            'slug': self.slug,
+        })
 
 
 class PublicImage(DefaultActiveFields):
