@@ -9,8 +9,8 @@
     <li class="#"><a href="{% url website:weblogout %}">{% trans 'Sair' %}</a></li>
     <li class="right">
     <form action="." method="POST" name="search_public">
-        {{ form_search.as_ul }}
-        <button type="submit" class="btn search">Search</button>
+        {{ search_form.as_ul }}
+        <input type="image" class="search" />
     </form>
     </li>
 </ul>
