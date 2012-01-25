@@ -4,7 +4,7 @@
 form {
     overflow: auto;
 }
-input {
+input[type="text"], input[type="password"], input[type="select"], input[type="search"], input[type="file"], input[type="date"] {
     -webkit-border-radius: .3em;
     -moz-border-radius: .3em;
     border-radius: .3em;
