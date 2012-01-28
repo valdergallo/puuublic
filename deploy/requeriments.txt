@@ -1,0 +1,12 @@
+Django==1.3.1
+PIL==1.1.7
+django-extensions==0.7.1
+django-piston==0.2.3
+django-registration==0.7
+django-solr==1.0.0alpha15
+ipdb==0.6.1
+ipython==0.12
+pysmell==0.7.3
+readline==6.2.1
+rope==0.9.3
+wsgiref==0.1.2
