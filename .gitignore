@@ -2,3 +2,4 @@
 .pydev*
 .settings*
 .pyc
+.ropeproject*

@@ -1,4 +1,4 @@
-#include = "{.tm_properties,.gitignore}"
+include = "{.tm_properties,.gitignore}"
 
 TM_PYTHON = "/Users/valdergallo/www/puuublic-pack/bin/python"
 DJANGO_SETTINGS_MODULE = "puuublic.settings"
