@@ -5,14 +5,23 @@ from django.contrib.auth.forms import authenticate
 from django.contrib.auth.views import login, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 
 from public.forms import SearchForm
 from friendship.forms import RegisterForm, LoginForm
 from public.models import Public
+  
 
-
-def home(request, page=1):
+def home(request):
     "Starting page without login"
+    page = request.REQUEST.get('page', 1)
+    
+    if request.user:
+        return redirect(reverse('website:home_user', args=[request.user]))
+       
     must_popular_public_list = Public.objects.must_popular(page=page)
     last_public_list = Public.objects.lastest_five()
 
@@ -23,7 +32,7 @@ def home(request, page=1):
     if request.method == 'POST':
 		register_form = RegisterForm(request.POST)
 		if register_form.is_valid():
-			return redirect('/')
+			return redirect(reverse('website:home'))
 
     return render(request,
                   "website/home.html",
@@ -35,6 +44,25 @@ def home(request, page=1):
                      "last_public_list":last_public_list,
                      }
                   )
+
+@login_required
+def home_user(request, username):
+    "Starting page with login"
+    page = request.REQUEST.get('page', 1)
+    user = get_object_or_404(User, username=username)
+    must_popular_public_list = user.publics.must_popular(page=page)
+    last_public_list = Public.objects.lastest_five()
+    search_form = SearchForm()
+    
+    return render(request,
+                  "website/home_user.html",
+                    {
+                    "search_form":search_form,
+                     "must_popular_public_list":must_popular_public_list,
+                     "last_public_list":last_public_list,
+                     }
+                  )
+    
 
 
 def novidades(request):

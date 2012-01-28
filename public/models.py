@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db import models
 
+
 from core.models import DefaultFields, DefaultActiveFields
 
 
@@ -34,6 +35,19 @@ class Alert(DefaultFields):
     public = models.ForeignKey('Public', related_name='public_alert')
 
 
+class TagManager(models.Manager):
+    
+    def register(self,values):
+        tags = list(set(re.split(',| |-|/|\"|\'', values))) #split value
+        tags = [x for x in tags if x] #clear empty values
+        for tag in tags:
+            tag, _ = Tag.objects.get_or_create(tag=tag)
+            public = Public.objects.get(id=self.core_filters.get('public__id'))
+            pubtag, _ = PublicTag.objects.get_or_create(tag=tag, public=public)
+             
+        return tags
+    
+
 class Tag(DefaultActiveFields):
     tag = models.CharField(max_length=100)
 
@@ -43,21 +57,12 @@ class Tag(DefaultActiveFields):
 
 class PublicTag(models.Model):
     tag = models.ForeignKey(Tag)
-    public = models.ForeignKey('Public')
-
-    @staticmethod
-    def add(self, value, public):
-        tags = list(set(re.split(',| |-', value)))
-        for tag in tags:
-            if tag:
-                tag, _ = Tag.objects.get_or_create(tag)
-                pubtag, _ = PublicTag.objects.get_or_create(tag, public)
-                return pubtag
-            else:
-                return None
-
+    public = models.ForeignKey('Public', related_name='tags')
+    
+    objects = TagManager()
+ 
     def __unicode__(self):
-        return self.tag
+        return self.tag.tag
 
 
 class PublicManager(models.Manager):
@@ -76,7 +81,7 @@ class PublicManager(models.Manager):
 
 
 class Public(DefaultFields):
-    user = models.ForeignKey(User, related_name='users')
+    user = models.ForeignKey(User, related_name='publics')
     parent = models.ForeignKey('self', null=True, blank=True, related_name='parents')
     title = models.CharField(max_length=255)
     tie = models.CharField(max_length=255)
