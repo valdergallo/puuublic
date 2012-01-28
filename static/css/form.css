@@ -115,3 +115,23 @@ li.error {
     clear:both;
     color:red;
 }
+
+blockout.search{
+    border:1px solid #000;
+    padding:5px;
+    margin:10px 0px;
+    display:block;
+}
+
+blockout.search label {
+    display:none;
+}
+
+blockout.search input[type=text] {
+    width:90%;
+    border:0px;
+}
+
+blockout.search input[type=image] {
+    float:right;
+}

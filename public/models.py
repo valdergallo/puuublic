@@ -99,9 +99,6 @@ class Public(DefaultFields):
     @models.permalink
     def get_absolute_url(self):
         return ('public', (), {
-            'year': self.publication_date.strftime('%Y'),
-            'month': self.publication_date.strftime('%m'),
-            'day': self.publication_date.strftime('%d'),
             'slug': self.slug,
         })
 

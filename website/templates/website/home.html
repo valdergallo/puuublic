@@ -53,9 +53,8 @@ Autenticado -.-
         <div>
             Encontre publicações, puuublics e pessoas.
         </div>
-        <form action="." method="POST" name="search_public">
-            {{ search_form.as_ul }}
-            <input type="image" class="search input_label" />
+        <form action="{% url website:home %}" method="POST" name="search_public">
+             {% include 'search_form.html' %}
         </form>
     </article>
 </section>

@@ -28,6 +28,7 @@ def home(request, page=1):
     return render(request,
                   "website/home.html",
                     {
+                    "search_form":search_form,
                      "login_form":login_form,
                      "register_form":register_form,
                      "must_popular_public_list":must_popular_public_list,
