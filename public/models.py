@@ -68,17 +68,23 @@ class PublicTag(models.Model):
 class PublicManager(models.Manager):
 
     def must_popular(self, page=1, limit=10):
-        query = Public.objects.all().order_by('-rated_count')
+        query = Public.objects.acitives().order_by('-rated_count')
         paginator = Paginator(query, limit)
         query_list = paginator.page(page)
         return query_list.object_list
 
     def lastest_five(self):
         try:
-            return Public.objects.latest()[0:5]
+            return Public.objects.acitives().order_by('-date_created')[0:5]
         except Public.DoesNotExist:
             return Public.objects.none()
 
+    def acitives(self):
+        return super(PublicManager, self).get_query_set().filter(active=1)
+        
+    def canceleds(self):
+        return super(PublicManager, self).get_query_set().filter(active=0)
+    
 
 class Public(DefaultFields):
     user = models.ForeignKey(User, related_name='publics')
@@ -92,7 +98,7 @@ class Public(DefaultFields):
     rated_count = models.IntegerField(default=0)
     watched_count = models.IntegerField(default=0)
     liked_count = models.IntegerField(default=0)
-
+      
     objects = PublicManager()
 
     class Meta:
@@ -111,13 +117,13 @@ class Public(DefaultFields):
 class PublicImage(DefaultActiveFields):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name='images')
     public = models.ForeignKey(Public)
 
 
 class Comment(DefaultActiveFields):
     message = models.CharField(max_length=200)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name='comments')
     public = models.ForeignKey(Public)
 
 

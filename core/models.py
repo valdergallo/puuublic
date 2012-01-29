@@ -12,7 +12,7 @@ class DefaultFields(models.Model):
     lon = models.FloatField(null=True, blank=True, db_index=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=True, db_index=True)
 
     class Meta:
         abstract = True
@@ -25,7 +25,7 @@ class DefaultActiveFields(models.Model):
     """
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=True, db_index=True)
 
 
     class Meta:
