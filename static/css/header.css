@@ -9,13 +9,21 @@ header {
     padding: 5px 0px;
     margin-bottom: 20px;
 }
-header nav {
-    width: 810px;
-    display: block;
+
+header nav nav.logo {
+    display: inline-block;
     margin: 0px auto;
     background: url('../image/Logotipo.png') no-repeat left;
     height: 40px;
-    padding-left: 150px;
+    width:150px;
+    float:left;
+}
+
+header nav {
+    width: 960px;
+    display: block;
+    margin: 0px auto;
+    height: 40px;
 }
 header nav ul li {
     list-style: none;
