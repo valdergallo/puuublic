@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     'core',
     'friendship',
     'website',
-    'registration',
+    #'registration', #TODO: make this work
 )
 
 AUTH_PROFILE_MODULE = 'friendship.UserProfile'
