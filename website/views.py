@@ -19,7 +19,7 @@ def home(request):
     "Starting page without login"
     page = request.REQUEST.get('page', 1)
     
-    if request.user:
+    if request.user.is_authenticated():
         return redirect(reverse('website:home_user', args=[request.user]))
        
     must_popular_public_list = Public.objects.must_popular(page=page)
@@ -45,6 +45,7 @@ def home(request):
                      }
                   )
 
+
 @login_required
 def home_user(request, username):
     "Starting page with login"
@@ -63,7 +64,6 @@ def home_user(request, username):
                      }
                   )
     
-
 
 def novidades(request):
     "News without login"
