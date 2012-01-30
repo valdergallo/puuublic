@@ -76,12 +76,14 @@ def home_user(request, username):
 
 def novidades(request):
     "News without login"
+    search_form = SearchForm()
     blog_list = Blog.objects.lastest_five()
     
     return render(request, 
                 "website/novidades.html",
                     {
                     "blog_list": blog_list,
+                    "search_form":search_form,
                     }
                 )
  
