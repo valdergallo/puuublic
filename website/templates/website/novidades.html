@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block wrapper %}
+<section>
+	{% for blog in blog_list %}
+		<article>
+			{% thumbnail blog.image "100" as im %}
+				<figure><img src="{{ im.url }}" title="{{ blog.title }}" width="{{ im.width }}" height="{{ im.height }}"></figure>
+			{% endthumbnail %}
+			<h4>{{ blog.title }}</h4> 
+			<span>{{ blog.date_created|date:"d-m-Y"}}</span>
+			<h5>{{ blog.tie }}</h5>
+			<blockout>
+				{{ blog.message }}
+			</blockout>
+		</article>
+	{% empty %}
+		<article>
+			<h4> Nenhuma novidade cadastrada </h4>
+		</article>
+	{% endfor %}
+</section>
+{% endblock wrapper %}
