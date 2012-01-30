@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# encoding: utf-8
+"""
+Created by Valder Gallo on 2012-01-29.
+Copyright (c) 2012 valdergallo. All rights reserved.
+"""
 Django==1.3.1
 PIL==1.1.7
 django-extensions==0.7.1

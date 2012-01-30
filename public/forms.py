@@ -1,4 +1,12 @@
+#!/usr/bin/env python
 # encoding: utf-8
+"""
+forms.py
+
+Created by Valder Gallo on 2012-01-29.
+Copyright (c) 2012 valdergallo. All rights reserved.
+"""
+
 import re
 
 from django import forms
@@ -27,22 +35,10 @@ class SearchForm(forms.Form):
         return value, Public.objects.filter(query)
 
 
-class TagForm(forms.Form):
-    "Add tags and split multiple values from one string like ,/ ... "
-
-    tags = forms.CharField(max_length=255, required=False)
-
-    def clean_tags(self):
-        value = self.cleaned_data['tags']
-        strip_tags = re.split('; | , - /', value)
-        if len(strip_tags):
-            return [slugify(tag) for tag in strip_tags]
-        else:
-            return slugify(strip_tags)
-
-
+ 
 class PublicForm(forms.ModelForm):
     "Add new Public"
+    tags = forms.CharField(max_length=255, required=False)
 
     class Meta:
         model = Public
