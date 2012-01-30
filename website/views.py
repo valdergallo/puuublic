@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from public.forms import SearchForm
 from friendship.forms import RegisterForm, LoginForm
 from public.models import Public
+from website.models import Blog
   
 
 def home(request):
@@ -67,19 +68,16 @@ def home_user(request, username):
 
 def novidades(request):
     "News without login"
-    return render(request, "base.html")
-
-
-def institucional(request):
-    "Institucional without login"
-    return render(request, "base.html")
-
-
-def termos(request):
-    "Termo without login"
-    return render(request, "base.html")
-
-
+    blog_list = Blog.objects.lastest_five()
+    
+    return render(request, 
+                "website/novidades.html",
+                    {
+                    "blog_list": blog_list,
+                    }
+                )
+ 
+ 
 def contato(request):
     "Contato without login"
     return render(request, "base.html")
