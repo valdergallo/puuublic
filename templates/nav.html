@@ -9,11 +9,9 @@
     <li class="#"><a href="#">{% trans 'Configurar' %}</a></li>
     <li class="#"><a href="{% url website:weblogout %}">{% trans 'Sair' %}</a></li>
     <li class="right">
-    <form action="{% url website:home %}" method="POST" name="search_public">
-        <form action="." method="POST" name="search_public">
+		<form action="{% url website:home_user user %}" method="POST" name="search_public">
              {% include 'search_form.html' %}
         </form>
-    </form>
     </li>
 </ul>
 {% endif %}
