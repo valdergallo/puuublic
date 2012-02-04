@@ -13,11 +13,9 @@ from forms import PublicForm
 
 
 def public_add(request):
-    public_form = PublicForm()
+    public_form = PublicForm(request.POST or None)
     
     if not request.method == 'POST':
-        public_form = PublicForm(request.POST)
-         
         if public_form.is_valid():
             public_form.save()
             public_form.tags.add(request.POST['tags'])

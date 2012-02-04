@@ -34,14 +34,10 @@ def home(request):
     must_popular_public_list = Public.objects.must_popular(page=page)
     last_public_list = Public.objects.lastest_five()
 
-    register_form = RegisterForm()
-    login_form = LoginForm()
-    search_form = SearchForm()
-
-    if request.method == 'POST':
-		register_form = RegisterForm(request.POST)
-		if register_form.is_valid():
-			return redirect(reverse('website:home'))
+    register_form = RegisterForm(request.POST or None)
+    login_form = LoginForm(request.POST or None)
+    search_form = SearchForm(request.POST or None)
+ 
 
     return render(request,
                   "website/home.html",
@@ -62,7 +58,7 @@ def home_user(request, username):
     user = get_object_or_404(User, username=username)
     must_popular_public_list = user.publics.must_popular(page=page)
     last_public_list = Public.objects.lastest_five()
-    search_form = SearchForm()
+    search_form = SearchForm(request.POST or None)
     
     return render(request,
                   "website/home_user.html",
@@ -74,9 +70,23 @@ def home_user(request, username):
                   )
     
 
+ 
+def institucional(request):
+    "Institucional without login"
+    search_form = SearchForm(request.POST or None)
+    return render(request, "website/institucional.html", {'search_form': search_form})
+
+
+def termos(request):
+    "Termo without login"
+    search_form = SearchForm(request.POST or None)
+    return render(request, "website/termos.html", {'search_form': search_form})
+
+
+
 def novidades(request):
     "News without login"
-    search_form = SearchForm()
+    search_form = SearchForm(request.POST or None)
     blog_list = Blog.objects.lastest_five()
     
     return render(request, 
