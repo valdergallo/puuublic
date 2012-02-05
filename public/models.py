@@ -50,7 +50,7 @@ class TagManager(models.Manager):
         tags = list(set(re.split(',| |-|/|\"|\'', values))) #split value
         tags = [x for x in tags if x] #clear empty values
         for tag in tags:
-            tag, _ = Tag.objects.get_or_create(tag=slugify(tags))
+            tag, _ = Tag.objects.get_or_create(value=slugify(tags))
             public = Public.objects.get(id=self.core_filters.get('public__id'))
             pubtag, _ = PublicTag.objects.get_or_create(tag=tag, public=public)
              
@@ -102,7 +102,7 @@ class Public(DefaultFields):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, null=True, blank=True)
     message = models.TextField()
-    image = models.ImageField(upload_to='public/%Y/%m/%d')
+    image = models.ImageField(upload_to='public/%Y/%m/%d', null=True, blank=True)
      
     #replicate count
     rated_count = models.IntegerField(default=0)

@@ -17,6 +17,7 @@
 <section class="form_public">
 <h4>Crie uma nova Publicação</h4>
 <form action="{% url public:register %}" method="POST" name="public_add">
+	{% csrf_token %}
     {{ public_form.as_p }}
     <button type="submit">Publicar</button>
 </form>
