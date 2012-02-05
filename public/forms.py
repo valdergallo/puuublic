@@ -13,7 +13,7 @@ from django import forms
 from django.db.models import Q
 from django.template.defaultfilters import slugify
 
-from public.models import Public
+from public.models import Public, Group
 
 
 class SearchForm(forms.Form):
@@ -30,10 +30,9 @@ class SearchForm(forms.Form):
         query |= Q(title__icontains=value)
         query |= Q(tie__icontains=value)
         query |= Q(message__icontains=value)
-        query |= Q(publictag__tag__icontains=value)
+        query |= Q(tags__tag__tag__icontains=value)
 
-        return value, Public.objects.filter(query)
-
+        return Public.objects.filter(query)
 
  
 class PublicForm(forms.ModelForm):
@@ -43,4 +42,11 @@ class PublicForm(forms.ModelForm):
     class Meta:
         model = Public
         fields = ('title', 'tie', 'message', 'image')
+        
+        
+class RegisterPublicForm(forms.ModelForm):
+    "Add new Group Public"
+    class Meta:
+        model = Group
+        fields = ('title',)
 

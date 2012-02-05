@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block wrapper %}
+<section class="col_right_form">
+	<h4>Quais as novidades?</h4>
+	<p>Um puuublic é uma página pública que pode ser criada por qualquer usuário. Crie um puuublic para sua cidade, bairro, colégio, empresa, família, time, artista favorito ou qualquer outro assunto. Todos os usuários poderão publicar neste puuublic. </p>
+	<p>O nome de um puuublic deve conter no máximo 25 caracteres e aceita espaços, letras maiúsculas, minúsculas e números. Portando seja criativo e escolha um nome que defina bem o assunto afim de evitar que confundam com outro puuublic e publiquem por engano.</p>
+	<p>O Puuuublic.com é uma rede de novidades onde todos tem liberdade para publicar novidades e opiniões sobre qualquer assunto.</p>
+</section>
+
+<section class="form_public">
+<h4>Crie um novo Puuublic</h4>
+<form action="{% url public:register %}" method="POST" name="public_add">
+    {{ public_form.as_p }}
+    <button type="submit">Criar</button>
+</form>
+<div>
+	O endereço deste puuublic será:
+	<a href='#'>O endereço deste puuublic será: <span class='changed'></span> </a>
+</div>
+</section>
+
+{% endblock wrapper %}

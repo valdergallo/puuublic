@@ -135,3 +135,16 @@ blockout.search input[type=text] {
 blockout.search input[type=image] {
     float:right;
 }
+.col_right_form {
+    float:right;
+    width:250px;
+    text-align:justify;
+}
+.col_right_form h4 {
+    border-bottom:1px solid #efefef;
+    padding-bottom:10px;
+    margin-bottom:25px;
+}
+.form_public input[type=text], .form_public textarea {
+    width:80%;
+}

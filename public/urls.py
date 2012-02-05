@@ -10,5 +10,6 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('public.views',
-    url(r'^add/$', 'public_add', name='add'),
+    url(r'^add/$', 'public_add', name='register'),
+    url(r'^addpublic/$', 'group_public_add', name='group'),
 )
