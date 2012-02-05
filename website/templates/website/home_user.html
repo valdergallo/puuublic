@@ -1,6 +1,24 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n thumbnail %}
 
 {% block wrapper %}
-Autenticado -.-
+
+{% for pub in pub_list %}
+		<article>
+			{% thumbnail pub.image "100" as im %}
+				<figure><img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}"></figure>
+			{% endthumbnail %}
+			<h4>{{ pub.title }}</h4> 
+			<span>{{ pub.date_created|date:"d-m-Y"}}</span>
+			<h5>{{ pub.tie }}</h5>
+			<blockout>
+				{{ pub.message }}
+			</blockout>
+		</article>
+	{% empty %}
+		<article>
+			<h4> Nenhum Puuublic cadastrado {% if search %} para {{ search }} {% endif %} </h4>
+		</article>
+{% endfor %}
+
 {% endblock wrapper %}

@@ -55,17 +55,22 @@ def home(request):
 def home_user(request, username):
     "Starting page with login"
     page = request.REQUEST.get('page', 1)
+    search = request.POST.get('search', '')
     user = get_object_or_404(User, username=username)
-    must_popular_public_list = user.publics.must_popular(page=page)
-    last_public_list = Public.objects.lastest_five()
+    
+    pub_list = user.publics.must_popular(page=page)
     search_form = SearchForm(request.POST or None)
+    
+    if request.method == 'POST':
+        if search_form.is_valid():
+            pub_list = search_form.get_result_queryset()
     
     return render(request,
                   "website/home_user.html",
                     {
-                    "search_form":search_form,
-                     "must_popular_public_list":must_popular_public_list,
-                     "last_public_list":last_public_list,
+                    "search": search,
+                    "search_form": search_form,
+                    "pub_list": pub_list
                      }
                   )
     
