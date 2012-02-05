@@ -24,11 +24,10 @@ class SearchForm(forms.Form):
     def get_result_queryset(self):
         query = Q()
         if not self.cleaned_data:
-            raise forms.ValidationError('Form no is clean')
+            raise forms.ValidationError('Form need be clear')
 
         value = self.cleaned_data['search']
         query |= Q(title__icontains=value)
-        query |= Q(tie__icontains=value)
         query |= Q(message__icontains=value)
         query |= Q(tags__tag__value__icontains=value)
 
@@ -41,4 +40,4 @@ class PublicForm(forms.ModelForm):
 
     class Meta:
         model = Public
-        fields = ('title', 'tie', 'message', 'image')
+        fields = ('title', 'message', 'image')

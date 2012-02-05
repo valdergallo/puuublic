@@ -100,7 +100,6 @@ class Public(DefaultFields):
     user = models.ForeignKey(User, related_name='publics')
     parent = models.ForeignKey('self', null=True, blank=True, related_name='parents')
     title = models.CharField(max_length=255)
-    tie = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, null=True, blank=True)
     message = models.TextField()
     image = models.ImageField(upload_to='public/%Y/%m/%d')
