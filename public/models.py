@@ -120,17 +120,26 @@ class Public(DefaultFields):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('public', (), {
-            'group': self.group,
-            'slug': self.slug,
-        })
+        if not self.parent:
+            public_url = ('public', (), {
+                'slug': self.slug,
+            })
+        else:
+            public_url = ('public', (), {
+                'slug': self.parent.slug,
+                'child': self.slug,
+            })
+        return public_url
 
 
 class PublicImage(DefaultActiveFields):
-    title = models.CharField(max_length=200)
-    description = models.CharField(max_length=200)
+    message = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='public/%Y/%m/%d')
     user = models.ForeignKey(User, related_name='images')
-    public = models.ForeignKey(Public)
+    public = models.ForeignKey(Public, related_name='public_images')
+    
+    def __unicode__(self):
+        return self.description
 
 
 class Comment(DefaultActiveFields):
