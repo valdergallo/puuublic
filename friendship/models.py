@@ -19,9 +19,11 @@ class Group(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Private(models.Model):
     group = models.ForeignKey(Group, related_name='private_group')
     can_see = models.BooleanField(default=True)
+
 
 class FriendshipType(models.Model):
     name = models.CharField(max_length=100)
