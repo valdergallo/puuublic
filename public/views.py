@@ -24,18 +24,3 @@ def public_add(request):
                   "public/public_form.html",
                   { 'public_form': public_form },
                   )
-    
-    
-def group_public_add(request):
-    public_form = RegisterPublicForm(request.POST or None)
-    
-    if not request.method == 'POST':
-        if public_form.is_valid():
-            public_form.save()
-            public_form.tags.add(request.POST['tags'])
-    
-    return render(request,
-                  "public/register_public_form.html",
-                  { 'public_form': public_form },
-                  )
-    

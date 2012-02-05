@@ -58,10 +58,10 @@ class TagManager(models.Manager):
     
 
 class Tag(DefaultActiveFields):
-    tag = models.CharField(max_length=100)
+    value = models.CharField(max_length=100)
 
     def __unicode__(self):
-        return self.tag
+        return self.value
 
 
 class PublicTag(models.Model):
@@ -71,7 +71,7 @@ class PublicTag(models.Model):
     objects = TagManager()
  
     def __unicode__(self):
-        return self.tag.tag
+        return self.tag.value
 
 
 class PublicManager(models.Manager):
@@ -93,30 +93,8 @@ class PublicManager(models.Manager):
         
     def canceleds(self):
         return super(PublicManager, self).get_query_set().filter(active=0)
-
-
-class Group(DefaultFields):
-    "This is one Puuublic"
-    user = models.ForeignKey(User, related_name='public_groups')
-    title = models.CharField(max_length=255)
-    tie = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, null=True, blank=True)
-    message = models.TextField()
-    image = models.ImageField(upload_to='group/%Y/%m/%d')
-    
-    class Meta:
-        get_latest_by = ('date_created',)
-
-    def __unicode__(self):
-        return self.title 
-        
-    @models.permalink
-    def get_absolute_url(self):
-        return ('public', (), {
-            'slug': self.slug,
-        })
-
-
+ 
+ 
 class Public(DefaultFields):
     "This is messages from one public"
     user = models.ForeignKey(User, related_name='publics')
@@ -126,9 +104,7 @@ class Public(DefaultFields):
     slug = models.SlugField(max_length=255, null=True, blank=True)
     message = models.TextField()
     image = models.ImageField(upload_to='public/%Y/%m/%d')
-    
-    group = models.ForeignKey(Group)
-    
+     
     #replicate count
     rated_count = models.IntegerField(default=0)
     watched_count = models.IntegerField(default=0)

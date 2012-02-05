@@ -30,7 +30,7 @@ class SearchForm(forms.Form):
         query |= Q(title__icontains=value)
         query |= Q(tie__icontains=value)
         query |= Q(message__icontains=value)
-        query |= Q(tags__tag__tag__icontains=value)
+        query |= Q(tags__tag__value__icontains=value)
 
         return Public.objects.filter(query)
 
@@ -42,11 +42,3 @@ class PublicForm(forms.ModelForm):
     class Meta:
         model = Public
         fields = ('title', 'tie', 'message', 'image')
-        
-        
-class RegisterPublicForm(forms.ModelForm):
-    "Add new Group Public"
-    class Meta:
-        model = Group
-        fields = ('title',)
-
