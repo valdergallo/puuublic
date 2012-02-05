@@ -13,7 +13,7 @@ from django import forms
 from django.db.models import Q
 from django.template.defaultfilters import slugify
 
-from public.models import Public, Group
+from public.models import Public
 
 
 class SearchForm(forms.Form):
