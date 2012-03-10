@@ -27,7 +27,7 @@ class Private(models.Model):
 
 class FriendshipType(models.Model):
     name = models.CharField(max_length=100)
-    
+
     def __unicode__(self):
         return self.name
 
@@ -37,7 +37,7 @@ class Friendship(DefaultActiveFields):
     friend = models.ForeignKey(User, related_name='friend')
     group = models.ForeignKey(Group, related_name='group')
     fiendship_type = models.ForeignKey(FriendshipType, related_name='type')
-    
+
     def __unicode__(self):
         return self.owner
 
@@ -45,7 +45,7 @@ class Friendship(DefaultActiveFields):
 class Follow(DefaultActiveFields):
     owner = models.ForeignKey(User, related_name='follow_owner')
     friend = models.ForeignKey(User, related_name='follow_friend')
-    
+
     def __unicode__(self):
         return self.owner
 
@@ -53,6 +53,7 @@ class Follow(DefaultActiveFields):
 class UserProfile(DefaultFields):
     "Extending User with DefaultFields"
     user = models.OneToOneField(User)
+    image = models.ImageField(upload_to="profile/%Y/%m/%d")
     url = models.URLField(null=True, blank=True)
     about = models.TextField(null=True, blank=True)
     newsletter = models.BooleanField(default=True)
@@ -60,11 +61,13 @@ class UserProfile(DefaultFields):
     token = models.CharField(max_length=255, null=True, blank=True)
     token_dev = models.CharField(max_length=255, null=True, blank=True)
 
+    def get_absolute_url(self):
+        return '/u/%s/' % self.user.username
+
 
 def create_user_profile(sender, instance, created, **kwargs):
     "Signal to auto create user"
     if created:
         UserProfile.objects.create(user=instance)
-
 
 post_save.connect(create_user_profile, sender=User)

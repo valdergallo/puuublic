@@ -1,1 +1,27 @@
-[{"pk": 2, "model": "admin.logentry", "fields": {"action_flag": 1, "action_time": "2012-01-29 23:02:56", "object_repr": "Teste", "object_id": "1", "change_message": "", "user": 1, "content_type": 28}}, {"pk": 1, "model": "admin.logentry", "fields": {"action_flag": 1, "action_time": "2012-01-29 23:02:50", "object_repr": "novidades", "object_id": "1", "change_message": "", "user": 1, "content_type": 27}}]
+[
+    {
+        "pk": 2,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-01-29 23:02:56",
+            "object_repr": "Teste",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 28
+        }
+    }, {
+        "pk": 1,
+        "model": "admin.logentry",
+        "fields": {
+            "action_flag": 1,
+            "action_time": "2012-01-29 23:02:50",
+            "object_repr": "novidades",
+            "object_id": "1",
+            "change_message": "",
+            "user": 1,
+            "content_type": 27
+        }
+    }
+]

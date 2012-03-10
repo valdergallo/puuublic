@@ -27,13 +27,12 @@ class DefaultFields(models.Model):
 
 class DefaultActiveFields(models.Model):
     """
-    Class Abstract Fields with created date (date_created), 
+    Class Abstract Fields with created date (date_created),
     updated date (date_updated) and active
     """
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True, db_index=True)
-
 
     class Meta:
         abstract = True

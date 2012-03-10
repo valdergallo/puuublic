@@ -20,8 +20,8 @@ class RegisterForm(forms.ModelForm):
 
 
 class LoginForm(forms.ModelForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'id':'regiter_user'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'id':'register_password'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'id': 'regiter_user'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'id': 'register_password'}))
 
     def clean(self):
         username = self.cleaned_data['username']
@@ -35,4 +35,3 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'password',)
-
