@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db import models
 from django.template.defaultfilters import slugify
-
+from django.core.cache import cache
 
 from core.models import DefaultFields, DefaultActiveFields
 
@@ -45,17 +45,17 @@ class Alert(DefaultFields):
 
 
 class TagManager(models.Manager):
-    
-    def register(self,values):
-        tags = list(set(re.split(',| |-|/|\"|\'', values))) #split value
-        tags = [x for x in tags if x] #clear empty values
+
+    def register(self, values):
+        tags = list(set(re.split(',| |-|/|\"|\'', values)))  # split value
+        tags = [x for x in tags if x]  # clear empty values
         for tag in tags:
             tag, _ = Tag.objects.get_or_create(value=slugify(tags))
             public = Public.objects.get(id=self.core_filters.get('public__id'))
-            pubtag, _ = PublicTag.objects.get_or_create(tag=tag, public=public)
-             
+            PublicTag.objects.get_or_create(tag=tag, public=public)
+
         return tags
-    
+
 
 class Tag(DefaultActiveFields):
     value = models.CharField(max_length=100)
@@ -67,9 +67,9 @@ class Tag(DefaultActiveFields):
 class PublicTag(models.Model):
     tag = models.ForeignKey(Tag)
     public = models.ForeignKey('Public', related_name='tags')
-    
+
     objects = TagManager()
- 
+
     def __unicode__(self):
         return self.tag.value
 
@@ -90,11 +90,11 @@ class PublicManager(models.Manager):
 
     def acitives(self):
         return super(PublicManager, self).get_query_set().filter(active=1)
-        
+
     def canceleds(self):
         return super(PublicManager, self).get_query_set().filter(active=0)
- 
- 
+
+
 class Public(DefaultFields):
     "This is messages from one public"
     user = models.ForeignKey(User, related_name='publics')
@@ -103,12 +103,12 @@ class Public(DefaultFields):
     slug = models.SlugField(max_length=255, null=True, blank=True)
     message = models.TextField()
     image = models.ImageField(upload_to='public/%Y/%m/%d', null=True, blank=True)
-     
+
     #replicate count
     rated_count = models.IntegerField(default=0)
     watched_count = models.IntegerField(default=0)
     liked_count = models.IntegerField(default=0)
-      
+
     objects = PublicManager()
 
     class Meta:
@@ -116,6 +116,9 @@ class Public(DefaultFields):
 
     def __unicode__(self):
         return self.title
+
+    def default(self):
+        return DefaultImage.objects.random()
 
     @models.permalink
     def get_absolute_url(self):
@@ -131,12 +134,34 @@ class Public(DefaultFields):
         return public_url
 
 
+class DefaltManager(models.Manager):
+
+    def random(self):
+        if not cache.get('query_cache'):
+            cache.set('query_cache', DefaultImage.objects.all())
+
+        query_cache = cache.get('query_cache')
+
+        if query_cache.exists():
+            return query_cache.order_by('?')[0]
+        else:
+            return None
+
+
+class DefaultImage(DefaultActiveFields):
+    image = models.ImageField(upload_to='default/%Y/%m/%d')
+    objects = DefaltManager()
+
+    def __unicode__(self):
+        return self.image.name
+
+
 class PublicImage(DefaultActiveFields):
     message = models.CharField(max_length=250)
     image = models.ImageField(upload_to='public/%Y/%m/%d')
     user = models.ForeignKey(User, related_name='images')
     public = models.ForeignKey(Public, related_name='public_images')
-    
+
     def __unicode__(self):
         return self.description
 
