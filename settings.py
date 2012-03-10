@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -109,7 +110,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
 )
- 
 
 ROOT_URLCONF = 'puuublic.urls'
 
@@ -138,6 +138,9 @@ INSTALLED_APPS = (
     'website',
     #plugins
     'sorl.thumbnail',
+    'thumpy',
+    'debug_toolbar',
+    'django_dynamic_fixture',
     #'registration', #TODO: make this work
 )
 
@@ -148,6 +151,10 @@ EMAIL_HOST = 'localhost'
 DEFAULT_FROM_EMAIL = 'valdergallo@gmail.com'
 LOGIN_REDIRECT_URL = '/'
 
+INTERNAL_IPS = ('127.0.0.1',)
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS':False
+}
 
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
@@ -168,3 +175,15 @@ LOGGING = {
         },
     }
 }
+
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    'debug_toolbar.panels.headers.HeaderDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
+)
