@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n thumbnail %}
 
 {% block wrapper %}
 {% if user.is_authenticated %}
@@ -96,11 +96,17 @@ Autenticado -.-
 <hr>
 <section class="must_popular">
     <h4>Publicações mais populares</h4>
-    {% for public in must_popular_public_list %}
+    {% for pub in must_popular_public_list %}
     <article>
-        <figure>
-            <img src="{{ public.image.url }}">
-        </figure>
+		{% thumbnail pub.image "67" as im %}
+		<figure>
+			<img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
+		</figure>
+		{% empty %}
+		<figure>
+			<img src="{{ default.image.url }}" title="{{ pub.title }}" width="{{ default.image.width }}" height="{{ default.image.height }}">
+		</figure>
+		{% endthumbnail %}
         {{ public.title }}
         <div>
             no puuublic <a href="#">{{ public.user.username }}</a>
@@ -110,11 +116,17 @@ Autenticado -.-
 </section>
 <section class="last_public_list">
     <h4>Publicações mais recentes</h4>
-    {% for public in last_public_list %}
+    {% for pub in last_public_list %}
     <article>
-        <figure>
-            <img src="{{ public.image.url }}">
-        </figure>
+		{% thumbnail pub.image "67" as im %}
+		<figure>
+			<img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
+		</figure>
+		{% empty %}
+		<figure>
+			<img src="{{ default.image.url }}" title="{{ pub.title }}" width="{{ default.image.width }}" height="{{ default.image.height }}">
+		</figure>
+		{% endthumbnail %}
         {{ public.title }}
         <div>
             no puuublic <a href="#">{{ public.user.username }}</a>
