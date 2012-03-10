@@ -19,9 +19,9 @@ body {
     margin: 0px auto;
     position: relative;
 }
-aside {
-    float: right;
-    width: 200px;
+#wrapper.aside hr{
+    clear:left;
+    width:70%;
 }
 article {
     padding: 10px;

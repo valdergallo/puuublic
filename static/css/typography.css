@@ -159,3 +159,7 @@ abbr {
 .ta-justify {
     text-align: justify !important;
 }
+
+.small {
+    font-size:10px;
+}
