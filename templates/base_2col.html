@@ -1,51 +1,68 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset='UTF-8' />
-        {% block meta %}
-        <meta name="description" content="Puuublic">
-        <meta name="keywords" content="HTML, tags, commands">
-        {% endblock meta %} <title>Puuublic</title>
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" />
-        {% block css %}
-        {% endblock css %}
-    </head>
-    <body id="index" class="home">
-        <section id="wrapper">
-            <header id="banner">
-                {% block header %}
-                {% endblock header %}
-                {% block account %}
-                {% endblock account %}
-                <nav>
-                    {% block nav %}
-                    {% include 'nav.html' %}
-                    {% endblock nav %}
-                </nav>
-            </header>
-            <aside>
-                {% block aside %}
-                <article>
-                    vote
-                    aside
-                </article>
-                {% endblock aside %}
-            </aside>
-            {% block content %} <section id='itens'></section>
-            {% endblock content %}
-            <footer>
-                {% block footer %}
-                footer
-                {% endblock footer %}
-            </footer>
-        </section>
-    </body>
-    <script src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>
-    <script src="{{ STATIC_URL }}js/base.js"></script>
-    <script src="{{ STATIC_URL }}js/django.js"></script>
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    {% block js %}
-    {% endblock js %}
+<head>
+	<meta charset='UTF-8'/>
+	{% block meta %}
+	<meta name="description" content="Puuublic">
+	<meta name="keywords" content="HTML, tags, commands">
+	{% endblock meta %}
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<title>{% block title %}Puuublic {% endblock title %}</title>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css"/>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/header.css" type="text/css"/>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/typography.css" type="text/css"/>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/hack.css" type="text/css"/>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/section.css" type="text/css"/>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/button.css" type="text/css"/>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/form.css" type="text/css"/>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/footer.css" type="text/css"/>
+	{% block extra_header %}
+	{% endblock %}
+</head>
+<body id="index" class="home">
+	{% block body %}
+	<header id="navebar">
+		{% block nav %}
+		<nav>
+			{% include 'nav.html' %}
+		</nav>
+		{% endblock nav %}
+		{% block account %}
+		{% endblock account %}
+	</header>
+	<section id="wrapper" class="aside">
+		<aside class="col_right_form">
+			{% block aside %}
+			<article>
+				vote
+				aside
+			</article>
+			{% endblock aside %}
+		</aside>
+		{% if messages %}
+		<ul id="errorMsg">
+			{% for message in messages %}
+			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		{% block wrapper %}
+		{% endblock wrapper %}
+	</section>
+	{% endblock body %}
+	<footer>
+		{% block footer %}
+		{% include 'footer.html' %}
+		{% endblock footer %}
+	</footer>
+</body>
+<script src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>
+<script src="{{ STATIC_URL }}js/base.js"></script>
+<script src="{{ STATIC_URL }}js/django.js"></script>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+{% block js %}
+{% endblock js %}
 </html>
