@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block wrapper %}
+<aside class="col_right_form">
+    <section class="last_public_list">
+        <h4>Publicações mais recentes</h4>
+        {% for pub in last_public_list %}
+        <article>
+            {% thumbnail pub.image "67" as im %}
+            <figure>
+                <img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
+            </figure>
+            {% empty %}
+            <figure>
+                <img src="{{ default.image.url }}" title="{{ pub.title }}" width="{{ default.image.width }}" height="{{ default.image.height }}">
+            </figure>
+            {% endthumbnail %}
+            {{ public.title }}
+            <div>
+                no puuublic <a href="#">{{ public.user.username }}</a>
+            </div>
+        </article>
+        {% endfor %}
+    </section>
+</aside>
+<section class="form_public">
+    <h1>{{ public.title }}</h1>
+    {% thumbnail pub.image "950" as im %}
+    <figure>
+        <img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
+    </figure>
+    {% endthumbnail %}
+    {{ public.message|safe }}
+    <div class="edit_bar">
+        EDIT BAR
+    </div>
+    <h4> Commentar esta publicação </h4>
+    <form action="" name="form_comment" id="id_form_comment">
+        {{ form_comment.as_p }}
+        <button type="submit">
+            Enviar
+        </button>
+    </form>
+    <section class="comments">
+        <h4>Comentários ({{ public.comments.count }})</h4>
+        {% for comment in public.comments %}
+        <article>
+            {% thumbnail comment.user.get_profile.image "67" as im %}
+            <figure>
+                <img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
+            </figure>
+            {% empty %}
+            <figure>
+                <img src="{{ default.image.url }}" title="{{ pub.title }}" width="{{ default.image.width }}" height="{{ default.image.height }}">
+            </figure>
+            {% endthumbnail %}
+            {{ comment.message }}
+        </article>
+        {% endfor %}
+    </section>
+</section>
+{% endblock wrapper %} 

@@ -43,6 +43,9 @@ class Alert(DefaultFields):
     user = models.ForeignKey(User, related_name='user_alert')
     public = models.ForeignKey('Public', related_name='public_alert')
 
+    def __unicode__(self):
+        return self.message
+
 
 class TagManager(models.Manager):
 
@@ -170,6 +173,9 @@ class Comment(DefaultActiveFields):
     message = models.CharField(max_length=200)
     user = models.ForeignKey(User, related_name='comments')
     public = models.ForeignKey(Public)
+
+    def __unicode__(self):
+        return self.message
 
 
 class PublicPermission(DefaultActiveFields):
