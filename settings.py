@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     'thumpy',
     'debug_toolbar',
     'django_dynamic_fixture',
+    'django-coverage',
     #'registration', #TODO: make this work
 )
 
@@ -187,3 +188,12 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.signals.SignalDebugPanel',
     'debug_toolbar.panels.logger.LoggingPanel',
 )
+
+
+COVERAGE_MODULES = (
+                    'puuublic',
+                    'public',
+                    'core',
+                    'friendship',
+                    'website',
+                    )
