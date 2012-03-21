@@ -55,10 +55,11 @@ def public_update(request, public_id):
                   )
 
 
-def public_detail(request, public_id):
+def public_detail(request, public_id, public_slug):
     public = get_object_or_404(Public, id=public_id)
+    comment_form =
 
     return render(request,
-                  "public/public_detai.lhtml",
-                  {'public_form': public},
+                  "public/public_detail.html",
+                  {'public': public},
                   )

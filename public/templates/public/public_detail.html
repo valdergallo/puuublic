@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n thumbnail %}
 
 {% block wrapper %}
 <aside class="col_right_form">
@@ -26,7 +26,7 @@
 </aside>
 <section class="form_public">
     <h1>{{ public.title }}</h1>
-    {% thumbnail pub.image "950" as im %}
+    {% thumbnail public.image "950x200" as im %}
     <figure>
         <img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
     </figure>
@@ -43,7 +43,7 @@
         </button>
     </form>
     <section class="comments">
-        <h4>Comentários ({{ public.comments.count }})</h4>
+        <h4>Comentários ({{ public.comments.count|default:0 }})</h4>
         {% for comment in public.comments %}
         <article>
             {% thumbnail comment.user.get_profile.image "67" as im %}

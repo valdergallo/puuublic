@@ -141,7 +141,7 @@ INSTALLED_APPS = (
     'thumpy',
     'debug_toolbar',
     'django_dynamic_fixture',
-    'django-coverage',
+    'coverage',
     #'registration', #TODO: make this work
 )
 

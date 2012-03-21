@@ -16,6 +16,7 @@ from django.template.defaultfilters import slugify
 from django.core.cache import cache
 
 from core.models import DefaultFields, DefaultActiveFields
+from django.core.urlresolvers import reverse
 
 
 class Liked(DefaultFields):
@@ -125,16 +126,24 @@ class Public(DefaultFields):
 
     @models.permalink
     def get_absolute_url(self):
-        if not self.parent:
-            public_url = ('public', (), {
-                'slug': self.slug,
+        return ('public:public_detail', (), {
+                'public_slug': self.slug or 'pub',
+                'public_id': self.id,
             })
-        else:
-            public_url = ('public', (), {
-                'slug': self.parent.slug,
-                'child': self.slug,
-            })
-        return public_url
+
+#    @models.permalink
+#    def get_absolute_url(self):
+#        if not self.parent:
+#            public_url = {
+#                'public_slug': self.slug,
+#                'public_id': self.id,
+#            }
+#        else:
+#            public_url = {
+#                'public_slug': self.parent.slug,
+#                'public_id': self.id,
+#            }
+#        return ('public:public_detail', (), public_url)
 
 
 class DefaltManager(models.Manager):
