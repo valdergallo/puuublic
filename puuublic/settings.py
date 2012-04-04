@@ -113,6 +113,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 ROOT_URLCONF = 'puuublic.urls'
 
+# Python dotted path to the WSGI application used by Django's runserver.
+WSGI_APPLICATION = 'puuublic.wsgi.application'
+
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -145,7 +149,7 @@ INSTALLED_APPS = (
     #'registration', #TODO: make this work
 )
 
-AUTH_PROFILE_MODULE = 'friendship.UserProfile'
+AUTH_PROFILE_MODULE = 'puuublic.friendship.UserProfile'
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_HOST = 'localhost'
@@ -162,9 +166,15 @@ DEBUG_TOOLBAR_CONFIG = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
+            'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },
@@ -189,9 +199,7 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.logger.LoggingPanel',
 )
 
-
 COVERAGE_MODULES = (
-                    'puuublic',
                     'public',
                     'core',
                     'friendship',
