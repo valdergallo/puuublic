@@ -1,5 +1,5 @@
 import os
-BASEDIR = os.path.dirname(__file__)
+BASEDIR = os.path.abspath(os.path.dirname(os.path.pardir))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -142,14 +142,16 @@ INSTALLED_APPS = (
     'website',
     #plugins
     'sorl.thumbnail',
-    'thumpy',
+#    'thumpy',
     'debug_toolbar',
     'django_dynamic_fixture',
     'coverage',
+    'south',
     #'registration', #TODO: make this work
 )
 
-AUTH_PROFILE_MODULE = 'puuublic.friendship.UserProfile'
+AUTH_PROFILE_MODULE = 'friendship.UserProfile'
+
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_HOST = 'localhost'
@@ -157,6 +159,7 @@ DEFAULT_FROM_EMAIL = 'valdergallo@gmail.com'
 LOGIN_REDIRECT_URL = '/'
 
 INTERNAL_IPS = ('127.0.0.1',)
+
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS':False
 }
@@ -187,17 +190,17 @@ LOGGING = {
     }
 }
 
-DEBUG_TOOLBAR_PANELS = (
-    'debug_toolbar.panels.version.VersionDebugPanel',
-    'debug_toolbar.panels.timer.TimerDebugPanel',
-    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-    'debug_toolbar.panels.headers.HeaderDebugPanel',
-    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-    'debug_toolbar.panels.template.TemplateDebugPanel',
-    'debug_toolbar.panels.sql.SQLDebugPanel',
-    'debug_toolbar.panels.signals.SignalDebugPanel',
-    'debug_toolbar.panels.logger.LoggingPanel',
-)
+#DEBUG_TOOLBAR_PANELS = (
+#    'debug_toolbar.panels.version.VersionDebugPanel',
+#    'debug_toolbar.panels.timer.TimerDebugPanel',
+#    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+#    'debug_toolbar.panels.headers.HeaderDebugPanel',
+#    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+#    'debug_toolbar.panels.template.TemplateDebugPanel',
+#    'debug_toolbar.panels.sql.SQLDebugPanel',
+#    'debug_toolbar.panels.signals.SignalDebugPanel',
+#    'debug_toolbar.panels.logger.LoggingPanel',
+#)
 
 COVERAGE_MODULES = (
                     'public',
