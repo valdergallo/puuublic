@@ -5,7 +5,7 @@ from django_dynamic_fixture import G
 
 class PublicManagerTest(TestCase):
     def setUp(self):
-        G(Public, n=10)
+        G(Public, n=20)
 
     def test_get_must_popular(self):
         pub = Public.objects.must_popular()

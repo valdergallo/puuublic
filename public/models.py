@@ -7,16 +7,12 @@ Created by Valder Gallo on 2012-01-29.
 Copyright (c) 2012 valdergallo. All rights reserved.
 """
 
-import re
-
 from django.contrib.auth.models import User
-from django.core.paginator import Paginator
 from django.db import models
-from django.template.defaultfilters import slugify
-from django.core.cache import cache
+from django.core.urlresolvers import reverse
 
 from core.models import DefaultFields, DefaultActiveFields
-from django.core.urlresolvers import reverse
+from public.managers import TagManager, DefaltImageManager, PublicManager, CommentManager
 
 
 class Liked(DefaultFields):
@@ -48,19 +44,6 @@ class Alert(DefaultFields):
         return self.message
 
 
-class TagManager(models.Manager):
-
-    def register(self, values):
-        tags = list(set(re.split(',| |-|/|\"|\'', values)))  # split value
-        tags = [x for x in tags if x]  # clear empty values
-        for tag in tags:
-            tag, _ = Tag.objects.get_or_create(value=slugify(tags))
-            public = Public.objects.get(id=self.core_filters.get('public__id'))
-            PublicTag.objects.get_or_create(tag=tag, public=public)
-
-        return tags
-
-
 class Tag(DefaultActiveFields):
     value = models.CharField(max_length=100)
 
@@ -76,29 +59,6 @@ class PublicTag(models.Model):
 
     def __unicode__(self):
         return self.tag.value
-
-
-class BasicManager(models.Manager):
-    def acitives(self):
-        return super(BasicManager, self).get_query_set().filter(active=1)
-
-    def canceleds(self):
-        return super(BasicManager, self).get_query_set().filter(active=0)
-
-
-class PublicManager(BasicManager):
-
-    def must_popular(self, page=1, limit=10):
-        query = Public.objects.acitives().order_by('-rated_count')
-        paginator = Paginator(query, limit)
-        query_list = paginator.page(page)
-        return query_list.object_list
-
-    def lastest_five(self):
-        try:
-            return Public.objects.acitives().order_by('-date_created')[0:5]
-        except Public.DoesNotExist:
-            return Public.objects.none()
 
 
 class Public(DefaultFields):
@@ -133,37 +93,11 @@ class Public(DefaultFields):
                 'public_id': self.id,
             })
 
-#    @models.permalink
-#    def get_absolute_url(self):
-#        if not self.parent:
-#            public_url = {
-#                'public_slug': self.slug,
-#                'public_id': self.id,
-#            }
-#        else:
-#            public_url = {
-#                'public_slug': self.parent.slug,
-#                'public_id': self.id,
-#            }
-#        return ('public:public_detail', (), public_url)
-
-
-class DefaltManager(models.Manager):
-    def random(self):
-        if not cache.get('query_cache'):
-            cache.set('query_cache', DefaultImage.objects.all())
-
-        query_cache = cache.get('query_cache')
-
-        if query_cache.exists():
-            return query_cache.order_by('?')[0]
-        else:
-            return None
-
 
 class DefaultImage(DefaultActiveFields):
     image = models.ImageField(upload_to='default/%Y/%m/%d')
-    objects = DefaltManager()
+
+    objects = DefaltImageManager()
 
     def __unicode__(self):
         return self.image.name
@@ -177,14 +111,6 @@ class PublicImage(DefaultActiveFields):
 
     def __unicode__(self):
         return self.description
-
-
-class CommentManager(BasicManager):
-    def last_ten(self, page=1, limit=10):
-        query = Comment.objects.acitives().order_by('-date_created')
-        paginator = Paginator(query, limit)
-        query_list = paginator.page(page)
-        return query_list.object_list
 
 
 class Comment(DefaultActiveFields):
