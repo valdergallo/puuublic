@@ -1,19 +1,16 @@
 from django.test import TestCase
 from public.models import Public
+from django_dynamic_fixture import G
+
 
 class PublicManagerTest(TestCase):
-    def test_get_must_popular(self):
-        """
-        Get must popular Publics
-        """
-        pub = Public.objects.must_popular()
-         
-        #FIXME: error
-        pass
-        self.assertEqual(pub, None)
+    def setUp(self):
+        G(Public, n=10)
 
-    def test_lastest_five(self):
-            """
-            Tests that 1 + 1 always equals 2.
-            """
-            self.assertEqual(1 + 1, 2)
+    def test_get_must_popular(self):
+        pub = Public.objects.must_popular()
+        self.assertEqual(pub.count(), 10)
+
+    def test_get_last_five(self):
+        pub = Public.objects.lastest_five()
+        self.assertEqual(pub.count(), 5)

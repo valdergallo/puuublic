@@ -44,7 +44,7 @@
     </form>
     <section class="comments">
         <h4>Comentários ({{ public.comments.count|default:0 }})</h4>
-        {% for comment in public.comments %}
+        {% for comment in public.comments.last_ten %}
         <article>
             {% thumbnail comment.user.get_profile.image "67" as im %}
             <figure>

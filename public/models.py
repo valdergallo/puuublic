@@ -78,7 +78,15 @@ class PublicTag(models.Model):
         return self.tag.value
 
 
-class PublicManager(models.Manager):
+class BasicManager(models.Manager):
+    def acitives(self):
+        return super(BasicManager, self).get_query_set().filter(active=1)
+
+    def canceleds(self):
+        return super(BasicManager, self).get_query_set().filter(active=0)
+
+
+class PublicManager(BasicManager):
 
     def must_popular(self, page=1, limit=10):
         query = Public.objects.acitives().order_by('-rated_count')
@@ -91,12 +99,6 @@ class PublicManager(models.Manager):
             return Public.objects.acitives().order_by('-date_created')[0:5]
         except Public.DoesNotExist:
             return Public.objects.none()
-
-    def acitives(self):
-        return super(PublicManager, self).get_query_set().filter(active=1)
-
-    def canceleds(self):
-        return super(PublicManager, self).get_query_set().filter(active=0)
 
 
 class Public(DefaultFields):
@@ -147,7 +149,6 @@ class Public(DefaultFields):
 
 
 class DefaltManager(models.Manager):
-
     def random(self):
         if not cache.get('query_cache'):
             cache.set('query_cache', DefaultImage.objects.all())
@@ -178,10 +179,20 @@ class PublicImage(DefaultActiveFields):
         return self.description
 
 
+class CommentManager(BasicManager):
+    def last_ten(self, page=1, limit=10):
+        query = Comment.objects.acitives().order_by('-date_created')
+        paginator = Paginator(query, limit)
+        query_list = paginator.page(page)
+        return query_list.object_list
+
+
 class Comment(DefaultActiveFields):
     message = models.CharField(max_length=200)
-    user = models.ForeignKey(User, related_name='comments')
-    public = models.ForeignKey(Public)
+    user = models.ForeignKey(User)
+    public = models.ForeignKey(Public, related_name='comments')
+
+    objects = CommentManager()
 
     def __unicode__(self):
         return self.message
