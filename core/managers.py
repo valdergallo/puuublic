@@ -8,13 +8,14 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 """
 from django.db import models
 
-
-class BasicManager(models.Manager):
+class ActiveManager(models.Manager):
     def get_query_set(self):
         "Active by default"
-        return super(BasicManager, self).get_query_set().filter(active=1)
+        return super(ActiveManager, self).get_query_set().filter(active=True)
 
-    def canceleds(self):
+
+class CanceledManager(models.Manager):
+    def get_query_set(self):
         "Show canceled content"
-        return super(BasicManager, self).get_query_set().filter(active=0)
+        return super(CanceledManager, self).get_query_set().filter(active=False)
 

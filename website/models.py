@@ -9,28 +9,20 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 
 from django.db import models
 from core.models import DefaultFields
+from core.managers import ActiveManager, CanceledManager
 
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    
+
     def __unicode__(self):
         return self.name
 
 
-class BlogManager(models.Manager):
-    
-    def lastest_five(self):
-        try:
-            return Blog.objects.acitives().order_by('-date_created')[0:5]
-        except Blog.DoesNotExist:
-            return Public.objects.none()
+class BlogManager(ActiveManager):
 
-    def acitives(self):
-        return super(BlogManager, self).get_query_set().filter(active=1)
-        
-    def canceleds(self):
-        return super(BlogManager, self).get_query_set().filter(active=0)
+    def lastest_five(self):
+        return Blog.objects.all().order_by('-date_created')[0:5]
 
 
 class Blog(DefaultFields):
@@ -40,12 +32,13 @@ class Blog(DefaultFields):
     message = models.TextField()
     image = models.ImageField(upload_to='public/%Y/%m/%d')
     category = models.ManyToManyField(Category)
-    
+
     objects = BlogManager()
-    
+    canceleds = CanceledManager()
+
     def __unicode__(self):
         return self.title
-        
+
     @models.permalink
     def get_absolute_url(self):
             return ('blog', (), {

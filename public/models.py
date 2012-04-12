@@ -9,10 +9,10 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 
 from django.contrib.auth.models import User
 from django.db import models
-from django.core.urlresolvers import reverse
 
-from core.models import DefaultFields, DefaultActiveFields
+from core.models import DefaultFields, DefaultGeoFields
 from public.managers import TagManager, DefaltImageManager, PublicManager, CommentManager
+from core.managers import CanceledManager
 
 
 class Liked(DefaultFields):
@@ -44,7 +44,7 @@ class Alert(DefaultFields):
         return self.message
 
 
-class Tag(DefaultActiveFields):
+class Tag(DefaultFields):
     value = models.CharField(max_length=100)
 
     def __unicode__(self):
@@ -61,7 +61,7 @@ class PublicTag(models.Model):
         return self.tag.value
 
 
-class Public(DefaultFields):
+class Public(DefaultGeoFields):
     "This is messages from one public"
     user = models.ForeignKey(User, related_name='publics')
     parent = models.ForeignKey('self', null=True, blank=True, related_name='parents')
@@ -76,6 +76,7 @@ class Public(DefaultFields):
     liked_count = models.IntegerField(default=0)
 
     objects = PublicManager()
+    canceleds = CanceledManager()
 
     class Meta:
         get_latest_by = ('date_created',)
@@ -94,7 +95,7 @@ class Public(DefaultFields):
             })
 
 
-class DefaultImage(DefaultActiveFields):
+class DefaultImage(DefaultFields):
     image = models.ImageField(upload_to='default/%Y/%m/%d')
 
     objects = DefaltImageManager()
@@ -103,28 +104,31 @@ class DefaultImage(DefaultActiveFields):
         return self.image.name
 
 
-class PublicImage(DefaultActiveFields):
+class PublicImage(DefaultFields):
     message = models.CharField(max_length=250)
     image = models.ImageField(upload_to='public/%Y/%m/%d')
     user = models.ForeignKey(User, related_name='images')
     public = models.ForeignKey(Public, related_name='public_images')
 
+    canceleds = CanceledManager()
+
     def __unicode__(self):
         return self.description
 
 
-class Comment(DefaultActiveFields):
+class Comment(DefaultGeoFields):
     message = models.CharField(max_length=200)
     user = models.ForeignKey(User)
     public = models.ForeignKey(Public, related_name='comments')
 
     objects = CommentManager()
+    canceleds = CanceledManager()
 
     def __unicode__(self):
         return self.message
 
 
-class PublicPermission(DefaultActiveFields):
+class PublicPermission(DefaultFields):
     owner = models.ForeignKey(User, related_name='permission_user')
     friend = models.ForeignKey(User, related_name='permission_friend')
     public = models.ForeignKey(Public, related_name='permission_public')

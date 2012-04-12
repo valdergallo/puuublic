@@ -12,10 +12,10 @@ from django.core.cache import cache
 from django.template.defaultfilters import slugify
 from django.core.paginator import Paginator
 
-from core.managers import BasicManager
+from core.managers import ActiveManager
 
 
-class TagManager(BasicManager):
+class TagManager(ActiveManager):
 
     def register(self, values):
         from public.models import Public, PublicTag
@@ -26,11 +26,10 @@ class TagManager(BasicManager):
             tag, _ = self.get_or_create(value=slugify(tags))
             public = Public.objects.get(id=self.core_filters.get('public__id'))
             PublicTag.objects.get_or_create(tag=tag, public=public)
-
         return tags
 
 
-class PublicManager(BasicManager):
+class PublicManager(ActiveManager):
 
     def must_popular(self, page=1, limit=10):
         query = self.all().order_by('-rated_count')
@@ -56,7 +55,7 @@ class DefaltImageManager(models.Manager):
             return None
 
 
-class CommentManager(BasicManager):
+class CommentManager(ActiveManager):
 
     def last_ten(self, page=1, limit=10):
         query = self.objects.all().order_by('-date_created')

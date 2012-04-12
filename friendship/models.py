@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 
-from core.models import DefaultFields, DefaultActiveFields
+from core.models import DefaultFields
 
 
 class Group(models.Model):
@@ -32,7 +32,7 @@ class FriendshipType(models.Model):
         return self.name
 
 
-class Friendship(DefaultActiveFields):
+class Friendship(DefaultFields):
     owner = models.ForeignKey(User, related_name='owner')
     friend = models.ForeignKey(User, related_name='friend')
     group = models.ForeignKey(Group, related_name='group')
@@ -42,7 +42,7 @@ class Friendship(DefaultActiveFields):
         return self.owner
 
 
-class Follow(DefaultActiveFields):
+class Follow(DefaultFields):
     owner = models.ForeignKey(User, related_name='follow_owner')
     friend = models.ForeignKey(User, related_name='follow_friend')
 
@@ -69,6 +69,5 @@ def create_user_profile(sender, instance, created, **kwargs):
     "Signal to auto create user"
     if created:
         UserProfile.objects.create(user=instance)
-
 
 post_save.connect(create_user_profile, sender=User)

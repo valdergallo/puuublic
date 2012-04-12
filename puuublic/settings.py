@@ -12,36 +12,21 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(BASEDIR, 'db', 'pubblick.sqlite'), # Or path to database file if using sqlite3.
+        'NAME': os.path.join(BASEDIR, 'db', 'puuublic.sqlite'), # Or path to database file if using sqlite3.
         'USER': '', # Not used with sqlite3.
         'PASSWORD': '', # Not used with sqlite3.
         'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '', # Set to empty string for default. Not used with sqlite3.
+        'TEST_NAME': 'test.db',
     }
 }
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
 TIME_ZONE = 'America/Sao_Paulo'
-
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'pt-BR'
-
 SITE_ID = 1
-
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
 USE_I18N = True
-
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale
 USE_L10N = True
+USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
@@ -62,11 +47,6 @@ STATIC_ROOT = os.path.join(BASEDIR, 'static')
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-# URL prefix for admin static files -- CSS, JavaScript and images.
-# Make sure to use a trailing slash.
-# Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
-
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -84,7 +64,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '0b(orcov=ky32osfhtq)y92m42w+*2@y=*h%y$g9j+ix&x43px'
+SECRET_KEY = '2l+i-5to%g7l-5t3j*#uc7uu#iudn8zf+h0u=f@nzpy4%jfj-%'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -99,7 +79,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -143,14 +123,14 @@ INSTALLED_APPS = (
     #plugins
     'sorl.thumbnail',
 #    'thumpy',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'django_dynamic_fixture',
     'coverage',
     'south',
     #'registration', #TODO: make this work
 )
 
-AUTH_PROFILE_MODULE = 'friendship.UserProfile'
+# AUTH_PROFILE_MODULE = 'friendship.UserProfile'
 
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -190,17 +170,6 @@ LOGGING = {
     }
 }
 
-#DEBUG_TOOLBAR_PANELS = (
-#    'debug_toolbar.panels.version.VersionDebugPanel',
-#    'debug_toolbar.panels.timer.TimerDebugPanel',
-#    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-#    'debug_toolbar.panels.headers.HeaderDebugPanel',
-#    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-#    'debug_toolbar.panels.template.TemplateDebugPanel',
-#    'debug_toolbar.panels.sql.SQLDebugPanel',
-#    'debug_toolbar.panels.signals.SignalDebugPanel',
-#    'debug_toolbar.panels.logger.LoggingPanel',
-#)
 
 COVERAGE_MODULES = (
                     'public',
@@ -208,3 +177,9 @@ COVERAGE_MODULES = (
                     'friendship',
                     'website',
                     )
+
+
+DDF_DEFAULT_DATA_FIXTURE = 'sequential'
+DDF_NUMBER_OF_LAPS = 1
+DDF_USE_LIBRARY = False
+DDF_VALIDATE_ARGS = True
