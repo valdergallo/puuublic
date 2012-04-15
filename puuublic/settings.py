@@ -17,7 +17,10 @@ DATABASES = {
         'PASSWORD': '', # Not used with sqlite3.
         'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '', # Set to empty string for default. Not used with sqlite3.
-        'TEST_NAME': 'test.db',
+    },
+    'test': {
+        'ENGINE': 'django.db.backends.sqlite3', 
+        'NAME': ':memory:', 
     }
 }
 
@@ -130,7 +133,7 @@ INSTALLED_APPS = (
     #'registration', #TODO: make this work
 )
 
-# AUTH_PROFILE_MODULE = 'friendship.UserProfile'
+AUTH_PROFILE_MODULE = 'friendship.UserProfile'
 
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
