@@ -60,6 +60,8 @@ class UserProfile(DefaultFields):
     date_bourn = models.DateField(null=True, blank=True)
     token = models.CharField(max_length=255, null=True, blank=True)
     token_dev = models.CharField(max_length=255, null=True, blank=True)
+    
+    objects = models.Manager()
 
     def get_absolute_url(self):
         return '/u/%s/' % self.user.username

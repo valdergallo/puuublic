@@ -51,7 +51,7 @@ class Tag(DefaultFields):
         return self.value
 
 
-class PublicTag(models.Model):
+class PublicTag(DefaultFields):
     tag = models.ForeignKey(Tag)
     public = models.ForeignKey('Public', related_name='tags')
 
@@ -76,7 +76,6 @@ class Public(DefaultGeoFields):
     liked_count = models.IntegerField(default=0)
 
     objects = PublicManager()
-    canceleds = CanceledManager()
 
     class Meta:
         get_latest_by = ('date_created',)
@@ -109,9 +108,7 @@ class PublicImage(DefaultFields):
     image = models.ImageField(upload_to='public/%Y/%m/%d')
     user = models.ForeignKey(User, related_name='images')
     public = models.ForeignKey(Public, related_name='public_images')
-
-    canceleds = CanceledManager()
-
+ 
     def __unicode__(self):
         return self.description
 
@@ -122,8 +119,7 @@ class Comment(DefaultGeoFields):
     public = models.ForeignKey(Public, related_name='comments')
 
     objects = CommentManager()
-    canceleds = CanceledManager()
-
+     
     def __unicode__(self):
         return self.message
 

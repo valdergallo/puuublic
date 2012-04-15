@@ -8,7 +8,6 @@ Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 """
 
 from django import template
-from django.conf import settings
 from public.models import DefaultImage
 
 register = template.Library()
@@ -18,4 +17,7 @@ def random_image():
     """
     Usage:  <img src='{% random_image %}'>
     """
-    return DefaultImage.objects.random().image.url
+    try:
+        DefaultImage.objects.random().image.url
+    except:
+        return '/static/image/Avatar-Amarelo-67.png'

@@ -18,12 +18,12 @@ from core.managers import ActiveManager
 class TagManager(ActiveManager):
 
     def register(self, values):
-        from public.models import Public, PublicTag
+        from public.models import Public, PublicTag, Tag
 
         tags = list(set(re.split(',| |-|/|\"|\'', values)))  # split value
         tags = [x for x in tags if x]  # clear empty values
         for tag in tags:
-            tag, _ = self.get_or_create(value=slugify(tags))
+            tag, _ = Tag.objects.get_or_create(value=slugify(tags))
             public = Public.objects.get(id=self.core_filters.get('public__id'))
             PublicTag.objects.get_or_create(tag=tag, public=public)
         return tags
@@ -45,7 +45,7 @@ class DefaltImageManager(models.Manager):
 
     def random(self):
         if not cache.get('query_cache'):
-            cache.set('query_cache', self.objects.all())
+            cache.set('query_cache', self.all())
 
         query_cache = cache.get('query_cache')
 
@@ -58,7 +58,7 @@ class DefaltImageManager(models.Manager):
 class CommentManager(ActiveManager):
 
     def last_ten(self, page=1, limit=10):
-        query = self.objects.all().order_by('-date_created')
+        query = self.all().order_by('-date_created')
         paginator = Paginator(query, limit)
         query_list = paginator.page(page)
         return query_list.object_list

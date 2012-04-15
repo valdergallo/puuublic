@@ -8,7 +8,7 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 """
 
 from django.db import models
-from core.models import DefaultFields
+from core.models import DefaultGeoFields
 from core.managers import ActiveManager, CanceledManager
 
 
@@ -25,7 +25,7 @@ class BlogManager(ActiveManager):
         return Blog.objects.all().order_by('-date_created')[0:5]
 
 
-class Blog(DefaultFields):
+class Blog(DefaultGeoFields):
     title = models.CharField(max_length=255)
     tie = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, null=True, blank=True)
@@ -34,7 +34,7 @@ class Blog(DefaultFields):
     category = models.ManyToManyField(Category)
 
     objects = BlogManager()
-    canceleds = CanceledManager()
+    
 
     def __unicode__(self):
         return self.title
