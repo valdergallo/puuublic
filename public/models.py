@@ -12,7 +12,6 @@ from django.db import models
 
 from core.models import DefaultFields, DefaultGeoFields
 from public.managers import TagManager, DefaltImageManager, PublicManager, CommentManager
-from core.managers import CanceledManager
 
 
 class Liked(DefaultFields):
@@ -108,7 +107,7 @@ class PublicImage(DefaultFields):
     image = models.ImageField(upload_to='public/%Y/%m/%d')
     user = models.ForeignKey(User, related_name='images')
     public = models.ForeignKey(Public, related_name='public_images')
- 
+
     def __unicode__(self):
         return self.description
 
@@ -119,7 +118,7 @@ class Comment(DefaultGeoFields):
     public = models.ForeignKey(Public, related_name='comments')
 
     objects = CommentManager()
-     
+
     def __unicode__(self):
         return self.message
 

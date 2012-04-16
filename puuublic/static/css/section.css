@@ -171,6 +171,25 @@ section.must_popular, section.last_public_list {
     float:left;
     display:block;
 }
+
+section.recently_public_list {
+    width:270px;
+}
+
+section.recently_public_list h4 {
+    margin-bottom: 0px;
+}
+
+section.recently_public_list article { 
+    border-bottom: 1px solid #EFEFEF;
+    width:270px;
+}
+
+section.recently_public_list article div {
+    padding:5px 0;
+    width:270px;
+}
+
 section.must_popular h4, section.last_public_list h4{
     padding:15px 0;
 }
@@ -179,6 +198,10 @@ section.must_popular article , section.last_public_list article{
     height:70px;
     display:block;
     float:left;
+}
+
+section.form_public {
+    width: 700px;
 }
 
 article {

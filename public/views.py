@@ -10,14 +10,13 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.views.generic.list_detail import object_detail
 
 from forms import PublicForm
 from public.models import Public
 
 
 def public_add(request):
-    public_form = PublicForm(request.POST or None)
+    public_form = PublicForm(request.POST or None, request.FILES or None)
 
     if request.method == 'POST':
         if public_form.is_valid():
@@ -37,7 +36,7 @@ def public_add(request):
 
 def public_update(request, public_id):
     public = get_object_or_404(Public, id=public_id)
-    public_form = PublicForm(request.POST or None, instance=public)
+    public_form = PublicForm(request.POST or None, request.FILES or None, instance=public)
 
     if request.method == 'POST':
         if public_form.is_valid():

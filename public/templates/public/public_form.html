@@ -16,7 +16,7 @@
 
 <section class="form_public">
 <h4>Crie uma nova Publicação</h4>
-<form action="{% url public:public_add %}" method="POST" name="public_add">
+<form action="{% url public:public_add %}" method="POST" name="public_add" enctype="multipart/form-data" >
 	{% csrf_token %}
     {{ public_form.as_p }}
     <button type="submit">Publicar</button>
