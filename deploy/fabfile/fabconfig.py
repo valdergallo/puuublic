@@ -6,7 +6,8 @@ from fabric.api import env
 env.hosts = ['puuublic.com']
 env.project = 'puuublic'
 env.user = 'valder'
-env.path = '~/puuublic-pack/puuublic'
-env.activate = 'source ~/puuublic-pack/bin/activate'
+#/home/valder/www/puuublic/
+env.path = '~/www/puuublic'
+env.activate = 'source ~/.virtualenvs/puuublic-pack/bin/activate'
 env.colors = True
 env.format = True
