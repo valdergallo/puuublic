@@ -29,6 +29,7 @@ def install_packages():
     with virtualenv():
         print(yellow('Install requeriments packs'))
         run('pip install -r deploy/requeriments.txt')
+        print(green('Done'))
 
 @task
 def migrate_db():
@@ -36,6 +37,7 @@ def migrate_db():
     with virtualenv():
         print(yellow('Migrate database'))
         run('python manage.py migrate')
+        print(green('Done'))
 
 @task
 def pull():
@@ -43,8 +45,10 @@ def pull():
     with virtualenv():
         print(yellow('Reset Files'))
         run("git checkout -f")
+        print(green('Done'))
         print(yellow('Pull files from server'))
         run("git pull")
+        print(green('Done'))
 
 @task
 def restart():
@@ -52,6 +56,7 @@ def restart():
     with virtualenv():
         print(yellow('Restart server'))
         run("touch ../tmp/restart.txt")
+        print(green('Done'))
 
 @task
 def uninstall(package):
