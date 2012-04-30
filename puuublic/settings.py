@@ -117,18 +117,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'puuublic', #root for static
-    'publication',
     'core',
+    'publication',
     'friendship',
     'website',
     #plugins
     'sorl.thumbnail',
-#    'thumpy',
     # 'debug_toolbar',
     'django_dynamic_fixture',
     'coverage',
@@ -175,7 +172,6 @@ LOGGING = {
         },
     }
 }
-
 
 COVERAGE_MODULES = (
                     'Publication',

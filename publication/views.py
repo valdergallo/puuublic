@@ -15,7 +15,7 @@ from forms import PublicationForm
 from publication.models import Publication
 
 
-def Publication_add(request):
+def publication_add(request):
     Publication_form = PublicationForm(request.POST or None, request.FILES or None)
 
     if request.method == 'POST':
@@ -34,9 +34,10 @@ def Publication_add(request):
                   )
 
 
-def Publication_update(request, Publication_id):
+def publication_update(request, Publication_id):
     Publication = get_object_or_404(Publication, id=Publication_id)
-    Publication_form = PublicationForm(request.POST or None, request.FILES or None, instance=Publication)
+    Publication_form = PublicationForm(request.POST or None, request.FILES or None, 
+    instance=Publication)
 
     if request.method == 'POST':
         if Publication_form.is_valid():
@@ -54,7 +55,7 @@ def Publication_update(request, Publication_id):
                   )
 
 
-def Publication_detail(request, Publication_id, Publication_slug):
+def publication_detail(request, Publication_id, Publication_slug):
     Publication = get_object_or_404(Publication, id=Publication_id)
 
     return render(request,

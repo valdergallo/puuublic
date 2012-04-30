@@ -7,8 +7,8 @@ Created by Valder Gallo on 2012-01-29.
 Copyright (c) 2012 valdergallo. All rights reserved.
 """
 from django.contrib.auth.models import User
-from django.db import models
 from django.db.models.signals import post_save
+from django.db import models
 
 from core.models import DefaultFields
 

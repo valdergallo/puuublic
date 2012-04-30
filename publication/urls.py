@@ -10,6 +10,6 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('publication.views',
-    url(r'^add/$', 'Publication_add', name='Publication_add'),
-    url(r'^detail/(?P<Publication_id>\d+)/(?P<Publication_slug>\w+)/$', 'Publication_detail', name='Publication_detail'),
+    url(r'^add/$', 'publication_add', name='publication_add'),
+    url(r'^detail/(?P<publication_id>\d+)/(?P<publication_slug>\w+)/$', 'publication_detail', name='publication_detail'),
 )
