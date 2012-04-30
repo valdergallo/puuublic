@@ -26,13 +26,13 @@
     </section>
 </aside>
 <section class="form_Publication">
-    <h1>{{ Publication.title }}</h1>
+    <h1>{{ publication.title }}</h1>
     {% thumbnail Publication.image "950x200" as im %}
     <figure>
         <img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
     </figure>
     {% endthumbnail %}
-    {{ Publication.message|safe }}
+    {{ publication.message|safe }}
     <div class="edit_bar">
         EDIT BAR
     </div>
@@ -44,7 +44,7 @@
         </button>
     </form>
     <section class="comments">
-        <h4>Comentários ({{ Publication.comments.count|default:0 }})</h4>
+        <h4>Comentários ({{ publication.comments.count|default:0 }})</h4>
         {% for comment in Publication.comments.last_ten %}
         <article>
             {% thumbnail comment.user.get_profile.image "67" as im %}

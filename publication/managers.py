@@ -18,7 +18,7 @@ from core.managers import ActiveManager
 class TagManager(ActiveManager):
 
     def register(self, values):
-        from Publication.models import Publication, PublicationTag, Tag
+        from publication.models import Publication, PublicationTag, Tag
 
         tags = list(set(re.split(',| |-|/|\"|\'', values)))  # split value
         tags = [x for x in tags if x]  # clear empty values

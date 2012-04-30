@@ -8,7 +8,7 @@ Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 """
 
 from django import template
-from Publication.models import DefaultImage
+from publication.models import DefaultImage
 
 register = template.Library()
 
