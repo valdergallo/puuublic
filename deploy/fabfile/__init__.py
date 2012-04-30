@@ -16,8 +16,8 @@ def virtualenv():
 
 @task
 def test():
+    "Test connection with server"
     with virtualenv():
-        "Test connection with server"
         run('echo $PWD')
         run('uptime')
         run('uname -a')
@@ -25,46 +25,54 @@ def test():
 
 @task
 def install_packages():
+    "Install requeriments packs"
     with virtualenv():
+        print(yellow('Install requeriments packs'))
         run('pip install -r deploy/requeriments.txt')
 
 @task
 def migrate_db():
+    "Migrate database"
     with virtualenv():
+        print(yellow('Migrate database'))
         run('python manage.py migrate')
 
 @task
 def pull():
+    "Pull files from codebase to server"
     with virtualenv():
+        print(yellow('Reset Files'))
+        run("git checkout -f")
+        print(yellow('Pull files from server'))
         run("git pull")
 
 @task
 def restart():
+    "Restart webserver"
     with virtualenv():
+        print(yellow('Restart server'))
         run("touch ../tmp/restart.txt")
 
 @task
 def uninstall(package):
+    "Remove package installed"
     with virtualenv():
         run('pip uninstall %s' % package)
 
 @task
 def deploy():
-    with virtualenv():
-        print(yellow('Send files'))
-        run("git checkout -f")
-        run("git pull")
-        run("touch ../tmp/restart.txt")
-        print(yellow('End'))
-    install_packages()
+    "Send files to server and restart webserver"
+    pull()
+    restart()
 
 @task
 def command(command):
+    "Send command to manage.py"
     with virtualenv():
         run('python manage.py %s' % command)
 
 @task
 def git(command):
+    "Execute command to with git"
     with virtualenv():
         run("git %s" % command)
-        run("touch ../tmp/restart.txt")
