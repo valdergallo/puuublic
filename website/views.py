@@ -16,7 +16,6 @@ from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
 
 from publication.forms import SearchForm
 from friendship.forms import RegisterForm, LoginForm
@@ -50,23 +49,23 @@ def home(request):
                   )
 
 
-@login_required
 def home_user(request, username):
     "Starting page with login"
-    page = request.REQUEST.get('page', 1)
     search = request.POST.get('search', '')
-    user = get_object_or_404(User, username=username)
-
-    pub_list = user.publications.must_popular(page=page)
+    get_user = get_object_or_404(User, username=username)
+    
     search_form = SearchForm(request.POST or None)
 
     if request.method == 'POST':
         if search_form.is_valid():
             pub_list = search_form.get_result_queryset()
+    else:
+        pub_list = get_user.publications.all().order_by('-rated_count', '-date_updated')
 
     return render(request,
                   "website/home_user.html",
                     {
+                    "get_user": get_user,
                     "search": search,
                     "search_form": search_form,
                     "pub_list": pub_list,

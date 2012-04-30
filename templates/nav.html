@@ -3,6 +3,7 @@
 {% if user.is_authenticated %}
 <ul class="nav">
     <li class="#"><a href="{% url website:home %}">{% trans 'Inicio' %}</a></li>
+	<li class="#"><a href="{% url website:home %}">{% trans 'Favoritos' %}</a></li>
     <li class="#"><a href="{% url publication:publication_add %}">{% trans 'Criar Puuublic' %}</a></li>
     <li class="#"><a href="#">{% trans 'Perfil' %}</a></li>
     <li class="#"><a href="#">{% trans 'Configurar' %}</a></li>
