@@ -41,8 +41,7 @@ def pull():
 @task
 def restart():
     with virtualenv():
-        run('mkdir -p %stmp/' % env.path)
-        run('touch %stmp/restart.txt' % env.path)
+        run("touch ../tmp/restart.txt")
 
 @task
 def uninstall(package):
@@ -55,6 +54,7 @@ def deploy():
         print(yellow('Send files'))
         run("git checkout -f")
         run("git pull")
+        run("touch ../tmp/restart.txt")
         print(yellow('End'))
     install_packages()
 
@@ -67,3 +67,4 @@ def command(command):
 def git(command):
     with virtualenv():
         run("git %s" % command)
+        run("touch ../tmp/restart.txt")
