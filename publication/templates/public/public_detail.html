@@ -3,9 +3,9 @@
 
 {% block wrapper %}
 <aside class="col_right_form">
-    <section class="recently_public_list">
-        <h4>Publicações mais recentes</h4>
-        {% for pub in user.publics.must_popular %}
+    <section class="recently_Publication_list">
+        <h4>Publicationações mais recentes</h4>
+        {% for pub in user.Publications.must_popular %}
         <article>
             {% thumbnail pub.image "38" as im %}
             <figure>
@@ -25,18 +25,18 @@
         {% endfor %}
     </section>
 </aside>
-<section class="form_public">
-    <h1>{{ public.title }}</h1>
-    {% thumbnail public.image "950x200" as im %}
+<section class="form_Publication">
+    <h1>{{ Publication.title }}</h1>
+    {% thumbnail Publication.image "950x200" as im %}
     <figure>
         <img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
     </figure>
     {% endthumbnail %}
-    {{ public.message|safe }}
+    {{ Publication.message|safe }}
     <div class="edit_bar">
         EDIT BAR
     </div>
-    <h4> Commentar esta publicação </h4>
+    <h4> Commentar esta Publicationação </h4>
     <form action="" name="form_comment" id="id_form_comment">
         {{ form_comment.as_p }}
         <button type="submit">
@@ -44,8 +44,8 @@
         </button>
     </form>
     <section class="comments">
-        <h4>Comentários ({{ public.comments.count|default:0 }})</h4>
-        {% for comment in public.comments.last_ten %}
+        <h4>Comentários ({{ Publication.comments.count|default:0 }})</h4>
+        {% for comment in Publication.comments.last_ten %}
         <article>
             {% thumbnail comment.user.get_profile.image "67" as im %}
             <figure>

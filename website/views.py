@@ -18,9 +18,9 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-from public.forms import SearchForm
+from publication.forms import SearchForm
 from friendship.forms import RegisterForm, LoginForm
-from public.models import Public
+from publication.models import Publication
 from website.models import Blog
 
 
@@ -31,8 +31,8 @@ def home(request):
     if request.user.is_authenticated():
         return redirect(reverse('website:home_user', args=[request.user]))
 
-    must_popular_public_list = Public.objects.must_popular(page=page)
-    last_public_list = Public.objects.lastest_five()
+    must_popular_Publication_list = Publication.objects.must_popular(page=page)
+    last_Publication_list = Publication.objects.lastest_five()
 
     register_form = RegisterForm(request.POST or None)
     login_form = LoginForm(request.POST or None)
@@ -44,8 +44,8 @@ def home(request):
                     "search_form": search_form,
                      "login_form": login_form,
                      "register_form": register_form,
-                     "must_popular_public_list": must_popular_public_list,
-                     "last_public_list": last_public_list,
+                     "must_popular_Publication_list": must_popular_Publication_list,
+                     "last_Publication_list": last_Publication_list,
                      }
                   )
 
@@ -57,7 +57,7 @@ def home_user(request, username):
     search = request.POST.get('search', '')
     user = get_object_or_404(User, username=username)
 
-    pub_list = user.publics.must_popular(page=page)
+    pub_list = user.publications.must_popular(page=page)
     search_form = SearchForm(request.POST or None)
 
     if request.method == 'POST':

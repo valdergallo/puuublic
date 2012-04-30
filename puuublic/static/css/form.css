@@ -145,7 +145,7 @@ blockout.search input[type=image] {
     padding-bottom:10px;
     margin-bottom:25px;
 }
-.form_public input[type=text], .form_public textarea {
+.form_Publication input[type=text], .form_Publication textarea {
     width:80%;
 }
 

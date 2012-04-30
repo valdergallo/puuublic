@@ -34,26 +34,26 @@ Autenticado -.-
         </figure>
         <h4>É mais fácil com os Favoritos</h4>
         <div>
-            Favorite puuublics e pessoas e receba todas as publicações
+            Favorite puuublics e pessoas e receba todas as Publicationações
             de seus favoritos e as mais populares em uma única página.
         </div>
     </article>
     <article>
         <figure>
-            <img src="{{ STATIC_URL }}image/home-publicar.png">
+            <img src="{{ STATIC_URL }}image/home-Publicationar.png">
         </figure>
         <h4>Divulgue com um clique</h4>
         <div>
-            Gostou de alguma publicação? Envie para todos
+            Gostou de alguma Publicationação? Envie para todos
             os seus leitores com apenas um clique.
         </div>
     </article>
     <article>
         <h4>Pesquise no Puuublic:</h4>
         <div>
-            Encontre publicações, puuublics e pessoas.
+            Encontre Publicationações, puuublics e pessoas.
         </div>
-        <form action="{% url website:home %}" method="POST" name="search_public">
+        <form action="{% url website:home %}" method="POST" name="search_Publication">
              {% include 'search_form.html' %}
         </form>
     </article>
@@ -95,8 +95,8 @@ Autenticado -.-
 </section>
 <hr>
 <section class="must_popular">
-    <h4>Publicações mais populares</h4>
-    {% for pub in must_popular_public_list %}
+    <h4>Publicationações mais populares</h4>
+    {% for pub in must_popular_Publication_list %}
     <article>
 		{% thumbnail pub.image "67" as im %}
 		<figure>
@@ -107,16 +107,16 @@ Autenticado -.-
 			<img src="{{ default.image.url }}" title="{{ pub.title }}" width="{{ default.image.width }}" height="{{ default.image.height }}">
 		</figure>
 		{% endthumbnail %}
-        {{ public.title }}
+        {{ Publication.title }}
         <div>
-            no puuublic <a href="#">{{ public.user.username }}</a>
+            no puuublic <a href="#">{{ Publication.user.username }}</a>
         </div>
     </article>
     {% endfor %}
 </section>
-<section class="last_public_list">
-    <h4>Publicações mais recentes</h4>
-    {% for pub in last_public_list %}
+<section class="last_Publication_list">
+    <h4>Publicationações mais recentes</h4>
+    {% for pub in last_Publication_list %}
     <article>
 		{% thumbnail pub.image "67" as im %}
 		<figure>
@@ -127,9 +127,9 @@ Autenticado -.-
 			<img src="{{ default.image.url }}" title="{{ pub.title }}" width="{{ default.image.width }}" height="{{ default.image.height }}">
 		</figure>
 		{% endthumbnail %}
-        {{ public.title }}
+        {{ Publication.title }}
         <div>
-            no puuublic <a href="#">{{ public.user.username }}</a>
+            no puuublic <a href="#">{{ Publication.user.username }}</a>
         </div>
     </article>
     {% endfor %}

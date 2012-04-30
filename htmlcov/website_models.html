@@ -1,4 +1,4 @@
-<!doctype html PUBLIC "-//W3C//DTD html 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!doctype html Publication "-//W3C//DTD html 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
@@ -144,7 +144,7 @@
 <p id='t30' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>tie</span> <span class='op'>=</span> <span class='nam'>models</span><span class='op'>.</span><span class='nam'>CharField</span><span class='op'>(</span><span class='nam'>max_length</span><span class='op'>=</span><span class='num'>255</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t31' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>slug</span> <span class='op'>=</span> <span class='nam'>models</span><span class='op'>.</span><span class='nam'>SlugField</span><span class='op'>(</span><span class='nam'>max_length</span><span class='op'>=</span><span class='num'>255</span><span class='op'>,</span> <span class='nam'>null</span><span class='op'>=</span><span class='nam'>True</span><span class='op'>,</span> <span class='nam'>blank</span><span class='op'>=</span><span class='nam'>True</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t32' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>message</span> <span class='op'>=</span> <span class='nam'>models</span><span class='op'>.</span><span class='nam'>TextField</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t33' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>image</span> <span class='op'>=</span> <span class='nam'>models</span><span class='op'>.</span><span class='nam'>ImageField</span><span class='op'>(</span><span class='nam'>upload_to</span><span class='op'>=</span><span class='str'>&#39;public/%Y/%m/%d&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t33' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>image</span> <span class='op'>=</span> <span class='nam'>models</span><span class='op'>.</span><span class='nam'>ImageField</span><span class='op'>(</span><span class='nam'>upload_to</span><span class='op'>=</span><span class='str'>&#39;Publication/%Y/%m/%d&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t34' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>category</span> <span class='op'>=</span> <span class='nam'>models</span><span class='op'>.</span><span class='nam'>ManyToManyField</span><span class='op'>(</span><span class='nam'>Category</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
 <p id='t35' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t36' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>objects</span> <span class='op'>=</span> <span class='nam'>BlogManager</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>

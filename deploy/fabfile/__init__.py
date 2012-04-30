@@ -22,7 +22,6 @@ def test():
         run('uptime')
         run('uname -a')
         run('python -V')
-        
 
 @task
 def install_packages():
@@ -40,6 +39,12 @@ def pull():
         run("git pull")
 
 @task
+def restart():
+    with virtualenv():
+        run('mkdir -p %stmp/' % env.path)
+        run('touch %stmp/restart.txt' % env.path)
+
+@task
 def uninstall(package):
     with virtualenv():
         run('pip uninstall %s' % package)
@@ -52,7 +57,7 @@ def deploy():
         run("git pull")
         print(yellow('End'))
     install_packages()
-    
+
 @task
 def command(command):
     with virtualenv():

@@ -3,13 +3,13 @@
 {% if user.is_authenticated %}
 <ul class="nav">
     <li class="#"><a href="{% url website:home %}">{% trans 'Inicio' %}</a></li>
-    <li class="#"><a href="{% url public:public_add %}">{% trans 'Publicar' %}</a></li>
-    <li class="#"><a href="{% url public:public_add %}">{% trans 'Criar Puuublic' %}</a></li>
+    <li class="#"><a href="{% url Publication:Publication_add %}">{% trans 'Publicationar' %}</a></li>
+    <li class="#"><a href="{% url Publication:Publication_add %}">{% trans 'Criar Puuublic' %}</a></li>
     <li class="#"><a href="#">{% trans 'Perfil' %}</a></li>
     <li class="#"><a href="#">{% trans 'Configurar' %}</a></li>
     <li class="#"><a href="{% url website:weblogout %}">{% trans 'Sair' %}</a></li>
     <li class="right">
-		<form action="{% url website:home_user user %}" method="POST" name="search_public">
+		<form action="{% url website:home_user user %}" method="POST" name="search_Publication">
              {% include 'search_form.html' %}
         </form>
     </li>

@@ -8,7 +8,7 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 """
 
 from django.contrib import admin
-from models import Tag, Public, DefaultImage, PublicImage, Comment
+from models import Tag, Publication, DefaultImage, PublicationImage, Comment
 from sorl.thumbnail.admin import AdminImageMixin
 
 class Admin(admin.ModelAdmin):
@@ -19,12 +19,12 @@ class TagAdmin(admin.ModelAdmin):
     pass
     
     
-class PublicAdmin(admin.ModelAdmin):
+class PublicationAdmin(admin.ModelAdmin):
     pass
     
     
 admin.site.register(Tag, TagAdmin)
-admin.site.register(Public, PublicAdmin)
+admin.site.register(Publication, PublicationAdmin)
 admin.site.register(DefaultImage)
-admin.site.register(PublicImage)
+admin.site.register(PublicationImage)
 admin.site.register(Comment)

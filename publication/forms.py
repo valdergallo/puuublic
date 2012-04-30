@@ -10,11 +10,11 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 from django import forms
 from django.db.models import Q
 
-from public.models import Public
+from publication.models import Publication
 
 
 class SearchForm(forms.Form):
-    "Search values on public content everywere"
+    "Search values on Publication content everywere"
 
     search = forms.CharField(max_length=100, required=False)
 
@@ -28,13 +28,13 @@ class SearchForm(forms.Form):
         query |= Q(message__icontains=value)
         query |= Q(tags__tag__value__icontains=value)
 
-        return Public.objects.filter(query)
+        return Publication.objects.filter(query)
 
 
-class PublicForm(forms.ModelForm):
-    "Add new Public"
+class PublicationForm(forms.ModelForm):
+    "Add new Publication"
     tags = forms.CharField(max_length=255, required=False)
 
     class Meta:
-        model = Public
+        model = Publication
         fields = ('title', 'message', 'image')

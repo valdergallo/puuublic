@@ -1,5 +1,6 @@
 import os
 BASEDIR = os.path.abspath(os.path.dirname(os.path.pardir))
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -11,8 +12,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(BASEDIR, 'db', 'puuublic.sqlite'), # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', 
+        # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(BASEDIR, 'db', 'puuublic.sqlite'), 
+        # Or path to database file if using sqlite3.
         'USER': '', # Not used with sqlite3.
         'PASSWORD': '', # Not used with sqlite3.
         'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
@@ -119,7 +122,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'puuublic', #root for static
-    'public',
+    'publication',
     'core',
     'friendship',
     'website',
@@ -175,7 +178,7 @@ LOGGING = {
 
 
 COVERAGE_MODULES = (
-                    'public',
+                    'Publication',
                     'core',
                     'friendship',
                     'website',

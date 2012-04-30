@@ -1,7 +1,7 @@
 /**
  * jQuery.labelify - Display in-textbox hints
  * Stuart Langridge, http://www.kryogenix.org/
- * Released into the public domain
+ * Released into the Publication domain
  * Date: 25th June 2008
  * @author Stuart Langridge
  * @version 1.3

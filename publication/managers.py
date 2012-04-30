@@ -18,18 +18,18 @@ from core.managers import ActiveManager
 class TagManager(ActiveManager):
 
     def register(self, values):
-        from public.models import Public, PublicTag, Tag
+        from Publication.models import Publication, PublicationTag, Tag
 
         tags = list(set(re.split(',| |-|/|\"|\'', values)))  # split value
         tags = [x for x in tags if x]  # clear empty values
         for tag in tags:
             tag, _ = Tag.objects.get_or_create(value=slugify(tags))
-            public = Public.objects.get(id=self.core_filters.get('public__id'))
-            PublicTag.objects.get_or_create(tag=tag, public=public)
+            Publication = Publication.objects.get(id=self.core_filters.get('Publication__id'))
+            PublicationTag.objects.get_or_create(tag=tag, Publication=Publication)
         return tags
 
 
-class PublicManager(ActiveManager):
+class PublicationManager(ActiveManager):
 
     def must_popular(self, page=1, limit=10):
         query = self.all().order_by('-rated_count', '-date_updated')

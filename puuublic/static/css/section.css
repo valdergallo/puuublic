@@ -166,41 +166,41 @@ section article ul.login_user li button {
     width: 130px;
     border: none;
 }
-section.must_popular, section.last_public_list {
+section.must_popular, section.last_Publication_list {
     width:470px;
     float:left;
     display:block;
 }
 
-section.recently_public_list {
+section.recently_Publication_list {
     width:270px;
 }
 
-section.recently_public_list h4 {
+section.recently_Publication_list h4 {
     margin-bottom: 0px;
 }
 
-section.recently_public_list article { 
+section.recently_Publication_list article { 
     border-bottom: 1px solid #EFEFEF;
     width:270px;
 }
 
-section.recently_public_list article div {
+section.recently_Publication_list article div {
     padding:5px 0;
     width:270px;
 }
 
-section.must_popular h4, section.last_public_list h4{
+section.must_popular h4, section.last_Publication_list h4{
     padding:15px 0;
 }
-section.must_popular article , section.last_public_list article{
+section.must_popular article , section.last_Publication_list article{
     width:200px;
     height:70px;
     display:block;
     float:left;
 }
 
-section.form_public {
+section.form_Publication {
     width: 700px;
 }
 
