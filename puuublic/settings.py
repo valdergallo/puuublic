@@ -43,6 +43,7 @@ MEDIA_ROOT = os.path.join(BASEDIR, 'media')
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
 
+
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -60,6 +61,9 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     MEDIA_ROOT,
 )
+
+ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
+GRAPPELLI_ADMIN_TITLE = 'Puuublic Admin'
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -118,14 +122,21 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #admin
+    'grappelli',
+    'tinymce',
+    'filebrowser',
+    #admin default
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'puuublic', #root for static
+    #projet apps
+    'puuublic',
     'core',
     'publication',
     'friendship',
     'website',
     #plugins
+    'crispy_forms',
     'sorl.thumbnail',
     'endless_pagination',
     # 'debug_toolbar',
@@ -187,3 +198,12 @@ DDF_DEFAULT_DATA_FIXTURE = 'sequential'
 DDF_NUMBER_OF_LAPS = 1
 DDF_USE_LIBRARY = False
 DDF_VALIDATE_ARGS = True
+
+# TINYMCE_JS_URL = 'http://debug.example.org/tiny_mce/tiny_mce_src.js'
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'theme': "advanced",
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True
+TINYMCE_FILEBROWSER = True

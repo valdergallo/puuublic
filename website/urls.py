@@ -17,5 +17,5 @@ urlpatterns = patterns('website.views',
     url(r'^institucional/$', 'institucional', name='institucional'),
     url(r'^termos/$', 'termos', name='termos'),
     url(r'^contato/$', 'contato', name='contato'),
-    url(r'^(?P<username>\w+)/$', 'home_user', name='home_user'),
+    url(r'^u/(?P<username>\w+)/$', 'home_user', name='home_user'),
 )

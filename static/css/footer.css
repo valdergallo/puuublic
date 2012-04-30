@@ -1,0 +1,21 @@
+footer {
+    padding: 10px 0px;
+    margin-top: 50px;
+    clear: both;
+    display: block;
+    border-top: 1px solid #DCDBDC;
+    width: 100%;
+}
+footer nav {
+    width: 960px;
+    display: block;
+    margin: 0px auto;
+}
+footer nav ul {
+    display: inline;
+}
+footer nav ul li {
+    list-style: none;
+    display: inline-block;
+    padding-right: 15px;
+}

@@ -1,0 +1,54 @@
+/**********************************************
+ Header
+ ***********************************************/
+
+header {
+    clear: both;
+    border-bottom: 1px solid #CCC;
+    position: relative;
+    padding: 5px 0px;
+    margin-bottom: 20px;
+}
+
+header nav nav.logo {
+    display: inline-block;
+    margin: 0px auto;
+    background: url('../image/Logotipo.png') no-repeat left;
+    height: 40px;
+    width:150px;
+    float:left;
+}
+
+header nav {
+    width: 960px;
+    display: block;
+    margin: 0px auto;
+    height: 40px;
+}
+header nav ul li {
+    list-style: none;
+    display:inline-block;
+    padding:10px 2px 2px 2px;
+}
+
+header nav ul li a {
+    color:#333;
+    display:inline-block;
+}
+
+header nav ul li a:hover {
+    text-decoration:underline;
+}
+
+header nav ul li.right {
+    float:right;
+    width:300px;
+    padding:0px;
+    margin:0px;
+}
+
+header nav ul li.right blockout {
+    margin:0px;
+    padding:3px;
+    height:20px;
+}

@@ -20,7 +20,9 @@ class TagAdmin(admin.ModelAdmin):
     
     
 class PublicationAdmin(admin.ModelAdmin):
-    pass
+    @staticmethod
+    def autocomplete_search_fields():
+        return ("id__iexact", "name__icontains",)
     
     
 admin.site.register(Tag, TagAdmin)

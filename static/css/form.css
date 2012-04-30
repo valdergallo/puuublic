@@ -1,0 +1,195 @@
+/* Forms
+ ---------------------------------------------------------------------*/
+
+form {
+    overflow: auto;
+}
+input[type="text"], input[type="password"], input[type="select"], input[type="search"], input[type="file"], input[type="date"] {
+    -webkit-border-radius: .3em;
+    -moz-border-radius: .3em;
+    border-radius: .3em;
+}
+input:focus, textarea:focus, select:focus {
+    outline-width: 0; /* No outline border for Safary */
+}
+input[type="text"], input[type="password"], input[type="select"], input[type="search"], input[type="file"], input[type="date"], textarea, select {
+    border-color: #C4C4C4 #E9E9E9 #E9E9E9 #C4C4C4;
+    border-style: solid;
+    border-width: 1px;
+    padding: 4px;
+    color: #777;
+}
+textarea {
+    line-height: 18px;
+    overflow: auto;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+textarea.small {
+    height: 5.5em;
+}
+textarea.medium {
+    height: 10em;
+}
+textarea.large {
+    height: 20em;
+}
+input.half, select.half, textarea.half {
+    width: 50%;
+}
+input.full, select.full, textarea.full {
+    width: 97%;
+}
+input.title {
+    font-size: 20px;
+}
+input[type="submit"], input[type="reset"], input[type="button"] {
+    margin-bottom: 0;
+}
+input:focus, textarea:focus {
+    -moz-box-shadow: 0 1px 1px rgba(196,196,196,0.5);
+    -webkit-box-shadow: 0 1px 1px rgba(196,196,196,0.5);
+    box-shadow: 0 1px 1px rgba(196,196,196,0.5);
+    -webkit-focus-ring-color: none;
+    border-color: #c4c4c4;
+    background-color: #FFFFF0;
+}
+fieldset {
+    border: 0 none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 10px 0;
+    position: relative;
+}
+legend {
+    background: #fff;
+    color: #93BB3A;
+    font-weight: bold;
+    padding: 0 6px 0 0;
+}
+label {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: left;
+}
+label.required:before {
+    content: "*";
+    color: red;
+    font-family: "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+label.ok {
+    background: url("../img/valid.gif") no-repeat;
+    padding-left: 16px;
+}
+label.error {
+    color: #d00;
+    text-transform: none;
+    margin-left: 6px;
+}
+label.choice {
+    vertical-align: middle;
+    font-weight: normal;
+    text-transform: none;
+}
+fieldset small {
+    color: #999;
+    font-size: 11px;
+    display: block;
+}
+form p {
+    margin: 3px 0;
+}
+form ul.errorlist {
+    margin: 0px;
+    padding: 0px;
+}
+form ul.errorlist li {
+    padding:0px;
+    margin:0px;
+    clear:both;
+    color:red;
+    display:inline-block;
+}
+
+li.error {
+    clear:both;
+    color:red;
+}
+
+blockout.search{
+    border:1px solid #000;
+    padding:5px;
+    margin:10px 0px;
+    display:block;
+}
+
+blockout.search label {
+    display:none;
+}
+
+blockout.search input[type=text] {
+    width:90%;
+    border:0px;
+}
+
+blockout.search input[type=image] {
+    float:right;
+}
+.col_right_form {
+    float:right;
+    width:250px;
+    text-align:justify;
+}
+.col_right_form h4 {
+    border-bottom:1px solid #efefef;
+    padding-bottom:10px;
+    margin-bottom:25px;
+}
+.form_Publication input[type=text], .form_Publication textarea {
+    width:80%;
+}
+
+/****************************
+    Django message framework
+*****************************/
+
+
+#errorMsg {
+    margin:0;
+    padding:0;
+}
+
+ 
+#errorMsg li {
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    list-style: none;
+}
+
+#errorMsg .info {
+    color: #00529B;
+    background-color: #BDE5F8;
+    background-image: url('../image/info.png');
+}
+
+#errorMsg .success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    background-image:url('../image/success.png');
+}
+
+#errorMsg .warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    background-image: url('../image/warning.png');
+}
+
+#errorMsg .error {
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('../image/error.png');
+}
+
