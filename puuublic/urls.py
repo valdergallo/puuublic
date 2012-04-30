@@ -15,7 +15,6 @@ urlpatterns = patterns('',
     url(r'^public_admin/', include(admin.site.urls)),
     url(r'^public_admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^tinymce/', include('tinymce.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns() + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
