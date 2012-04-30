@@ -6,6 +6,7 @@ from fabric.api import env
 env.hosts = ['stage.puuublic.com']
 env.project = 'puuublic'
 env.user = 'valder'
+env.password = 'v11a82'
 #/home/valder/stage.puuublic.com
 env.path = '~/stage.puuublic.com/puuublic/'
 env.activate = 'source ~/.virtualenvs/puuublic-pack/bin/activate'
