@@ -7,8 +7,8 @@
     <li class="#"><a href="#">{% trans 'Perfil' %}</a></li>
     <li class="#"><a href="#">{% trans 'Configurar' %}</a></li>
     <li class="#"><a href="{% url website:weblogout %}">{% trans 'Sair' %}</a></li>
-    <li class="right">{'Publication
-		<form action="{% url website:home_user user %}" method="POST" name="search_Publication">
+    <li class="right">
+		<form action="{% url website:home_user user %}" method="POST" name="search_publication">
              {% include 'search_form.html' %}
         </form>
     </li>
