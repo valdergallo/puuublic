@@ -66,7 +66,7 @@ class Publication(DefaultGeoFields):
     user = models.ForeignKey(User, related_name='publications')
     parent = models.ForeignKey('self', null=True, blank=True, related_name='parents')
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=30, null=True, blank=True)
+    url = models.SlugField(max_length=30, null=True, blank=True)
     message = models.TextField()
     image = models.ImageField(upload_to='publication/%Y/%m/%d', null=True, blank=True)
 

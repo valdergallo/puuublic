@@ -33,10 +33,10 @@ class SearchForm(forms.Form):
 
 class PublicationForm(forms.ModelForm):
     "Add new Publication"
-    slug = forms.CharField(max_length=30, required=False, help_text='<br> Ex.: meupuuublic.puuublic.com')
+    url = forms.CharField(max_length=30, required=False, help_text='<br> Ex.: meupuuublic.puuublic.com')
     message = forms.CharField(widget=TinyMCE(attrs={'cols': 10, 'rows': 10}))
     tags = forms.CharField(max_length=255, required=False)
 
     class Meta:
         model = Publication
-        fields = ('title', 'message', 'image', 'slug')
+        fields = ('title', 'message', 'image', 'url')

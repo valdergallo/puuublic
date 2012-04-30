@@ -91,6 +91,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     #'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -139,7 +140,7 @@ INSTALLED_APPS = (
     #plugins
     'sorl.thumbnail',
     'endless_pagination',
-    # 'debug_toolbar',
+    'debug_toolbar',
     'django_dynamic_fixture',
     'coverage',
     'south',
@@ -204,3 +205,12 @@ TINYMCE_JS_ROOT = MEDIA_URL + 'tiny_mce'
 TINYMCE_COMPRESSOR = True
 TINYMCE_FILEBROWSER = True
 TINYMCE_GZ = True
+
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
+)
