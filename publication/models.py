@@ -93,15 +93,6 @@ class Publication(DefaultGeoFields):
             })
 
 
-class DefaultImage(DefaultFields):
-    image = models.ImageField(upload_to='default/%Y/%m/%d')
-
-    objects = DefaltImageManager()
-
-    def __unicode__(self):
-        return self.image.name
-
-
 class PublicationImage(DefaultFields):
     message = models.CharField(max_length=250)
     image = models.ImageField(upload_to='Publication/%Y/%m/%d')

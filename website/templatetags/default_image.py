@@ -8,7 +8,7 @@ Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 """
 
 from django import template
-from publication.models import DefaultImage
+from random import choice
 
 register = template.Library()
 
@@ -17,7 +17,14 @@ def random_image():
     """
     Usage:  <img src='{% random_image %}'>
     """
-    try:
-        DefaultImage.objects.random().image.url
-    except:
-        return '/static/image/Avatar-Amarelo-67.png'
+    CHOICE_DEFAULT = (
+        '/static/image/Avatar-Amarelo-67.png',
+        '/static/image/Avatar-Azul-Claro-67.png',
+        '/static/image/Avatar-Azul-Escuro-67.png',
+        '/static/image/Avatar-Azul-Medio-67.png',
+        '/static/image/Avatar-Roxo-67.png',
+        '/static/image/Avatar-Verde-67.png',
+        '/static/image/Avatar-Vermelho-67.png',
+    )
+    
+    return choice(CHOICE_DEFAULT)
