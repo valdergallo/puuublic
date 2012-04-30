@@ -1,6 +1,6 @@
 .project*
 .pydev*
 .settings*
-.pyc
 .ropeproject*
 media*
+*.pyc
