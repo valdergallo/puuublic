@@ -11,7 +11,8 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from core.models import DefaultFields, DefaultGeoFields
-from publication.managers import TagManager, DefaltImageManager, PublicationManager, CommentManager
+from publication.managers import TagManager, PublicationManager, CommentManager
+from website.templatetags.default_image import random_image
 
 
 class Liked(DefaultFields):
@@ -65,7 +66,7 @@ class Publication(DefaultGeoFields):
     user = models.ForeignKey(User, related_name='publications')
     parent = models.ForeignKey('self', null=True, blank=True, related_name='parents')
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, null=True, blank=True)
+    slug = models.SlugField(max_length=30, null=True, blank=True)
     message = models.TextField()
     image = models.ImageField(upload_to='publication/%Y/%m/%d', null=True, blank=True)
 
@@ -83,7 +84,7 @@ class Publication(DefaultGeoFields):
         return self.title
 
     def default(self):
-        return DefaultImage.objects.random()
+        return random_image()
 
     @models.permalink
     def get_absolute_url(self):
