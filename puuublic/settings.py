@@ -199,11 +199,8 @@ DDF_NUMBER_OF_LAPS = 1
 DDF_USE_LIBRARY = False
 DDF_VALIDATE_ARGS = True
 
-# TINYMCE_JS_URL = 'http://debug.example.org/tiny_mce/tiny_mce_src.js'
-TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "table,spellchecker,paste,searchreplace",
-    'theme': "advanced",
-}
-TINYMCE_SPELLCHECKER = True
+TINYMCE_JS_URL = MEDIA_URL + 'tiny_mce/tiny_mce.js'
+TINYMCE_JS_ROOT = MEDIA_URL + 'tiny_mce'
 TINYMCE_COMPRESSOR = True
 TINYMCE_FILEBROWSER = True
+TINYMCE_GZ = True

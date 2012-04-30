@@ -17,7 +17,15 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/button.css" type="text/css"/>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/form.css" type="text/css"/>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/footer.css" type="text/css"/>
-    {% block extra_header %}
+	{% block js %}
+	<script src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>
+	<script src="{{ STATIC_URL }}js/base.js"></script>
+	<script src="{{ STATIC_URL }}js/django.js"></script>
+	<!--[if lt IE 9]>
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	{% endblock js %}
+	{% block extra_header %}
     {% endblock %}
 </head>
 <body id="index" class="home">
@@ -49,12 +57,4 @@
     {% endblock footer %}
 </footer>
 </body>
-<script src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>
-<script src="{{ STATIC_URL }}js/base.js"></script>
-<script src="{{ STATIC_URL }}js/django.js"></script>
-<!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-{% block js %}
-{% endblock js %}
 </html>

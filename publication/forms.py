@@ -9,7 +9,7 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 
 from django import forms
 from django.db.models import Q
-
+from tinymce.widgets import TinyMCE
 from publication.models import Publication
 
 
@@ -34,6 +34,7 @@ class SearchForm(forms.Form):
 class PublicationForm(forms.ModelForm):
     "Add new Publication"
     slug = forms.CharField(max_length=30, required=False, help_text='<br> Ex.: meupuuublic.puuublic.com')
+    message = forms.CharField(widget=TinyMCE(attrs={'cols': 10, 'rows': 10}))
     tags = forms.CharField(max_length=255, required=False)
 
     class Meta:

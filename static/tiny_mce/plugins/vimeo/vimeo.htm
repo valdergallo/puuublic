@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{#vimeo_dlg.title}</title>
+<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+<script type="text/javascript" src="js/vimeo.js"></script>
+</head>
+<body>
+
+<div style="width:100%;height:30px;background:#38b349;">
+<img src="/imagem/mce_top.png" />
+</div>
+
+<div style="margin: 10px 10px 10px 10px;">
+<p style="font-size: 14px;"><img src="/imagem/mce_video.png" style="float: left;padding-right: 5px;" /> Adicione um vídeo</p>
+
+<div style="height:10px;"></div>
+
+<form onsubmit="VimeoDialog.insert();return false;" action="#">
+	<label for="vimeoURL">{#vimeo_dlg.url_field}</label>
+    <div style="height:10px;"></div>
+    <input id="vimeoURL" name="vimeoURL" type="text" class="text" style="width:255px;padding: 0px 5px;" />
+<div style="height:10px;"></div>
+
+	<div class="mceActionPanel">
+		<input type="button" id="insert" name="insert" value="{#insert}" />
+		<input type="button" id="cancel" name="cancel" value="{#cancel}" />
+	</div>
+</form>
+</div>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="/js/tiny_mce/tiny.placeholder.js"></script>
+<style type="text/css">
+.marcadagua {
+position:relative;
+color:#BCBEC0;
+font-size:14px;
+}
+</style>
+<script type="text/javascript">
+window.setTimeout(function() {
+$(function() {
+$('#vimeoURL').delay(4000).watermark(' Adicione um endereço do Vimeo', {className: 'marcadagua'});
+
+$('#cancel').click(function() {
+
+if ($.browser.mozilla) {
+$(this).css({ paddingTop: "2px", height: "30px", width: "90px"});
+} else {
+$(this).css({ paddingTop: "1px", height: "30px", width: "90px"});
+}
+
+window.setTimeout(function() {
+tinyMCEPopup.close();
+}, 200);
+
+});
+
+
+$('#insert').click(function() {
+
+if ($.browser.mozilla) {
+$(this).css({ paddingTop: "2px", height: "30px", width: "90px"});
+} else {
+$(this).css({ paddingTop: "1px", height: "30px", width: "90px"});
+}
+
+window.setTimeout(function() {
+VimeoDialog.insert();
+}, 200);
+
+});
+
+
+
+
+});
+}, 500);
+</script>
+</body>
+</html>
