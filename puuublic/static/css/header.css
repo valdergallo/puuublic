@@ -33,6 +33,11 @@ header nav ul li {
 
 header nav ul li a {
     color:#333;
+    display:inline-block;
+}
+
+header nav ul li a:hover {
+    text-decoration:underline;
 }
 
 header nav ul li.right {
