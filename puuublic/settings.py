@@ -136,7 +136,6 @@ INSTALLED_APPS = (
     'friendship',
     'website',
     #plugins
-    'crispy_forms',
     'sorl.thumbnail',
     'endless_pagination',
     # 'debug_toolbar',
