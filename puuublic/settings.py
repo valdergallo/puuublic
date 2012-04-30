@@ -63,6 +63,7 @@ STATICFILES_DIRS = (
 )
 
 ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
+FILEBROWSER_DIRECTORY = 'filebrowser/'
 GRAPPELLI_ADMIN_TITLE = 'Puuublic Admin'
 
 # List of finder classes that know how to find static files in
