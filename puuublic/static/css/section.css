@@ -172,20 +172,20 @@ section.must_popular, section.last_publication_list {
     display:block;
 }
 
-section.recently_Publication_list {
+section.recently_publication_list {
     width:270px;
 }
 
-section.recently_Publication_list h4 {
+section.recently_publication_list h4 {
     margin-bottom: 0px;
 }
 
-section.recently_Publication_list article { 
+section.recently_publication_list article { 
     border-bottom: 1px solid #EFEFEF;
     width:270px;
 }
 
-section.recently_Publication_list article div {
+section.recently_publication_list article div {
     padding:5px 0;
     width:270px;
 }

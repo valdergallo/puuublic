@@ -16,9 +16,9 @@
 
 <section class="form_Publication">
 <h4>Crie uma nova Publicationação</h4>
-<form action="{% url publication:publication_add %}" method="POST" name="Publication_add" enctype="multipart/form-data" >
+<form action="{% url publication:publication_add %}" method="POST" name="publication_add" enctype="multipart/form-data" >
 	{% csrf_token %}
-    {{ Publication_form.as_p }}
+    {{ publication_form.as_p }}
     <button type="submit">Publicationar</button>
 </form>
 </section>

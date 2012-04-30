@@ -31,7 +31,7 @@ def home(request):
     if request.user.is_authenticated():
         return redirect(reverse('website:home_user', args=[request.user]))
 
-    must_popular_Publication_list = Publication.objects.must_popular(page=page)
+    must_popular_publication_list = Publication.objects.must_popular(page=page)
     last_publication_list = Publication.objects.lastest_five()
 
     register_form = RegisterForm(request.POST or None)
@@ -44,7 +44,7 @@ def home(request):
                     "search_form": search_form,
                      "login_form": login_form,
                      "register_form": register_form,
-                     "must_popular_Publication_list": must_popular_Publication_list,
+                     "must_popular_publication_list": must_popular_publication_list,
                      "last_publication_list": last_publication_list,
                      }
                   )

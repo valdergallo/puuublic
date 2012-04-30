@@ -16,28 +16,28 @@ from publication.managers import TagManager, DefaltImageManager, PublicationMana
 
 class Liked(DefaultFields):
     user = models.ForeignKey(User, related_name='user_liked')
-    Publication = models.ForeignKey('Publication', related_name='Publication_liked')
+    Publication = models.ForeignKey('Publication', related_name='publication_liked')
 
 
 class Foward(DefaultFields):
     user = models.ForeignKey(User, related_name='user_foward')
-    Publication = models.ForeignKey('Publication', related_name='Publication_foward')
+    Publication = models.ForeignKey('Publication', related_name='publication_foward')
 
 
 class Watched(DefaultFields):
     user = models.ForeignKey(User, related_name='user_watched')
-    Publication = models.ForeignKey('Publication', related_name='Publication_watched')
+    Publication = models.ForeignKey('Publication', related_name='publication_watched')
 
 
 class Rated(DefaultFields):
     user = models.ForeignKey(User, related_name='user_rated')
-    Publication = models.ForeignKey('Publication', related_name='Publication_rated')
+    Publication = models.ForeignKey('Publication', related_name='publication_rated')
 
 
 class Alert(DefaultFields):
     message = models.TextField()
     user = models.ForeignKey(User, related_name='user_alert')
-    Publication = models.ForeignKey('Publication', related_name='Publication_alert')
+    Publication = models.ForeignKey('Publication', related_name='publication_alert')
 
     def __unicode__(self):
         return self.message
@@ -88,8 +88,8 @@ class Publication(DefaultGeoFields):
     @models.permalink
     def get_absolute_url(self):
         return ('publication:publication_detail', (), {
-                'Publication_slug': self.slug or 'pub',
-                'Publication_id': self.id,
+                'publication_slug': self.slug or 'pub',
+                'publication_id': self.id,
             })
 
 
@@ -106,7 +106,7 @@ class PublicationImage(DefaultFields):
     message = models.CharField(max_length=250)
     image = models.ImageField(upload_to='Publication/%Y/%m/%d')
     user = models.ForeignKey(User, related_name='images')
-    Publication = models.ForeignKey(Publication, related_name='Publication_images')
+    Publication = models.ForeignKey(Publication, related_name='publication_images')
 
     def __unicode__(self):
         return self.description

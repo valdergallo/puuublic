@@ -24,7 +24,7 @@ class TagManager(ActiveManager):
         tags = [x for x in tags if x]  # clear empty values
         for tag in tags:
             tag, _ = Tag.objects.get_or_create(value=slugify(tags))
-            Publication = Publication.objects.get(id=self.core_filters.get('Publication__id'))
+            Publication = Publication.objects.get(id=self.core_filters.get('publication__id'))
             PublicationTag.objects.get_or_create(tag=tag, Publication=Publication)
         return tags
 

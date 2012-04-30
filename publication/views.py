@@ -16,11 +16,11 @@ from publication.models import Publication
 
 
 def publication_add(request):
-    Publication_form = PublicationForm(request.POST or None, request.FILES or None)
+    publication_form = PublicationForm(request.POST or None, request.FILES or None)
 
     if request.method == 'POST':
-        if Publication_form.is_valid():
-            instance = Publication_form.save(commit=False)
+        if publication_form.is_valid():
+            instance = publication_form.save(commit=False)
             instance.user = request.user
             instance.save()
             instance.tags.register(request.POST['tags'])
@@ -30,18 +30,18 @@ def publication_add(request):
 
     return render(request,
                   "publication/publication_form.html",
-                  { 'publication_form': Publication_form},
+                  { 'publication_form': publication_form},
                   )
 
 
-def publication_update(request, Publication_id):
-    Publication = get_object_or_404(Publication, id=Publication_id)
-    Publication_form = PublicationForm(request.POST or None, request.FILES or None, 
+def publication_update(request, publication_id):
+    Publication = get_object_or_404(Publication, id=publication_id)
+    publication_form = PublicationForm(request.POST or None, request.FILES or None, 
     instance=Publication)
 
     if request.method == 'POST':
-        if Publication_form.is_valid():
-            instance = Publication_form.save(commit=False)
+        if publication_form.is_valid():
+            instance = publication_form.save(commit=False)
             instance.user = request.user
             instance.save()
             instance.tags.register(request.POST['tags'])
@@ -51,12 +51,12 @@ def publication_update(request, Publication_id):
 
     return render(request,
                   "publication/publication_form.html",
-                  { 'publication_form': Publication_form},
+                  { 'publication_form': publication_form},
                   )
 
 
-def publication_detail(request, Publication_id, Publication_slug):
-    Publication = get_object_or_404(Publication, id=Publication_id)
+def publication_detail(request, publication_id, publication_slug):
+    Publication = get_object_or_404(Publication, id=publication_id)
 
     return render(request,
                   "publication/publication_detail.html",
