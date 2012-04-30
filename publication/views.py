@@ -30,7 +30,7 @@ def publication_add(request):
 
     return render(request,
                   "publication/publication_form.html",
-                  {'Publication_form': Publication_form},
+                  { 'publication_form': Publication_form},
                   )
 
 
@@ -51,7 +51,7 @@ def publication_update(request, Publication_id):
 
     return render(request,
                   "publication/publication_form.html",
-                  {'Publication_form': Publication_form},
+                  { 'publication_form': Publication_form},
                   )
 
 
@@ -60,5 +60,5 @@ def publication_detail(request, Publication_id, Publication_slug):
 
     return render(request,
                   "publication/publication_detail.html",
-                  {'Publication': Publication},
+                  { 'publication': Publication},
                   )
