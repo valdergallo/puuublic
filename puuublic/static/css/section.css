@@ -166,7 +166,7 @@ section article ul.login_user li button {
     width: 130px;
     border: none;
 }
-section.must_popular, section.last_Publication_list {
+section.must_popular, section.last_publication_list {
     width:470px;
     float:left;
     display:block;
@@ -190,10 +190,10 @@ section.recently_Publication_list article div {
     width:270px;
 }
 
-section.must_popular h4, section.last_Publication_list h4{
+section.must_popular h4, section.last_publication_list h4{
     padding:15px 0;
 }
-section.must_popular article , section.last_Publication_list article{
+section.must_popular article , section.last_publication_list article{
     width:200px;
     height:70px;
     display:block;

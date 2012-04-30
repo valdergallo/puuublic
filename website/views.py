@@ -32,7 +32,7 @@ def home(request):
         return redirect(reverse('website:home_user', args=[request.user]))
 
     must_popular_Publication_list = Publication.objects.must_popular(page=page)
-    last_Publication_list = Publication.objects.lastest_five()
+    last_publication_list = Publication.objects.lastest_five()
 
     register_form = RegisterForm(request.POST or None)
     login_form = LoginForm(request.POST or None)
@@ -45,7 +45,7 @@ def home(request):
                      "login_form": login_form,
                      "register_form": register_form,
                      "must_popular_Publication_list": must_popular_Publication_list,
-                     "last_Publication_list": last_Publication_list,
+                     "last_publication_list": last_publication_list,
                      }
                   )
 
