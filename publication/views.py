@@ -29,7 +29,7 @@ def publication_add(request):
             return redirect(reverse('website:home_user', args=[request.user]))
 
     return render(request,
-                  "Publication/Publication_form.html",
+                  "publication/publication_form.html",
                   {'Publication_form': Publication_form},
                   )
 
@@ -50,7 +50,7 @@ def publication_update(request, Publication_id):
             return redirect(reverse('website:home_user', args=[request.user]))
 
     return render(request,
-                  "Publication/Publication_form.html",
+                  "publication/publication_form.html",
                   {'Publication_form': Publication_form},
                   )
 
@@ -59,6 +59,6 @@ def publication_detail(request, Publication_id, Publication_slug):
     Publication = get_object_or_404(Publication, id=Publication_id)
 
     return render(request,
-                  "Publication/Publication_detail.html",
+                  "publication/publication_detail.html",
                   {'Publication': Publication},
                   )
