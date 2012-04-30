@@ -1,43 +1,52 @@
 {% extends 'base_2col.html' %}
-{% load i18n thumbnail default_image %}
+{% load i18n thumbnail default_image endless %}
+
+
 
 {% block aside %}
-		<h4>{{ user.get_full_name|default:user|capfirst }}</h4>
-		
+
+		<h4>{{ get_user.get_full_name|default:user|capfirst }} </h4>
 		<div>Puuublics favoritados: </div>
 		<div>Pessoas favoritadas: </div>
 		<div>Leitores: </div>
 		<div>Publicationações: </div>
 		<div>Visualizações: </div>
 		<br>
-		<strong>Quem é {{ user.get_full_name|default:user|capfirst }}</strong>
-		<div>{{ user.get_profile.about }}</div>
+		<strong>Quem é {{ get_user.get_full_name|default:user|capfirst }}</strong>
+		<div>{{ get_user.get_profile.about }}</div>
 		{# <br> #}
 		{# 	 	<strong>Localização</strong> #}
 		{# 		<div><a href="about">#</a></div> #}
 		<br>
 		<strong>Página pessoal</strong>
-		<div><a href="{{ user.get_profile.url }}" >{{ user.get_profile.url }}</a></div>
+		<div><a href="{{ get_user.get_profile.url }}" >{{ user.get_profile.url }}</a></div>
 		 
 {% endblock aside %}
 
 {% block wrapper %}
 <article>
-	<table>
+	<table width='600px'>
 		<tr>
-			<td>
+			<td width='80px'>
 				<figure>
-				{% if user.get_profile.image %}
-					<img src="{{ user.get_profile.image.url }}" title="{{ user.username }}" width='67'>
+				{% if get_user.get_profile.image %}
+					<img src="{{ get_user.get_profile.image.url }}" title="{{ get_user.username }}" width='67'>
 				{% else %}
-					<img src="{% random_image %}" title="{{ user.username }}" width='67'>
+					<img src="{% random_image %}" title="{{ get_user.username }}" width='67'> 
 				{% endif %}
 				</figure>
 			</td>
 			<td>
-				<h4><a href="{{ user.get_absolute_url }}">{{ user.get_full_name|default:user|capfirst }}</a></h4>
-				<div>Quais as novidades de {{ user.get_full_name|default:user|capfirst }}</div>
-				<a href="{{ user.get_profile.url|default:'#' }}" target='_blank'>{{ user.get_profile.url }}</a>
+				<h4><a href="{{ get_user.get_absolute_url }}">{{ get_user.get_full_name|default:user|capfirst }}</a></h4>
+				<div>Quais as novidades de {{ get_user.get_full_name|default:user|capfirst }}</div>
+				<a href="{{ get_user.get_profile.url|default:'#' }}" target='_blank'>{{ get_user.get_profile.url }}</a>
+				<div style='float:right'>
+					{% if user.is_authenticated %}
+					 <!-- TODO: if not follow -->
+						<button>adicionar aos favoritos</button>
+					<!-- TODO: show is folling -->
+					{% endif %}
+				</div>
 			</td>
 		</tr>
 	</table>
@@ -46,6 +55,7 @@
 <h5>Publicationações recentes</h5>
 <hr/>
 
+{% paginate pub_list %}
 {% for pub in pub_list %}
 		<article>
 			{% thumbnail pub.image "40" as im %}
@@ -69,5 +79,6 @@
 			<h4> Nenhum Puuublic cadastrado {% if search %} para {{ search }} {% endif %} </h4>
 		</article>
 {% endfor %}
+{% show_pages %}
 
 {% endblock wrapper %}

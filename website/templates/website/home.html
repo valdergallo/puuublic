@@ -94,6 +94,7 @@ Autenticado -.-
     </article>
 </section>
 <hr>
+{% if must_popular_publication_list %}
 <section class="must_popular">
     <h4>Publicationações mais populares</h4>
     {% for pub in must_popular_publication_list %}
@@ -114,6 +115,9 @@ Autenticado -.-
     </article>
     {% endfor %}
 </section>
+{% endif %}
+
+{% if last_publication_list %}
 <section class="last_publication_list">
     <h4>Publicationações mais recentes</h4>
     {% for pub in last_publication_list %}
@@ -134,6 +138,8 @@ Autenticado -.-
     </article>
     {% endfor %}
 </section>
+{% endif %}
+
 {% endif %}
 {% endblock wrapper %}
 
