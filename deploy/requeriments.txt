@@ -10,6 +10,7 @@ django-endless-pagination==1.1
 django-filebrowser==3.4.2
 django-grappelli==2.3.8
 django-tinymce==1.5.1b2
+ipdb==0.6.1
 ipython==0.12.1
 readline==6.2.2
 sorl-thumbnail==11.12
