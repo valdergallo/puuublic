@@ -17,28 +17,28 @@ from website.templatetags.default_image import random_image
 
 class Liked(DefaultFields):
     user = models.ForeignKey(User, related_name='user_liked')
-    Publication = models.ForeignKey('Publication', related_name='publication_liked')
+    publication = models.ForeignKey('Publication', related_name='publication_liked')
 
 
 class Foward(DefaultFields):
     user = models.ForeignKey(User, related_name='user_foward')
-    Publication = models.ForeignKey('Publication', related_name='publication_foward')
+    publication = models.ForeignKey('Publication', related_name='publication_foward')
 
 
 class Watched(DefaultFields):
     user = models.ForeignKey(User, related_name='user_watched')
-    Publication = models.ForeignKey('Publication', related_name='publication_watched')
+    publication = models.ForeignKey('Publication', related_name='publication_watched')
 
 
 class Rated(DefaultFields):
     user = models.ForeignKey(User, related_name='user_rated')
-    Publication = models.ForeignKey('Publication', related_name='publication_rated')
+    publication = models.ForeignKey('Publication', related_name='publication_rated')
 
 
 class Alert(DefaultFields):
     message = models.TextField()
     user = models.ForeignKey(User, related_name='user_alert')
-    Publication = models.ForeignKey('Publication', related_name='publication_alert')
+    publication = models.ForeignKey('Publication', related_name='publication_alert')
 
     def __unicode__(self):
         return self.message
@@ -53,7 +53,7 @@ class Tag(DefaultFields):
 
 class PublicationTag(DefaultFields):
     tag = models.ForeignKey(Tag)
-    Publication = models.ForeignKey('Publication', related_name='tags')
+    publication = models.ForeignKey('Publication', related_name='tags')
 
     objects = TagManager()
 
@@ -69,6 +69,7 @@ class Publication(DefaultGeoFields):
     url = models.SlugField(max_length=30, null=True, blank=True)
     message = models.TextField()
     image = models.ImageField(upload_to='publication/%Y/%m/%d', null=True, blank=True)
+    published = models.BooleanField(default=True)
 
     #replicate count
     rated_count = models.IntegerField(default=0)
@@ -98,7 +99,7 @@ class PublicationImage(DefaultFields):
     message = models.CharField(max_length=250)
     image = models.ImageField(upload_to='Publication/%Y/%m/%d')
     user = models.ForeignKey(User, related_name='images')
-    Publication = models.ForeignKey(Publication, related_name='publication_images')
+    publication = models.ForeignKey(Publication, related_name='publication_images')
 
     def __unicode__(self):
         return self.description
@@ -107,7 +108,7 @@ class PublicationImage(DefaultFields):
 class Comment(DefaultGeoFields):
     message = models.CharField(max_length=200)
     user = models.ForeignKey(User)
-    Publication = models.ForeignKey(Publication, related_name='comments')
+    publication = models.ForeignKey(Publication, related_name='comments')
 
     objects = CommentManager()
 
@@ -115,7 +116,11 @@ class Comment(DefaultGeoFields):
         return self.message
 
 
-class PublicationPermission(DefaultFields):
-    owner = models.ForeignKey(User, related_name='permission_user')
-    friend = models.ForeignKey(User, related_name='permission_friend')
-    Publication = models.ForeignKey(Publication, related_name='permission_Publication')
+class Moderator(DefaultFields):
+    "Moderator User"
+    owner = models.ForeignKey(User, related_name='moderator_owner')
+    moderator = models.ForeignKey(User, related_name='moderator_user')
+    publication = models.ForeignKey(Publication, related_name='publication_moderator')
+    
+    can_publish = models.BooleanField(default=True)
+    can_exclude = models.BooleanField(default=True)
