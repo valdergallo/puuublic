@@ -145,8 +145,57 @@ blockout.search input[type=image] {
     padding-bottom:10px;
     margin-bottom:25px;
 }
-.form_Publication input[type=text], .form_Publication textarea {
+.form_publication input[type=text], .form_publication textarea {
     width:80%;
+}
+
+.form_contact input[type=text], .form_contact textarea {
+    width:80%;
+    border:1px solid #BDBEC0;
+}
+
+.form_contact input[type=submit] {
+    background-color:#44B652;
+    border:1px solid #449243;
+    color:#fff;
+    padding:5px 10px;
+    cursor:pointer;
+    margin-left:310px;
+}
+
+.form_contact input[type=submit]:hover {
+    background-color:#449243;
+}
+
+.form_contact textarea {
+    height:150px;
+}
+
+.form_contact label {
+    margin-top:15px;
+    color:#444544;
+}
+
+.form_contact div.form_left {
+    float:left;
+    width:49%;
+}
+
+.form_contact div.form_right {
+    float:right;
+    width:49%;
+}
+
+.form_contact p {
+    clear:both;
+}
+
+.form_contact label {
+    font-weight:normal;
+}
+
+.form_contact span {
+    color:#BDBEC0;
 }
 
 /****************************
