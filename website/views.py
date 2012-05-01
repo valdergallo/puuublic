@@ -21,6 +21,7 @@ from publication.forms import SearchForm
 from friendship.forms import RegisterForm, LoginForm
 from publication.models import Publication
 from website.models import Blog
+from website.forms import ContactForm
 
 
 def home(request):
@@ -101,7 +102,19 @@ def novidades(request):
 
 def contato(request):
     "Contato without login"
-    return render(request, "base.html")
+    
+    form = ContactForm(request.POST or None)
+    if form.is_valid:
+        form.save()
+        form.send_email()
+        #reset form
+        form = ContactForm()
+        form.sended = u"Sua mensagem foi enviada com sucesso"
+    
+    return render(request, 
+                "website/contact.html",
+                {'form': form}
+                )
 
 
 def ajax_login(request):

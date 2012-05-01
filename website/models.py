@@ -13,11 +13,12 @@ from core.managers import ActiveManager
 
 
 class Contact(models.Model):
-    name = models.CharField(max_length=100)
-    city = models.CharField(blank=True, max_length=100)
-    email = models.EmailField()
-    fone = models.CharField(blank=True, max_length=100)
-    message = models.TextField(blank=True)
+    name = models.CharField(max_length=100, help_text=u"Qual o seu nome completo?")
+    city = models.CharField(blank=True, max_length=100, help_text=u"Diga-nos de onde você é")
+    email = models.EmailField(help_text=u"Qual é o seu e-mail?")
+    fone = models.CharField(blank=True, max_length=100, help_text=u"Qual é o seu telefone com DDD?")
+    message = models.TextField(blank=True, help_text=u"Digite a mensagem")
+    date_send = models.DateField(auto_now_add=True)
     
     def __unicode__(self):
         return self.email

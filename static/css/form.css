@@ -145,8 +145,18 @@ blockout.search input[type=image] {
     padding-bottom:10px;
     margin-bottom:25px;
 }
-.form_Publication input[type=text], .form_Publication textarea {
+.form_publication input[type=text], .form_publication textarea {
     width:80%;
+}
+
+.form_contact div.form_left {
+    float:left;
+    width:200px;
+}
+
+.form_contact div.form_right {
+    float:right;
+    width:200px;
 }
 
 /****************************
