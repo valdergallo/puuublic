@@ -9,8 +9,18 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 
 from django.db import models
 from core.models import DefaultGeoFields
-from core.managers import ActiveManager, CanceledManager
+from core.managers import ActiveManager
 
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    city = models.CharField(blank=True, max_length=100)
+    email = models.EmailField()
+    fone = models.CharField(blank=True, max_length=100)
+    message = models.TextField(blank=True)
+    
+    def __unicode__(self):
+        return self.email
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -22,7 +32,7 @@ class Category(models.Model):
 class BlogManager(ActiveManager):
 
     def lastest_five(self):
-        return Blog.objects.all().order_by('-date_created')[0:5]
+        return self.all().order_by('-date_created')[0:5]
 
 
 class Blog(DefaultGeoFields):
