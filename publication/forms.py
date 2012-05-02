@@ -15,7 +15,6 @@ from publication.models import Publication
 
 class SearchForm(forms.Form):
     "Search values on Publication content everywere"
-
     search = forms.CharField(max_length=100, required=False)
 
     def get_result_queryset(self):

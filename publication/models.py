@@ -19,20 +19,32 @@ class Liked(DefaultFields):
     user = models.ForeignKey(User, related_name='user_liked')
     publication = models.ForeignKey('Publication', related_name='publication_liked')
 
+    def __unicode__(self):
+        return self.user
+
 
 class Foward(DefaultFields):
     user = models.ForeignKey(User, related_name='user_foward')
     publication = models.ForeignKey('Publication', related_name='publication_foward')
+
+    def __unicode__(self):
+        return self.user
 
 
 class Watched(DefaultFields):
     user = models.ForeignKey(User, related_name='user_watched')
     publication = models.ForeignKey('Publication', related_name='publication_watched')
 
+    def __unicode__(self):
+        return self.user
+
 
 class Rated(DefaultFields):
     user = models.ForeignKey(User, related_name='user_rated')
     publication = models.ForeignKey('Publication', related_name='publication_rated')
+
+    def __unicode__(self):
+        return self.user
 
 
 class Alert(DefaultFields):

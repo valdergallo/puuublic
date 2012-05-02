@@ -25,7 +25,7 @@ class TagManager(ActiveManager):
         for tag in tags:
             tag, _ = Tag.objects.get_or_create(value=slugify(tags))
             Publication = Publication.objects.get(id=self.core_filters.get('publication__id'))
-            PublicationTag.objects.get_or_create(tag=tag, Publication=Publication)
+            PublicationTag.objects.get_or_create(tag=tag, publication=publication)
         return tags
 
 
