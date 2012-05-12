@@ -73,12 +73,21 @@ class PublicationTag(DefaultFields):
         return self.tag.value
 
 
+class Theme(DefaultGeoFields):
+    "This is messages from one Puuublic"
+    user = models.ForeignKey(User, related_name='themes_set')
+    title = models.CharField(max_length=255)
+    url = models.SlugField(max_length=30, null=True, blank=True, db_index=True)
+    
+    def __unicode__(self):
+        return self.title
+
+
 class Publication(DefaultGeoFields):
     "This is messages from one Publication"
-    user = models.ForeignKey(User, related_name='publications')
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='parents')
+    theme = models.ForeignKey(Theme, related_name='themes_set')
+    user = models.ForeignKey(User, related_name='publications_set')
     title = models.CharField(max_length=255)
-    url = models.SlugField(max_length=30, null=True, blank=True)
     message = models.TextField()
     image = models.ImageField(upload_to='publication/%Y/%m/%d', null=True, blank=True)
     published = models.BooleanField(default=True)
@@ -96,7 +105,7 @@ class Publication(DefaultGeoFields):
     def __unicode__(self):
         return self.title
 
-    def default(self):
+    def image_default(self):
         return random_image()
 
     @models.permalink
@@ -110,8 +119,8 @@ class Publication(DefaultGeoFields):
 class PublicationImage(DefaultFields):
     message = models.CharField(max_length=250)
     image = models.ImageField(upload_to='Publication/%Y/%m/%d')
-    user = models.ForeignKey(User, related_name='images')
-    publication = models.ForeignKey(Publication, related_name='publication_images')
+    user = models.ForeignKey(User, related_name='images_set')
+    publication = models.ForeignKey(Publication, related_name='publication_images_set')
 
     def __unicode__(self):
         return self.description
@@ -120,19 +129,9 @@ class PublicationImage(DefaultFields):
 class Comment(DefaultGeoFields):
     message = models.CharField(max_length=200)
     user = models.ForeignKey(User)
-    publication = models.ForeignKey(Publication, related_name='comments')
+    publication = models.ForeignKey(Publication, related_name='comments_set')
 
     objects = CommentManager()
 
     def __unicode__(self):
         return self.message
-
-
-class Moderator(DefaultFields):
-    "Moderator User"
-    owner = models.ForeignKey(User, related_name='moderator_owner')
-    moderator = models.ForeignKey(User, related_name='moderator_user')
-    publication = models.ForeignKey(Publication, related_name='publication_moderator')
-    
-    can_publish = models.BooleanField(default=True)
-    can_exclude = models.BooleanField(default=True)
