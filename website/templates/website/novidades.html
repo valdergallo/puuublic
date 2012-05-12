@@ -9,7 +9,7 @@
 				<figure><img src="{{ im.url }}" title="{{ blog.title }}" width="{{ im.width }}" height="{{ im.height }}"></figure>
 			{% endthumbnail %}
 			<h4>{{ blog.title }}</h4> 
-			<span>{{ blog.date_created|date:"d-m-Y"}}</span>
+			<span>{{ blog.created_at|date:"d-m-Y"}}</span>
 			<h5>{{ blog.tie }}</h5>
 			<blockout>
 				{{ blog.message }}
