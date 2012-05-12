@@ -8,7 +8,7 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 """
 
 from django.contrib import admin
-from models import UserProfile, Group, Private, FriendshipType, Friendship, Follow
+from models import UserProfile, Group, Private, Follow
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 
@@ -29,6 +29,4 @@ admin.site.register(User, UserAdmin)
 
 admin.site.register(Group)
 admin.site.register(Private)
-admin.site.register(FriendshipType)
-admin.site.register(Friendship)
 admin.site.register(Follow)

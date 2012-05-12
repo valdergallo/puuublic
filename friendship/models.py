@@ -25,23 +25,6 @@ class Private(models.Model):
     can_see = models.BooleanField(default=True)
 
 
-class FriendshipType(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __unicode__(self):
-        return self.name
-
-
-class Friendship(DefaultFields):
-    owner = models.ForeignKey(User, related_name='owner')
-    friend = models.ForeignKey(User, related_name='friend')
-    group = models.ForeignKey(Group, related_name='group')
-    fiendship_type = models.ForeignKey(FriendshipType, related_name='type')
-
-    def __unicode__(self):
-        return self.owner
-
-
 class Follow(DefaultFields):
     owner = models.ForeignKey(User, related_name='follow_owner')
     friend = models.ForeignKey(User, related_name='follow_friend')
