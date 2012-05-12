@@ -13,13 +13,13 @@ from core.managers import CanceledManager
 class DefaultFields(models.Model):
     """
     Class Abstract Fields with latitude (lat), longitude (lon)
-    created date (date_created), updated date (date_updated)
+    created date (created_at), updated date (updated_at)
     and active (active)
     """
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True, db_index=True)
-    
+ 
     objects = models.Manager()
     canceleds = CanceledManager()
     
@@ -29,8 +29,8 @@ class DefaultFields(models.Model):
 
 class DefaultGeoFields(DefaultFields):
     """
-    Class Abstract Fields with created date (date_created),
-    updated date (date_updated) and active
+    Class Abstract Fields with created date (created_at),
+    updated date (updated_at) and active
     """
     lat = models.FloatField(null=True, blank=True, db_index=True)
     lon = models.FloatField(null=True, blank=True, db_index=True)
