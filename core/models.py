@@ -7,7 +7,7 @@ Created by Valder Gallo on 2012-01-29.
 Copyright (c) 2012 valdergallo. All rights reserved.
 """
 from django.db import models
-from core.managers import CanceledManager
+from core.managers import CanceledManager, ActiveManager
 
 
 class DefaultFields(models.Model):
@@ -20,7 +20,7 @@ class DefaultFields(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True, db_index=True)
  
-    objects = models.Manager()
+    objects = ActiveManager()
     canceleds = CanceledManager()
     
     class Meta:
