@@ -32,13 +32,13 @@ class TagManager(ActiveManager):
 class PublicationManager(ActiveManager):
 
     def must_popular(self, page=1, limit=10):
-        query = self.all().order_by('-rated_count', '-date_updated')
+        query = self.all().order_by('-rated_count', '-updated_at')
         paginator = Paginator(query, limit)
         query_list = paginator.page(page)
         return query_list.object_list
 
     def lastest_five(self):
-        return self.all().order_by('-date_updated')[0:5]
+        return self.all().order_by('-updated_at')[0:5]
 
 
 class DefaltImageManager(models.Manager):
@@ -58,7 +58,7 @@ class DefaltImageManager(models.Manager):
 class CommentManager(ActiveManager):
 
     def last_ten(self, page=1, limit=10):
-        query = self.all().order_by('-date_created', '-date_updated')
+        query = self.all().order_by('-date_created', '-updated_at')
         paginator = Paginator(query, limit)
         query_list = paginator.page(page)
         return query_list.object_list

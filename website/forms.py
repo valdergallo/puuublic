@@ -17,17 +17,16 @@ class ContactForm(forms.ModelForm):
     "Register contact form and send email"
     class Meta:
         model = Contact
-        
+
     def send_email(self):
-        #TODO: send email default 
+        #TODO: send email default
         msg = u"""
         Date: %(date_send)s \n
         Nome: %(name)s \n
         Telefone: %(fone)s \n
         Cidade: %(city)s \n
-        Mensagem: %(message)s          
+        Mensagem: %(message)s
         """ % (self.instance.__dict__)
-        
+
         send_mail('[pubblic:contact] Contact Message', msg, self.instance.email,
             settings.ADMINS, fail_silently=True)
-        

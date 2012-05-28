@@ -26,5 +26,5 @@ def random_image():
         '/static/image/Avatar-Verde-67.png',
         '/static/image/Avatar-Vermelho-67.png',
     )
-    
+
     return choice(CHOICE_DEFAULT)

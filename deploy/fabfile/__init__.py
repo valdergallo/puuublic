@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # encoding: utf-8
-from __future__ import with_statement
-import fabconfig
 
-from fabric.api import *
-from fabric.colors import *
+from __future__ import with_statement
+from fabconfig import env
+from fabric.api import cd, run, prefix, task
+from fabric.colors import yellow, green
 from contextlib import contextmanager as _contextmanager
 
 
@@ -13,6 +13,7 @@ def virtualenv():
     with cd(env.path):
         with prefix(env.activate):
             yield
+
 
 @task
 def test():
@@ -23,6 +24,7 @@ def test():
         run('uname -a')
         run('python -V')
 
+
 @task
 def install_packages():
     "Install requeriments packs"
@@ -31,6 +33,7 @@ def install_packages():
         run('pip install -r deploy/requeriments.txt')
         print(green('Done'))
 
+
 @task
 def migrate_db():
     "Migrate database"
@@ -38,6 +41,7 @@ def migrate_db():
         print(yellow('Migrate database'))
         run('python manage.py migrate')
         print(green('Done'))
+
 
 @task
 def pull():
@@ -50,6 +54,7 @@ def pull():
         run("git pull")
         print(green('Done'))
 
+
 @task
 def restart():
     "Restart webserver"
@@ -58,11 +63,13 @@ def restart():
         run("touch ../tmp/restart.txt")
         print(green('Done'))
 
+
 @task
 def uninstall(package):
     "Remove package installed"
     with virtualenv():
         run('pip uninstall %s' % package)
+
 
 @task
 def deploy():
@@ -70,11 +77,13 @@ def deploy():
     pull()
     restart()
 
+
 @task
 def command(command):
     "Send command to manage.py"
     with virtualenv():
         run('python manage.py %s' % command)
+
 
 @task
 def git(command):

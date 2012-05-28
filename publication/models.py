@@ -78,7 +78,7 @@ class Theme(DefaultGeoFields):
     user = models.ForeignKey(User, related_name='themes_set')
     title = models.CharField(max_length=255)
     url = models.SlugField(max_length=30, null=True, blank=True, db_index=True)
-    
+
     def __unicode__(self):
         return self.title
 

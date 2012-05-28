@@ -19,7 +19,7 @@ class Contact(models.Model):
     fone = models.CharField(blank=True, max_length=100, help_text=u"Qual é o seu telefone com DDD?")
     message = models.TextField(blank=True, help_text=u"Digite a mensagem")
     date_send = models.DateField(auto_now_add=True)
-    
+
     def __unicode__(self):
         return self.email
 
@@ -45,7 +45,6 @@ class Blog(DefaultGeoFields):
     category = models.ManyToManyField(Category)
 
     objects = BlogManager()
-    
 
     def __unicode__(self):
         return self.title
@@ -55,6 +54,3 @@ class Blog(DefaultGeoFields):
             return ('blog', (), {
                 'slug': self.slug,
             })
-
-
-

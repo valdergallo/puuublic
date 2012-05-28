@@ -8,6 +8,7 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 """
 from django.db import models
 
+
 class ActiveManager(models.Manager):
     def get_query_set(self):
         "Active by default"
@@ -18,4 +19,3 @@ class CanceledManager(models.Manager):
     def get_query_set(self):
         "Show canceled content"
         return super(CanceledManager, self).get_query_set().filter(active=False)
-

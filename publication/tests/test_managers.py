@@ -12,8 +12,8 @@ from django_dynamic_fixture import G
 
 class PublicationManagerTest(TestCase):
     def setUp(self):
-      G(Publication,parent=None, n=20)
-      G(Publication,parent=None,active=False, n=10)
+        G(Publication, parent=None, n=20)
+        G(Publication, parent=None, active=False, n=10)
 
     def test_active_content(self):
         active_Publication = Publication.objects.all()

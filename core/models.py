@@ -19,10 +19,10 @@ class DefaultFields(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True, db_index=True)
- 
+
     objects = ActiveManager()
     canceleds = CanceledManager()
-    
+
     class Meta:
         abstract = True
 

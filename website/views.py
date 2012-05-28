@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # encoding: utf-8
 """
 views.py
@@ -6,7 +6,6 @@ views.py
 Created by Valder Gallo on 2012-01-29.
 Copyright (c) 2012 valdergallo. All rights reserved.
 """
-
 import json
 
 from django.contrib.auth.forms import authenticate
@@ -54,14 +53,14 @@ def home_user(request, username):
     "Starting page with login"
     search = request.POST.get('search', '')
     get_user = get_object_or_404(User, username=username)
-    
+
     search_form = SearchForm(request.POST or None)
 
     if request.method == 'POST':
         if search_form.is_valid():
             pub_list = search_form.get_result_queryset()
     else:
-        pub_list = get_user.publications.all().order_by('-rated_count', '-date_updated')
+        pub_list = get_user.publications.all().order_by('-rated_count', '-updated_at')
 
     return render(request,
                   "website/home_user.html",
@@ -102,7 +101,7 @@ def novidades(request):
 
 def contato(request):
     "Contato without login"
-    
+
     form = ContactForm(request.POST or None)
     if form.is_valid:
         form.save()
@@ -110,8 +109,8 @@ def contato(request):
         #reset form
         form = ContactForm()
         form.sended = u"Sua mensagem foi enviada com sucesso"
-    
-    return render(request, 
+
+    return render(request,
                 "website/contact.html",
                 {'form': form}
                 )

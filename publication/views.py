@@ -30,14 +30,13 @@ def publication_add(request):
 
     return render(request,
                   "publication/publication_form.html",
-                  { 'publication_form': publication_form},
+                  {'publication_form': publication_form},
                   )
 
 
 def publication_update(request, publication_id):
     publication = get_object_or_404(Publication, id=publication_id)
-    publication_form = PublicationForm(request.POST or None, request.FILES or None, 
-                        instance=publication)
+    publication_form = PublicationForm(request.POST or None, request.FILES or None, instance=publication)
 
     if request.method == 'POST':
         if publication_form.is_valid():
