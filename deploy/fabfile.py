@@ -2,10 +2,20 @@
 # encoding: utf-8
 
 from __future__ import with_statement
-from fabconfig import env
-from fabric.api import cd, run, prefix, task
+from fabric.api import cd, run, prefix, task, env
 from fabric.colors import yellow, green
 from contextlib import contextmanager as _contextmanager
+
+# globals
+env.hosts = ['stage.puuublic.com']
+env.project = 'puuublic'
+env.user = 'valder'
+env.password = 'v11a82'
+#/home/valder/stage.puuublic.com
+env.path = '~/stage.puuublic.com/puuublic/'
+env.activate = 'source ~/.virtualenvs/puuublic-pack/bin/activate'
+env.colors = True
+env.format = True
 
 
 @_contextmanager
