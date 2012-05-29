@@ -1,11 +1,15 @@
+# -*- coding: utf-8 -*-
 import os
 BASEDIR = os.path.realpath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+
+print BASEDIR
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Valder Gallo', 'valdergallo@gmail.com'),
+    ('Ellison Leão', 'ellisonleao@gmail.com'),
 )
 
 MANAGERS = ADMINS
