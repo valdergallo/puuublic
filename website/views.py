@@ -60,7 +60,7 @@ def home_user(request, username):
         if search_form.is_valid():
             pub_list = search_form.get_result_queryset()
     else:
-        pub_list = get_user.publications.all().order_by('-rated_count', '-updated_at')
+        pub_list = get_user.publications_set.all().order_by('-rated_count', '-updated_at')
 
     return render(request,
                   "website/home_user.html",

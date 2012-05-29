@@ -143,11 +143,13 @@ Autenticado -.-
 {% endif %}
 {% endblock wrapper %}
 
-{% block js %} <script src="{{ STATIC_URL }}js/jquery.labelify.js"></script>
+{% block js %}
+{{ block.super }}
+<script src="{{ STATIC_URL }}js/jquery.labelify.js"></script>
 <script type="text/javascript" charset="utf-8">
     $("input").labelify({
         text : "label"
     });
 
 </script>
-{% endblock js %} 
+{% endblock js %}
