@@ -1,4 +1,4 @@
-import os
+import os, sys
 BASEDIR = os.path.realpath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 DEBUG = True
@@ -19,10 +19,6 @@ DATABASES = {
         'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',  # Set to empty string for default. Not used with sqlite3.
     },
-    'test': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
-    }
 }
 
 TIME_ZONE = 'America/Sao_Paulo'
@@ -140,15 +136,12 @@ INSTALLED_APPS = (
     'endless_pagination',
     'debug_toolbar',
     'django_dynamic_fixture',
-    'django_nose',
     'coverage',
     #'south',
     #'registration', #TODO: make this work
 )
 
 AUTH_PROFILE_MODULE = 'friendship.UserProfile'
-TEST_NAME = 'test'
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -215,3 +208,8 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.signals.SignalDebugPanel',
     'debug_toolbar.panels.logger.LoggingPanel',
 )
+
+
+if 'test' in sys.argv:
+    DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3', 'NAME': '::memory::'}
+    del AUTH_PROFILE_MODULE
