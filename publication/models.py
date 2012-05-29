@@ -16,32 +16,32 @@ from website.templatetags.default_image import random_image
 
 
 class Liked(DefaultFields):
-    user = models.ForeignKey(User, related_name='user_liked')
-    publication = models.ForeignKey('Publication', related_name='publication_liked')
+    user = models.ForeignKey(User, related_name='users_liked')
+    publication = models.ForeignKey('Publication', related_name='publications_liked')
 
     def __unicode__(self):
         return self.user
 
 
 class Foward(DefaultFields):
-    user = models.ForeignKey(User, related_name='user_foward')
-    publication = models.ForeignKey('Publication', related_name='publication_foward')
+    user = models.ForeignKey(User, related_name='users_foward')
+    publication = models.ForeignKey('Publication', related_name='publications_foward')
 
     def __unicode__(self):
         return self.user
 
 
 class Watched(DefaultFields):
-    user = models.ForeignKey(User, related_name='user_watched')
-    publication = models.ForeignKey('Publication', related_name='publication_watched')
+    user = models.ForeignKey(User, related_name='users_watched')
+    publication = models.ForeignKey('Publication', related_name='publications_watched')
 
     def __unicode__(self):
         return self.user
 
 
 class Rated(DefaultFields):
-    user = models.ForeignKey(User, related_name='user_rated')
-    publication = models.ForeignKey('Publication', related_name='publication_rated')
+    user = models.ForeignKey(User, related_name='users_rated')
+    publication = models.ForeignKey('Publication', related_name='publications_rated')
 
     def __unicode__(self):
         return self.user
@@ -49,8 +49,8 @@ class Rated(DefaultFields):
 
 class Alert(DefaultFields):
     message = models.TextField()
-    user = models.ForeignKey(User, related_name='user_alert')
-    publication = models.ForeignKey('Publication', related_name='publication_alert')
+    user = models.ForeignKey(User, related_name='users_alert')
+    publication = models.ForeignKey('Publication', related_name='publications_alert')
 
     def __unicode__(self):
         return self.message
@@ -65,7 +65,7 @@ class Tag(DefaultFields):
 
 class PublicationTag(DefaultFields):
     tag = models.ForeignKey(Tag)
-    publication = models.ForeignKey('Publication', related_name='tags')
+    publication = models.ForeignKey('Publication', related_name='tags_set')
 
     objects = TagManager()
 

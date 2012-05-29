@@ -21,13 +21,13 @@ class Group(models.Model):
 
 
 class Private(models.Model):
-    group = models.ForeignKey(Group, related_name='private_group')
+    group = models.ForeignKey(Group, related_name='private_groups')
     can_see = models.BooleanField(default=True)
 
 
 class Follow(DefaultFields):
-    owner = models.ForeignKey(User, related_name='follow_owner')
-    friend = models.ForeignKey(User, related_name='follow_friend')
+    owner = models.ForeignKey(User, related_name='followers_owner')
+    friend = models.ForeignKey(User, related_name='followers_friend')
 
     def __unicode__(self):
         return self.owner
