@@ -143,10 +143,13 @@ INSTALLED_APPS = (
     'django_nose',
     'coverage',
     #'south',
+    'fabric',
     #'registration', #TODO: make this work
 )
 
 AUTH_PROFILE_MODULE = 'friendship.UserProfile'
+TEST_NAME = 'test'
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
