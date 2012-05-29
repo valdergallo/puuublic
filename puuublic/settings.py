@@ -143,7 +143,6 @@ INSTALLED_APPS = (
     'django_nose',
     'coverage',
     #'south',
-    'fabric',
     #'registration', #TODO: make this work
 )
 
