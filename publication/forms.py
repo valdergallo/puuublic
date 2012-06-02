@@ -42,6 +42,7 @@ class PublicationForm(forms.ModelForm):
         fields = ('title', 'message', 'image', 'url')
 
 
-class ThemeForm(forms.Model):
+class ThemeForm(forms.ModelForm):
     class Meta:
         model = Theme
+        fields = ('title', 'url')

@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 
-from forms import PublicationForm
+from forms import PublicationForm, ThemeForm
 from publication.models import Publication
 
 
@@ -50,7 +50,7 @@ def publication_update(request, publication_id):
 
     return render(request,
                   "publication/publication_form.html",
-                  { 'publication_form': publication_form},
+                  {'publication_form': publication_form},
                   )
 
 
@@ -59,5 +59,19 @@ def publication_detail(request, publication_id, publication_slug):
 
     return render(request,
                   "publication/publication_detail.html",
-                  { 'publication': publication},
+                  {'publication': publication},
                   )
+
+
+def theme_add(request):
+    theme_form = ThemeForm(request.POST or None)
+
+    if theme_form.is_valid():
+        instance = theme_form.save(commit=False)
+        instance.user = request.user
+        instance.save()
+
+    return render(request,
+              "publication/theme_form.html",
+              {'theme_form': theme_form},
+              )
