@@ -10,7 +10,7 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 from django import forms
 from django.db.models import Q
 from tinymce.widgets import TinyMCE
-from publication.models import Publication
+from publication.models import Publication, Theme
 
 
 class SearchForm(forms.Form):
@@ -40,3 +40,8 @@ class PublicationForm(forms.ModelForm):
     class Meta:
         model = Publication
         fields = ('title', 'message', 'image', 'url')
+
+
+class ThemeForm(forms.Model):
+    class Meta:
+        model = Theme
