@@ -26,8 +26,8 @@ class Private(models.Model):
 
 
 class Follow(DefaultFields):
-    owner = models.ForeignKey(User, related_name='followers_owner')
-    friend = models.ForeignKey(User, related_name='followers_friend')
+    owner = models.ForeignKey(User, related_name='followers')
+    friend = models.ForeignKey(User, related_name='following')
 
     def __unicode__(self):
         return self.owner
