@@ -158,12 +158,14 @@ def contato(request):
     "Contato without login"
 
     form = ContactForm(request.POST or None)
-    if form.is_valid:
-        form.save()
-        form.send_email()
-        #reset form
-        form = ContactForm()
-        form.sended = u"Sua mensagem foi enviada com sucesso"
+
+    if request.method == 'POST':
+        if form.is_valid:
+            form.save()
+            form.send_email()
+            #reset form
+            form = ContactForm()
+            form.sended = u"Sua mensagem foi enviada com sucesso"
 
     return render(request,
                 "website/contact.html",

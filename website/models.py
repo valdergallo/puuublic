@@ -33,7 +33,7 @@ class Category(models.Model):
 class BlogManager(ActiveManager):
 
     def lastest_five(self):
-        return self.all().order_by('-date_created')[0:5]
+        return self.all().order_by('-created_at')[0:5]
 
 
 class Blog(DefaultGeoFields):

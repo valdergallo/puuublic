@@ -28,7 +28,7 @@ class SearchForm(forms.Form):
         query |= Q(message__icontains=value)
         query |= Q(tags__tag__value__icontains=value)
 
-        return Publication.objects.select_realted('themes').filter(query)
+        return Publication.objects.select_realted('themes', 'tags').filter(query)
 
 
 class PublicationForm(forms.ModelForm):
