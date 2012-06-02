@@ -1,5 +1,6 @@
 .project*
 .pydev*
+.coverage*
 .settings*
 .ropeproject*
 media*
