@@ -97,6 +97,6 @@ def command(command):
 
 @task
 def git(command):
-    "Execute command to with git"
+    "Run command with git"
     with virtualenv():
         run("git %s" % command)
