@@ -213,3 +213,4 @@ DEBUG_TOOLBAR_PANELS = (
 if 'test' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3', 'NAME': '::memory::'}
     del AUTH_PROFILE_MODULE
+    

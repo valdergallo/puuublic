@@ -26,7 +26,7 @@ def publication_add(request):
             instance.tags.register(request.POST['tags'])
 
             messages.success(request, 'Puuublic registred with success')
-            return redirect(reverse('website:home_user', args=[request.user]))
+            return redirect(reverse('website:publications_user', args=[request.user]))
 
     return render(request,
                   "publication/publication_form.html",
@@ -46,7 +46,7 @@ def publication_update(request, publication_id):
             instance.tags.register(request.POST['tags'])
 
             messages.success(request, 'Puuublic updated with success')
-            return redirect(reverse('website:home_user', args=[request.user]))
+            return redirect(reverse('website:publications_user', args=[request.user]))
 
     return render(request,
                   "publication/publication_form.html",

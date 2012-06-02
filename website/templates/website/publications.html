@@ -1,0 +1,66 @@
+{% extends 'base_2col.html' %}
+{% load i18n thumbnail default_image endless %}
+
+
+
+{% block aside %}
+<h5>Publicationações mais recentes</h5>
+<hr/>
+{% for pub in pub_last_update %}
+		<article>
+			{% thumbnail pub.image "40" as im %}
+			<figure>
+				<img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
+			</figure>
+			{% empty %}
+			<figure>
+				<img src="{% random_image %}" title="{{ pub.title }}" width="40">
+			</figure>
+			{% endthumbnail %}
+				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></h4>
+				<h5>{{ pub.tie }}</h5>
+				<div class='small article_footer'>Divulgado em {{ pub.date_created|date:"d/m/Y"}} às {{ pub.date_created|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
+		</article>
+		{% if not forloop.last %}
+		<hr>
+		{% endif %}
+	{% empty %}
+		<article>
+			Nenhum Puuublic cadastrado
+		</article>
+{% endfor %}
+
+{% endblock aside %}
+
+{% block wrapper %}
+<br/>
+<h5>Publicationações Populares</h5>
+<hr/>
+
+{% paginate pub_list %}
+{% for pub in pub_list %}
+		<article>
+			{% thumbnail pub.image "40" as im %}
+			<figure>
+				<img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
+			</figure>
+			{% empty %}
+			<figure>
+				<img src="{% random_image %}" title="{{ pub.title }}" width="40">
+			</figure>
+			{% endthumbnail %}
+				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></h4>
+				<h5>{{ pub.tie }}</h5>
+				<div class='small article_footer'>Divulgado em {{ pub.date_created|date:"d/m/Y"}} às {{ pub.date_created|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
+		</article>
+		{% if not forloop.last %}
+		<hr>
+		{% endif %}
+	{% empty %}
+		<article>
+			<h4> Nenhum Puuublic cadastrado {% if search %} para {{ search }} {% endif %} </h4>
+		</article>
+{% endfor %}
+{% show_pages %}
+
+{% endblock wrapper %}
