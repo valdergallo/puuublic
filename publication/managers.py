@@ -58,7 +58,7 @@ class DefaltImageManager(models.Manager):
 class CommentManager(ActiveManager):
 
     def last_ten(self, page=1, limit=10):
-        query = self.all().order_by('-date_created', '-updated_at')
+        query = self.all().order_by('-updated_at')
         paginator = Paginator(query, limit)
         query_list = paginator.page(page)
         return query_list.object_list
