@@ -19,7 +19,7 @@
 			{% endthumbnail %}
 				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></h4>
 				<h5>{{ pub.tie }}</h5>
-				<div class='small article_footer'>Divulgado em {{ pub.date_created|date:"d/m/Y"}} às {{ pub.date_created|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
+				<div class='small article_footer'>Divulgado em {{ pub.updated_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
 		</article>
 		{% if not forloop.last %}
 		<hr>
@@ -51,7 +51,7 @@
 			{% endthumbnail %}
 				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></h4>
 				<h5>{{ pub.tie }}</h5>
-				<div class='small article_footer'>Divulgado em {{ pub.date_created|date:"d/m/Y"}} às {{ pub.date_created|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
+				<div class='small article_footer'>Divulgado em {{ pub.updated_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
 		</article>
 		{% if not forloop.last %}
 		<hr>
