@@ -24,11 +24,11 @@ class SearchForm(forms.Form):
 
         value = self.cleaned_data['search']
         query |= Q(title__icontains=value)
-        query |= Q(themes__title__icontains=value)
+        query |= Q(theme__title__icontains=value)
         query |= Q(message__icontains=value)
-        query |= Q(tags__tag__value__icontains=value)
+        query |= Q(tags_set__tag__value__icontains=value)
 
-        return Publication.objects.select_realted('themes').filter(query)
+        return Publication.objects.select_related('theme').filter(query)
 
 
 class PublicationForm(forms.ModelForm):
