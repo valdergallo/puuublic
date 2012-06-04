@@ -1,10 +1,15 @@
 #!/usr/bin/python
 # encoding: utf-8
-
 from __future__ import with_statement
+import os
+import sys
 from fabric.api import cd, run, prefix, task, env
 from fabric.colors import yellow, green
 from contextlib import contextmanager as _contextmanager
+
+BASEDIR = os.path.realpath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+sys.path.append(BASEDIR)
+os.environ['DJANGO_SETTINGS_MODULE'] = 'puuublic.settings'
 
 # globals
 env.hosts = ['stage.puuublic.com']
@@ -42,6 +47,18 @@ def install_packages():
         print(yellow('Install requeriments packs'))
         run('pip install -r deploy/requeriments.txt')
         print(green('Done'))
+
+
+@task
+def reset_db():
+    "Reset database"
+    with virtualenv():
+        dabase_path = os.path.join(env.path, 'db', 'puuublic.sqlite')
+        try:
+            run("rm %s" % dabase_path)
+        except:
+            print green('Database File doest not exist')
+        run('python manage.py syncdb')
 
 
 @task
@@ -97,6 +114,6 @@ def command(command):
 
 @task
 def git(command):
-    "Execute command to with git"
+    "Run command with git"
     with virtualenv():
         run("git %s" % command)

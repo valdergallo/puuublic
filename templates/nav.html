@@ -1,15 +1,19 @@
 {% load i18n %}
-<a href="{% url website:home %}"><nav class="logo"></nav></a>
+{% if user.is_authenticated %}
+<a href="{% url website:publications %}"><nav class="logo"></nav></a>
+{% else %}
+<a href="{% url website:dashboard user %}"><nav class="logo"></nav></a>
+{% endif %}
 {% if user.is_authenticated %}
 <ul class="nav">
-    <li class="#"><a href="{% url website:home %}">{% trans 'Inicio' %}</a></li>
-	<li class="#"><a href="{% url website:home %}">{% trans 'Favoritos' %}</a></li>
-    <li class="#"><a href="{% url publication:publication_add %}">{% trans 'Criar Puuublic' %}</a></li>
-    <li class="#"><a href="#">{% trans 'Perfil' %}</a></li>
+    <li class="#"><a href="{% url website:dashboard user %}">{% trans 'Inicio' %}</a></li>
+	<li class="#"><a href="{% url publication:publication_add %}">{% trans 'Publicar' %}</a></li>
+    <li class="#"><a href="{% url publication:theme_add %}">{% trans 'Criar Puuublic' %}</a></li>
+    <li class="#"><a href="{% url website:publications_user user %}">{% trans 'Perfil' %}</a></li>
     <li class="#"><a href="#">{% trans 'Configurar' %}</a></li>
     <li class="#"><a href="{% url website:weblogout %}">{% trans 'Sair' %}</a></li>
     <li class="right">
-		<form action="{% url website:home_user user %}" method="POST" name="search_publication">
+		<form action="{% url website:publications %}" method="POST" name="search_publication">
              {% include 'search_form.html' %}
         </form>
     </li>

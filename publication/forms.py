@@ -10,7 +10,7 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 from django import forms
 from django.db.models import Q
 from tinymce.widgets import TinyMCE
-from publication.models import Publication
+from publication.models import Publication, Theme
 
 
 class SearchForm(forms.Form):
@@ -28,15 +28,20 @@ class SearchForm(forms.Form):
         query |= Q(message__icontains=value)
         query |= Q(tags_set__tag__value__icontains=value)
 
-        return Publication.objects.select_related('theme').filter(query)
+        return Publication.objects.select_related('themes', 'tags').filter(query)
 
 
 class PublicationForm(forms.ModelForm):
     "Add new Publication"
-    url = forms.CharField(max_length=30, required=False, help_text='<br> Ex.: meupuuublic.puuublic.com')
     message = forms.CharField(widget=TinyMCE(attrs={'cols': 10, 'rows': 10}))
     tags = forms.CharField(max_length=255, required=False)
 
     class Meta:
         model = Publication
-        fields = ('title', 'message', 'image', 'url')
+        fields = ('title', 'message', 'image')
+
+
+class ThemeForm(forms.ModelForm):
+    class Meta:
+        model = Theme
+        fields = ('title', 'url')

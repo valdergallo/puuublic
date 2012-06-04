@@ -100,7 +100,7 @@ class Publication(DefaultGeoFields):
     objects = PublicationManager()
 
     class Meta:
-        get_latest_by = ('date_created',)
+        get_latest_by = ('updated_at',)
 
     def __unicode__(self):
         return self.title
