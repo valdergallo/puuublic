@@ -52,7 +52,7 @@ p24
 I0
 sbssS'hash'
 p25
-S'\xbfV\x0bd\x0b>Z\xe5.\xd8\xe3`<q\xfbv'
+S'\xe4\xa9\xeb\x89\x03nZ\x05\xe5\xca\x08i\x80\xd9DT'
 p26
 ssS'publication_tests___init__'
 p27
@@ -112,7 +112,7 @@ I1
 sg20
 I0
 sg21
-I28
+I27
 sg22
 I0
 sg23
@@ -120,7 +120,7 @@ I9
 sg24
 I0
 sbssg25
-S'\xa0\xad$S@\x9b\xeaQ\xf5\t}q9\xc6L\x16'
+S'\xe2\x92d\x1a\x89$I\xbd\x9c\x89qH@\xd5\xfcU'
 p42
 ssS'website_tests'
 p43
@@ -255,7 +255,7 @@ I12
 sg24
 I0
 sbssg25
-S'\xd0#\xee*\xdco\xf8\xad.\x0b\x82\x15k\xc8|\xba'
+S'8\x0c\x8eV}\xe8hns\x14\xf7\xe5u/j\xb8'
 p73
 ssS'website_urls'
 p74
@@ -323,7 +323,7 @@ I61
 sg24
 I0
 sbssg25
-S'\xaf\xdd\xc3\xaf\xb1\xc0\xea\xf5S\x85H\xccw\xad\x89v'
+S'Tcg\x1c\xef\xfd\x1bb\xefz\x8f\xc7t\x8c\xdd\x05'
 p89
 ssS'friendship_admin'
 p90
@@ -655,7 +655,7 @@ I1
 sg20
 I0
 sg21
-I52
+I53
 sg22
 I0
 sg23
@@ -663,7 +663,7 @@ I0
 sg24
 I0
 sbssg25
-S'\xa4\xe8\xa1\xc4\x88\xb7\x17\xd64|,z\x19`E0'
+S'\xa8\xf0\xd6@Bb\xd1\xbdf)\x1b\xe6R\xeb\xb2\xe0'
 p169
 ssS'core_managers'
 p170
