@@ -11,6 +11,7 @@ from django import forms
 from django.db.models import Q
 from tinymce.widgets import TinyMCE
 from publication.models import Publication, Theme
+from django.contrib.auth.models import User
 
 
 class SearchForm(forms.Form):
@@ -23,12 +24,27 @@ class SearchForm(forms.Form):
             raise forms.ValidationError('Form need be clear')
 
         value = self.cleaned_data['search']
-        query |= Q(title__icontains=value)
-        query |= Q(theme__title__icontains=value)
-        query |= Q(message__icontains=value)
-        query |= Q(tags_set__tag__value__icontains=value)
+        _filter = self.data.get('filter', 'publication')
 
-        return Publication.objects.select_related('themes', 'tags').filter(query)
+        if _filter == 'publication':
+            query |= Q(title__icontains=value)
+            query |= Q(theme__title__icontains=value)
+            query |= Q(message__icontains=value)
+            query |= Q(tags_set__tag__value__icontains=value)
+
+            return Publication.objects.select_related('themes', 'tags').filter(query)
+
+        if _filter == 'publics':
+            query |= Q(title__icontains=value)
+
+            return Theme.objects.filter(query)
+
+        if _filter == 'people':
+            query |= Q(first_name__icontains=value)
+            query |= Q(last_name__icontains=value)
+            query |= Q(username__icontains=value)
+
+            return User.objects.filter(query)
 
 
 class PublicationForm(forms.ModelForm):

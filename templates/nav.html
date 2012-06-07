@@ -13,8 +13,12 @@
     <li class="#"><a href="#">{% trans 'Configurar' %}</a></li>
     <li class="#"><a href="{% url website:weblogout %}">{% trans 'Sair' %}</a></li>
     <li class="right">
-		<form action="{% url website:publications %}" method="POST" name="search_publication">
-             {% include 'search_form.html' %}
+		<form action="{% url website:publications %}" method="get" name="search_publication">
+             <blockout class='search'>
+                {{ search_form.search }}
+                <input type="image" src="{{STATIC_URL}}image/btn_search.png"
+                class="search input_label" value='' />
+              </blockout>
         </form>
     </li>
 </ul>

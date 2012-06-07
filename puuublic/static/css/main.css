@@ -29,6 +29,9 @@ article {
 .clear {
     clear: both;
 }
+.mini{
+    font-size:0.85em;
+}
 figure img {
     margin-right: 10px;
 }
@@ -38,5 +41,21 @@ a {
 }
 label {
     display: block;
+}
+dl dt{
+    display: inline-block;
+    padding:15px 5px 5px 0px;
+}
+dl dt a {
+    color: #4D4D4F;
+    font-weight: bolder;
+    cursor: pointer;
+}
+dl dt a.selected {
+    color: #efefef;
+}
+.no_result{
+    padding: 0px;
+    color: #4D4D4F;
 }
 

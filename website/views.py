@@ -51,23 +51,25 @@ def home(request):
 
 def publications(request):
     "List all publications"
-    search = request.POST.get('search', '')
+    search = request.GET.get('search', '')
+    _filter = request.GET.get('filter', '')
     page = request.REQUEST.get('page', 1)
 
-    search_form = SearchForm(request.POST or None)
+    search_form = SearchForm(request.GET or None)
 
-    if request.method == 'POST':
+    if search:
         if search_form.is_valid():
             pub_list = search_form.get_result_queryset()
     else:
         pub_list = Publication.objects.all().order_by('-rated_count', '-updated_at')
 
-    pub_last_update = pub_list.order_by('-updated_at')[0:10]
+    pub_last_update = Publication.objects.all().order_by('-updated_at')[0:10]
 
     return render(request,
                   "website/publications.html",
                     {
                     "search": search,
+                    "filter": _filter,
                     "search_form": search_form,
                     "pub_list": pub_list,
                     "pub_last_update": pub_last_update,

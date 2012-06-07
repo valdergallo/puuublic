@@ -33,10 +33,24 @@
 {% endblock aside %}
 
 {% block wrapper %}
-<br/>
+{% if not search %}
 <h5>Publicationações Populares</h5>
+{% else %}
+<h3>Pesquisa: {{ search }}</h3>
+<span class='mini'> Aproximadamente {{ pub_list.count }} resultado{{ pub_list|pluralize:'s' }}</span>
+<br/>
+<dl>
+	<dt><a href='{% url website:publications %}?filter=publication&search={{ search }}'
+	{% ifequal filter 'publication' %} class='selected' {% endifequal %}>Publicações</a></dt>
+	<dt><a href='{% url website:publications %}?filter=publics&search={{ search }}'
+	{% ifequal filter 'publics' %} class='selected' {% endifequal %}>Puuublics</a></dt>
+	<dt><a href='{% url website:publications %}?filter=people&search={{ search }}'
+	{% ifequal filter 'people' %} class='selected' {% endifequal %}>Pessoas</a></dt>
+</dl>
+{% endif %}
 <hr/>
 
+{% if not filter or filter == 'publication' %}
 {% paginate pub_list %}
 {% for pub in pub_list %}
 		<article>
@@ -58,9 +72,47 @@
 		{% endif %}
 	{% empty %}
 		<article>
-			<h4> Nenhum Puuublic cadastrado {% if search %} para {{ search }} {% endif %} </h4>
+			<h4 class='no_result'> Desculpe, sua pesquisa não resultou nenhum resultado {% if search %} para {{ search }} {% endif %} </h4>
 		</article>
 {% endfor %}
 {% show_pages %}
+{% endif %}
+
+{% if filter == 'publics' %}
+{% paginate pub_list %}
+{% for pub in pub_list %}
+		<article>
+				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></h4>
+				<h5>{{ pub.title }}</h5>
+				<div class='small article_footer'>Divulgado em {{ pub.updated_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
+		</article>
+		{% if not forloop.last %}
+		<hr>
+		{% endif %}
+	{% empty %}
+		<article>
+			<h4 class='no_result'> Desculpe, sua pesquisa não resultou nenhum resultado {% if search %} para {{ search }} {% endif %} </h4>
+		</article>
+{% endfor %}
+{% show_pages %}
+{% endif %}
+
+{% if filter == 'people' %}
+{% paginate pub_list %}
+{% for pub in pub_list %}
+		<article>
+				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.first_name }} {{ pub.last_name }}</a></h4>
+				<h5>{{ pub.first_name }} {{ pub.last_name }}</h5>
+		</article>
+		{% if not forloop.last %}
+		<hr>
+		{% endif %}
+	{% empty %}
+		<article>
+			<h4 class='no_result'> Desculpe, sua pesquisa não resultou nenhum resultado {% if search %} para {{ search }} {% endif %} </h4>
+		</article>
+{% endfor %}
+{% show_pages %}
+{% endif %}
 
 {% endblock wrapper %}

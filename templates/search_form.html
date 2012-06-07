@@ -1,8 +1,0 @@
-{% csrf_token %}
-<blockout class='search'>
-{% for input in search_form %}
-{{ input.label_tag }}
-{{ input }}
-{% endfor %}
-<input type="image" src="{{STATIC_URL}}image/btn_search.png" class="search input_label" />
-</blockout>
