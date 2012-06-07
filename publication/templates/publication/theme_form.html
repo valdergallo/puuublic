@@ -23,6 +23,10 @@
 <form action="{% url publication:publication_add %}" method="POST" name="publication_add" enctype="multipart/form-data" >
 	{% csrf_token %}
     {{ theme_form.as_p }}
+    <div class='auto_url'>
+    	<p>O endereço desse puuublic será:</p>
+    	<a href='#'>http://</a>
+    </div>
     <button type="submit">Salvar</button>
 </form>
 </section>

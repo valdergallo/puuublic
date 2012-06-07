@@ -42,6 +42,8 @@ class PublicationForm(forms.ModelForm):
 
 
 class ThemeForm(forms.ModelForm):
+    url = forms.CharField(widget=forms.HiddenInput())
+
     class Meta:
         model = Theme
         fields = ('title', 'url')
