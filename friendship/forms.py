@@ -12,16 +12,24 @@ from django.contrib.auth.models import User
 
 
 class RegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(), required=True)
+    password = forms.CharField(widget=forms.PasswordInput(\
+            attrs={'placeholder':'******'}), required=True)
 
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email', 'username', 'password',)
-
+        widgets = {
+            'first_name' : forms.TextInput(attrs={'placeholder': 'Nome'}),
+            'last_name' : forms.TextInput(attrs={'placeholder': 'Sobrenome'}),
+            'email' : forms.TextInput(attrs={'placeholder': 'Email'}),
+            'username' : forms.TextInput(attrs={'placeholder': u'Usuário'}),
+        }
 
 class LoginForm(forms.ModelForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'id': 'regiter_user'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'id': 'register_password'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'id':'regiter_user',\
+                'placeholder': u'Usuário'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'id':'register_password',\
+                'placeholder': '******'}))
 
     def clean(self):
         username = self.cleaned_data['username']
