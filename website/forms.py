@@ -18,6 +18,7 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
 
+
     def send_email(self):
         #TODO: send email default
         msg = u"""
