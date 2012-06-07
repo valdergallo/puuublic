@@ -28,6 +28,35 @@ class TestForm(TestCase):
         form = LoginForm(data)
         self.assertTrue(form.is_valid())
 
+    def test_form_login_desactived(self):
+        """
+        Test user loged desactived
+        """
+        user = User.objects.get(username='test')
+        user.is_active = False
+        user.save()
+
+        data = {'username': 'test', 'password': 'test'}
+        form = LoginForm(data)
+        self.assertFalse(form.is_valid())
+        self.assertTrue('__all__' in form.errors)
+
+    def test_form_login_errors(self):
+        """
+        Test user loged
+        """
+        data = {'password': 'test'}
+        form = LoginForm(data)
+        self.assertFalse(form.is_valid())
+
+        self.assertTrue('username' in form.errors)
+
+        data = {'username': 'test'}
+        form = LoginForm(data)
+        self.assertFalse(form.is_valid())
+
+        self.assertTrue('password' in form.errors)
+
     def test_form_registration(self):
         """
         Test user registration

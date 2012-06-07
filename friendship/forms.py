@@ -33,13 +33,13 @@ class LoginForm(forms.ModelForm):
                 'placeholder': '******'}))
 
     def clean(self):
-        username = self.cleaned_data['username']
-        password = self.cleaned_data['password']
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         if user is None:
             raise forms.ValidationError(u'Usuário inválido')
-            if user.is_active:
-                raise forms.ValidationError(u'Usuário desativado')
+        if not user.is_active:
+            raise forms.ValidationError(u'Usuário desativado')
         return self.cleaned_data
 
     class Meta:
