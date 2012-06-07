@@ -78,7 +78,9 @@ def pull():
         run("git checkout -f")
         print(green('Done'))
         print(yellow('Pull files from server'))
-        run("git pull")
+        run("git fetch")
+        run("git checkout -f")
+        run("git log -n 1")
         print(green('Done'))
 
 
