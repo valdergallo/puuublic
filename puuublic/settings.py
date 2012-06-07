@@ -1,11 +1,15 @@
+# -*- coding: utf8 -*-
 import os, sys
 BASEDIR = os.path.realpath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+
+print BASEDIR
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Valder Gallo', 'valdergallo@gmail.com'),
+    (u'Ellison Leao', 'ellisonleao@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -213,4 +217,4 @@ DEBUG_TOOLBAR_PANELS = (
 if 'test' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3', 'NAME': '::memory::'}
     del AUTH_PROFILE_MODULE
-    
+

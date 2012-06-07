@@ -220,36 +220,35 @@
 <p id='n158' class='pln'><a href='#n158'>158</a></p>
 <p id='n159' class='pln'><a href='#n159'>159</a></p>
 <p id='n160' class='stm mis'><a href='#n160'>160</a></p>
-<p id='n161' class='pln'><a href='#n161'>161</a></p>
+<p id='n161' class='stm mis'><a href='#n161'>161</a></p>
 <p id='n162' class='stm mis'><a href='#n162'>162</a></p>
 <p id='n163' class='stm mis'><a href='#n163'>163</a></p>
 <p id='n164' class='stm mis'><a href='#n164'>164</a></p>
-<p id='n165' class='stm mis'><a href='#n165'>165</a></p>
-<p id='n166' class='pln'><a href='#n166'>166</a></p>
+<p id='n165' class='pln'><a href='#n165'>165</a></p>
+<p id='n166' class='stm mis'><a href='#n166'>166</a></p>
 <p id='n167' class='stm mis'><a href='#n167'>167</a></p>
-<p id='n168' class='stm mis'><a href='#n168'>168</a></p>
-<p id='n169' class='pln'><a href='#n169'>169</a></p>
-<p id='n170' class='stm mis'><a href='#n170'>170</a></p>
+<p id='n168' class='pln'><a href='#n168'>168</a></p>
+<p id='n169' class='stm mis'><a href='#n169'>169</a></p>
+<p id='n170' class='pln'><a href='#n170'>170</a></p>
 <p id='n171' class='pln'><a href='#n171'>171</a></p>
 <p id='n172' class='pln'><a href='#n172'>172</a></p>
 <p id='n173' class='pln'><a href='#n173'>173</a></p>
 <p id='n174' class='pln'><a href='#n174'>174</a></p>
-<p id='n175' class='pln'><a href='#n175'>175</a></p>
-<p id='n176' class='stm run hide_run'><a href='#n176'>176</a></p>
+<p id='n175' class='stm run hide_run'><a href='#n175'>175</a></p>
+<p id='n176' class='stm mis'><a href='#n176'>176</a></p>
 <p id='n177' class='stm mis'><a href='#n177'>177</a></p>
 <p id='n178' class='stm mis'><a href='#n178'>178</a></p>
 <p id='n179' class='stm mis'><a href='#n179'>179</a></p>
 <p id='n180' class='stm mis'><a href='#n180'>180</a></p>
 <p id='n181' class='stm mis'><a href='#n181'>181</a></p>
 <p id='n182' class='stm mis'><a href='#n182'>182</a></p>
-<p id='n183' class='stm mis'><a href='#n183'>183</a></p>
-<p id='n184' class='pln'><a href='#n184'>184</a></p>
-<p id='n185' class='stm mis'><a href='#n185'>185</a></p>
+<p id='n183' class='pln'><a href='#n183'>183</a></p>
+<p id='n184' class='stm mis'><a href='#n184'>184</a></p>
+<p id='n185' class='pln'><a href='#n185'>185</a></p>
 <p id='n186' class='pln'><a href='#n186'>186</a></p>
-<p id='n187' class='pln'><a href='#n187'>187</a></p>
-<p id='n188' class='stm run hide_run'><a href='#n188'>188</a></p>
+<p id='n187' class='stm run hide_run'><a href='#n187'>187</a></p>
+<p id='n188' class='stm mis'><a href='#n188'>188</a></p>
 <p id='n189' class='stm mis'><a href='#n189'>189</a></p>
-<p id='n190' class='stm mis'><a href='#n190'>190</a></p>
                 
             </td>
             <td class='text' valign='top'>
@@ -413,36 +412,35 @@
 <p id='t158' class='pln'>&nbsp; &nbsp; <span class='str'>&quot;Contato without login&quot;</span><span class='strut'>&nbsp;</span></p>
 <p id='t159' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t160' class='stm mis'>&nbsp; &nbsp; <span class='nam'>form</span> <span class='op'>=</span> <span class='nam'>ContactForm</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>.</span><span class='nam'>POST</span> <span class='key'>or</span> <span class='nam'>None</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t161' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t162' class='stm mis'>&nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>request</span><span class='op'>.</span><span class='nam'>method</span> <span class='op'>==</span> <span class='str'>&#39;POST&#39;</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t163' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>form</span><span class='op'>.</span><span class='nam'>is_valid</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t164' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>form</span><span class='op'>.</span><span class='nam'>save</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t165' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>form</span><span class='op'>.</span><span class='nam'>send_email</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t166' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='com'>#reset form</span><span class='strut'>&nbsp;</span></p>
-<p id='t167' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>form</span> <span class='op'>=</span> <span class='nam'>ContactForm</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t168' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>form</span><span class='op'>.</span><span class='nam'>sended</span> <span class='op'>=</span> <span class='str'>u&quot;Sua mensagem foi enviada com sucesso&quot;</span><span class='strut'>&nbsp;</span></p>
-<p id='t169' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t170' class='stm mis'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>render</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
-<p id='t171' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&quot;website/contact.html&quot;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
-<p id='t172' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='op'>{</span><span class='str'>&#39;form&#39;</span><span class='op'>:</span> <span class='nam'>form</span><span class='op'>}</span><span class='strut'>&nbsp;</span></p>
-<p id='t173' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t161' class='stm mis'>&nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>request</span><span class='op'>.</span><span class='nam'>method</span> <span class='op'>==</span> <span class='str'>&#39;POST&#39;</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t162' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>form</span><span class='op'>.</span><span class='nam'>is_valid</span><span class='op'>(</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t163' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>form</span><span class='op'>.</span><span class='nam'>save</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t164' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>form</span><span class='op'>.</span><span class='nam'>send_email</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t165' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='com'>#reset form</span><span class='strut'>&nbsp;</span></p>
+<p id='t166' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>form</span> <span class='op'>=</span> <span class='nam'>ContactForm</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t167' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>form</span><span class='op'>.</span><span class='nam'>sent</span> <span class='op'>=</span> <span class='str'>u&quot;Sua mensagem foi enviada com sucesso&quot;</span><span class='strut'>&nbsp;</span></p>
+<p id='t168' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t169' class='stm mis'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>render</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t170' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='str'>&quot;website/contact.html&quot;</span><span class='op'>,</span><span class='strut'>&nbsp;</span></p>
+<p id='t171' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='op'>{</span><span class='str'>&#39;form&#39;</span><span class='op'>:</span> <span class='nam'>form</span><span class='op'>}</span><span class='strut'>&nbsp;</span></p>
+<p id='t172' class='pln'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t173' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t174' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t175' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t176' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>ajax_login</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t177' class='stm mis'>&nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>request</span><span class='op'>.</span><span class='nam'>method</span> <span class='op'>==</span> <span class='str'>&#39;POST&#39;</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t178' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>user</span> <span class='op'>=</span> <span class='nam'>authenticate</span><span class='op'>(</span><span class='nam'>username</span><span class='op'>=</span><span class='nam'>request</span><span class='op'>.</span><span class='nam'>POST</span><span class='op'>[</span><span class='str'>&#39;username&#39;</span><span class='op'>]</span><span class='op'>,</span> <span class='nam'>password</span><span class='op'>=</span><span class='nam'>request</span><span class='op'>.</span><span class='nam'>POST</span><span class='op'>[</span><span class='str'>&#39;password&#39;</span><span class='op'>]</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t179' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>user</span> <span class='key'>is</span> <span class='key'>not</span> <span class='nam'>None</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t180' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>user</span><span class='op'>.</span><span class='nam'>is_active</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t181' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>login</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>,</span> <span class='nam'>user</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t182' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>HttpResponse</span><span class='op'>(</span><span class='nam'>json</span><span class='op'>.</span><span class='nam'>dumps</span><span class='op'>(</span><span class='op'>{</span><span class='str'>&#39;msg&#39;</span><span class='op'>:</span> <span class='str'>u&#39;Logado&#39;</span><span class='op'>,</span> <span class='str'>&#39;status&#39;</span><span class='op'>:</span> <span class='nam'>True</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t183' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>HttpResponse</span><span class='op'>(</span><span class='nam'>json</span><span class='op'>.</span><span class='nam'>dumps</span><span class='op'>(</span><span class='op'>{</span><span class='str'>&#39;msg&#39;</span><span class='op'>:</span> <span class='str'>u&#39;Usu&#225;rio desativado&#39;</span><span class='op'>,</span> <span class='str'>&#39;status&#39;</span><span class='op'>:</span> <span class='nam'>False</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t184' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t185' class='stm mis'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>HttpResponse</span><span class='op'>(</span><span class='nam'>json</span><span class='op'>.</span><span class='nam'>dumps</span><span class='op'>(</span><span class='op'>{</span><span class='str'>&#39;msg&#39;</span><span class='op'>:</span> <span class='str'>u&#39;Usu&#225;rio inv&#225;lido&#39;</span><span class='op'>,</span> <span class='str'>&#39;status&#39;</span><span class='op'>:</span> <span class='nam'>False</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t175' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>ajax_login</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t176' class='stm mis'>&nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>request</span><span class='op'>.</span><span class='nam'>method</span> <span class='op'>==</span> <span class='str'>&#39;POST&#39;</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t177' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>user</span> <span class='op'>=</span> <span class='nam'>authenticate</span><span class='op'>(</span><span class='nam'>username</span><span class='op'>=</span><span class='nam'>request</span><span class='op'>.</span><span class='nam'>POST</span><span class='op'>[</span><span class='str'>&#39;username&#39;</span><span class='op'>]</span><span class='op'>,</span> <span class='nam'>password</span><span class='op'>=</span><span class='nam'>request</span><span class='op'>.</span><span class='nam'>POST</span><span class='op'>[</span><span class='str'>&#39;password&#39;</span><span class='op'>]</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t178' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>user</span> <span class='key'>is</span> <span class='key'>not</span> <span class='nam'>None</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t179' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>if</span> <span class='nam'>user</span><span class='op'>.</span><span class='nam'>is_active</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t180' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>login</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>,</span> <span class='nam'>user</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t181' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>HttpResponse</span><span class='op'>(</span><span class='nam'>json</span><span class='op'>.</span><span class='nam'>dumps</span><span class='op'>(</span><span class='op'>{</span><span class='str'>&#39;msg&#39;</span><span class='op'>:</span> <span class='str'>u&#39;Logado&#39;</span><span class='op'>,</span> <span class='str'>&#39;status&#39;</span><span class='op'>:</span> <span class='nam'>True</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t182' class='stm mis'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>HttpResponse</span><span class='op'>(</span><span class='nam'>json</span><span class='op'>.</span><span class='nam'>dumps</span><span class='op'>(</span><span class='op'>{</span><span class='str'>&#39;msg&#39;</span><span class='op'>:</span> <span class='str'>u&#39;Usu&#225;rio desativado&#39;</span><span class='op'>,</span> <span class='str'>&#39;status&#39;</span><span class='op'>:</span> <span class='nam'>False</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t183' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t184' class='stm mis'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>HttpResponse</span><span class='op'>(</span><span class='nam'>json</span><span class='op'>.</span><span class='nam'>dumps</span><span class='op'>(</span><span class='op'>{</span><span class='str'>&#39;msg&#39;</span><span class='op'>:</span> <span class='str'>u&#39;Usu&#225;rio inv&#225;lido&#39;</span><span class='op'>,</span> <span class='str'>&#39;status&#39;</span><span class='op'>:</span> <span class='nam'>False</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t185' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t186' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t187' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t188' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>weblogout</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t189' class='stm mis'>&nbsp; &nbsp; <span class='nam'>logout</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t190' class='stm mis'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>redirect</span><span class='op'>(</span><span class='str'>&#39;/&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t187' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>weblogout</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t188' class='stm mis'>&nbsp; &nbsp; <span class='nam'>logout</span><span class='op'>(</span><span class='nam'>request</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t189' class='stm mis'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>redirect</span><span class='op'>(</span><span class='str'>&#39;/&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
                 
             </td>
         </tr>

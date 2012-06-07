@@ -5,7 +5,7 @@
     
     
     <meta http-equiv='X-UA-Compatible' content='IE=emulateIE7' />
-    <title>Coverage for publication/forms: 68%</title>
+    <title>Coverage for publication/forms: 67%</title>
     <link rel='stylesheet' href='style.css' type='text/css'>
     <script type='text/javascript' src='jquery-1.4.3.min.js'></script>
     <script type='text/javascript' src='jquery.hotkeys.js'></script>
@@ -20,12 +20,12 @@
 <div id='header'>
     <div class='content'>
         <h1>Coverage for <b>publication/forms</b> :
-            <span class='pc_cov'>68%</span>
+            <span class='pc_cov'>67%</span>
         </h1>
         <img id='keyboard_icon' src='keybd_closed.png'>
         <h2 class='stats'>
-            28 statements
-            <span class='run hide_run shortkey_r' onclick='coverage.toggle_lines(this, "run")'>19 run</span>
+            27 statements
+            <span class='run hide_run shortkey_r' onclick='coverage.toggle_lines(this, "run")'>18 run</span>
             <span class='mis shortkey_m' onclick='coverage.toggle_lines(this, "mis")'>9 missing</span>
             <span class='exc shortkey_x' onclick='coverage.toggle_lines(this, "exc")'>0 excluded</span>
             
@@ -97,17 +97,16 @@
 <p id='n35' class='pln'><a href='#n35'>35</a></p>
 <p id='n36' class='stm run hide_run'><a href='#n36'>36</a></p>
 <p id='n37' class='stm run hide_run'><a href='#n37'>37</a></p>
-<p id='n38' class='stm run hide_run'><a href='#n38'>38</a></p>
-<p id='n39' class='pln'><a href='#n39'>39</a></p>
+<p id='n38' class='pln'><a href='#n38'>38</a></p>
+<p id='n39' class='stm run hide_run'><a href='#n39'>39</a></p>
 <p id='n40' class='stm run hide_run'><a href='#n40'>40</a></p>
 <p id='n41' class='stm run hide_run'><a href='#n41'>41</a></p>
-<p id='n42' class='stm run hide_run'><a href='#n42'>42</a></p>
+<p id='n42' class='pln'><a href='#n42'>42</a></p>
 <p id='n43' class='pln'><a href='#n43'>43</a></p>
-<p id='n44' class='pln'><a href='#n44'>44</a></p>
+<p id='n44' class='stm run hide_run'><a href='#n44'>44</a></p>
 <p id='n45' class='stm run hide_run'><a href='#n45'>45</a></p>
 <p id='n46' class='stm run hide_run'><a href='#n46'>46</a></p>
 <p id='n47' class='stm run hide_run'><a href='#n47'>47</a></p>
-<p id='n48' class='stm run hide_run'><a href='#n48'>48</a></p>
                 
             </td>
             <td class='text' valign='top'>
@@ -146,19 +145,18 @@
 <p id='t33' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t34' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>PublicationForm</span><span class='op'>(</span><span class='nam'>forms</span><span class='op'>.</span><span class='nam'>ModelForm</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
 <p id='t35' class='pln'>&nbsp; &nbsp; <span class='str'>&quot;Add new Publication&quot;</span><span class='strut'>&nbsp;</span></p>
-<p id='t36' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>url</span> <span class='op'>=</span> <span class='nam'>forms</span><span class='op'>.</span><span class='nam'>CharField</span><span class='op'>(</span><span class='nam'>max_length</span><span class='op'>=</span><span class='num'>30</span><span class='op'>,</span> <span class='nam'>required</span><span class='op'>=</span><span class='nam'>False</span><span class='op'>,</span> <span class='nam'>help_text</span><span class='op'>=</span><span class='str'>&#39;&lt;br&gt; Ex.: meupuuublic.puuublic.com&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t37' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>message</span> <span class='op'>=</span> <span class='nam'>forms</span><span class='op'>.</span><span class='nam'>CharField</span><span class='op'>(</span><span class='nam'>widget</span><span class='op'>=</span><span class='nam'>TinyMCE</span><span class='op'>(</span><span class='nam'>attrs</span><span class='op'>=</span><span class='op'>{</span><span class='str'>&#39;cols&#39;</span><span class='op'>:</span> <span class='num'>10</span><span class='op'>,</span> <span class='str'>&#39;rows&#39;</span><span class='op'>:</span> <span class='num'>10</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t38' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>tags</span> <span class='op'>=</span> <span class='nam'>forms</span><span class='op'>.</span><span class='nam'>CharField</span><span class='op'>(</span><span class='nam'>max_length</span><span class='op'>=</span><span class='num'>255</span><span class='op'>,</span> <span class='nam'>required</span><span class='op'>=</span><span class='nam'>False</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
-<p id='t39' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t40' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>class</span> <span class='nam'>Meta</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t41' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>model</span> <span class='op'>=</span> <span class='nam'>Publication</span><span class='strut'>&nbsp;</span></p>
-<p id='t42' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>fields</span> <span class='op'>=</span> <span class='op'>(</span><span class='str'>&#39;title&#39;</span><span class='op'>,</span> <span class='str'>&#39;message&#39;</span><span class='op'>,</span> <span class='str'>&#39;image&#39;</span><span class='op'>,</span> <span class='str'>&#39;url&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t36' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>message</span> <span class='op'>=</span> <span class='nam'>forms</span><span class='op'>.</span><span class='nam'>CharField</span><span class='op'>(</span><span class='nam'>widget</span><span class='op'>=</span><span class='nam'>TinyMCE</span><span class='op'>(</span><span class='nam'>attrs</span><span class='op'>=</span><span class='op'>{</span><span class='str'>&#39;cols&#39;</span><span class='op'>:</span> <span class='num'>10</span><span class='op'>,</span> <span class='str'>&#39;rows&#39;</span><span class='op'>:</span> <span class='num'>10</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t37' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>tags</span> <span class='op'>=</span> <span class='nam'>forms</span><span class='op'>.</span><span class='nam'>CharField</span><span class='op'>(</span><span class='nam'>max_length</span><span class='op'>=</span><span class='num'>255</span><span class='op'>,</span> <span class='nam'>required</span><span class='op'>=</span><span class='nam'>False</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t38' class='pln'><span class='strut'>&nbsp;</span></p>
+<p id='t39' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>class</span> <span class='nam'>Meta</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t40' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>model</span> <span class='op'>=</span> <span class='nam'>Publication</span><span class='strut'>&nbsp;</span></p>
+<p id='t41' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>fields</span> <span class='op'>=</span> <span class='op'>(</span><span class='str'>&#39;title&#39;</span><span class='op'>,</span> <span class='str'>&#39;message&#39;</span><span class='op'>,</span> <span class='str'>&#39;image&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t42' class='pln'><span class='strut'>&nbsp;</span></p>
 <p id='t43' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t44' class='pln'><span class='strut'>&nbsp;</span></p>
-<p id='t45' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>ThemeForm</span><span class='op'>(</span><span class='nam'>forms</span><span class='op'>.</span><span class='nam'>ModelForm</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t46' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>class</span> <span class='nam'>Meta</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
-<p id='t47' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>model</span> <span class='op'>=</span> <span class='nam'>Theme</span><span class='strut'>&nbsp;</span></p>
-<p id='t48' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>fields</span> <span class='op'>=</span> <span class='op'>(</span><span class='str'>&#39;title&#39;</span><span class='op'>,</span> <span class='str'>&#39;url&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
+<p id='t44' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>ThemeForm</span><span class='op'>(</span><span class='nam'>forms</span><span class='op'>.</span><span class='nam'>ModelForm</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t45' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>class</span> <span class='nam'>Meta</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>
+<p id='t46' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>model</span> <span class='op'>=</span> <span class='nam'>Theme</span><span class='strut'>&nbsp;</span></p>
+<p id='t47' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>fields</span> <span class='op'>=</span> <span class='op'>(</span><span class='str'>&#39;title&#39;</span><span class='op'>,</span> <span class='str'>&#39;url&#39;</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>
                 
             </td>
         </tr>

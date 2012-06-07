@@ -1,7 +1,7 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block wrapper %}
-<section> 
+<section>
 	<h2>Contato</h2>
 	<article>
 		Quer fazer reclamações, tem uma sugestão para melhorar o site ou quer nos enviar uma pergunta?<br>
@@ -11,34 +11,38 @@
 		<form action="" name='form_contact' class="form_contact" method="POST" enctype="multipart/form-data">{% csrf_token %}
 			<div id='errorMsg'>
 				{{ form.non_field_errors }}
+                {% if form.sent %}
+                <ul>
+                    <li class="success">{{form.sent}}</li>
+                </ul>
+                {% endif %}
 			</div>
 			<div class="form_right">
-				<p> 
+				<p>
 			        <label for="id_message" title="{{ form.message.help_text }}">Mensagem:</label>
 			        {{ form.message }}
 				</p>
 				<p>
 					<span>*Preenchimento obrigatório</span>
 					<input type="submit" value="Enviar &rarr;">
-					<p>{{ form.sended }}</p>
 				</p>
 			</div>
 			<div class="form_left">
-			    <p> 
+			    <p>
 			        <label for="id_name" title="{{ form.name.help_text }}">Nome*:</label>
 			        {{ form.name }}
 					{{ form.name.errors }}
 				</p>
-				<p> 
+				<p>
 			        <label for="id_city" title="{{ form.city.help_text }}">Cidade:</label>
 			        {{ form.city }}
 				</p>
-				<p> 
+				<p>
 			        <label for="id_email" title="{{ form.email.help_text }}">E-mail*:</label>
 			        {{ form.email }}
 					{{ form.email.errors }}
 				</p>
-				<p> 
+				<p>
 			        <label for="id_fone" title="{{ form.fone.help_text }}">Telefone:</label>
 			        {{ form.fone }}
 				</p>
