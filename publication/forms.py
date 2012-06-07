@@ -15,7 +15,8 @@ from publication.models import Publication, Theme
 
 class SearchForm(forms.Form):
     "Search values on Publication content everywere"
-    search = forms.CharField(max_length=100, required=False)
+    search = forms.CharField(max_length=100, required=False,\
+        widget=forms.TextInput(attrs={'placeholder':'Digite sua busca aqui...'} ))
 
     def get_result_queryset(self):
         query = Q()
