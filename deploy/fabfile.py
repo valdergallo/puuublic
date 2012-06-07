@@ -74,12 +74,11 @@ def migrate_db():
 def pull():
     "Pull files from codebase to server"
     with virtualenv():
-        print(yellow('Reset Files'))
-        run("git checkout -f")
         print(green('Done'))
         print(yellow('Pull files from server'))
         run("git fetch")
-        run("git checkout -f")
+        print(yellow('Reset Head'))
+        run("git checkout master -f")
         run("git log -n 1")
         print(green('Done'))
 
