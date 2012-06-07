@@ -9,17 +9,57 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django_dynamic_fixture import G
+from friendship.forms import LoginForm, RegisterForm
 
 
 class TestForm(TestCase):
 
     def setUp(self):
-        user = User.objects.create(username='admin', is_superuser=True, is_staff=True)
-        user.set_password('admin')
+        user = G(User, username='test', is_superuser=True, is_staff=True)
+        user.set_password('test')
         user.save()
 
-    def test_basic_addition(self):
+    def test_form_login(self):
         """
         Test user loged
         """
-        self.assertEqual(1 + 1, 2)
+        data = {'username': 'test', 'password': 'test'}
+        form = LoginForm(data)
+        self.assertTrue(form.is_valid())
+
+    def test_form_registration(self):
+        """
+        Test user registration
+        """
+        data = {
+        'username': 'username_test',
+        'password': 'password_test',
+        'first_name': 'first_name_test',
+        'last_name': 'last_name_test',
+        'email': 'email_test'
+        }
+
+        form = RegisterForm(data)
+        self.assertFalse(form.is_valid())  # invalid e-mail
+        self.assertTrue('email' in form.errors)
+
+    def test_form_registration_and_create_user(self):
+        """
+        Test user registration
+        """
+        data = {
+        'username': 'username_test',
+        'password': 'password_test',
+        'first_name': 'first_name_test',
+        'last_name': 'last_name_test',
+        'email': 'email@test.com'
+        }
+
+        data['email'] = 'email@test.com'
+        form = RegisterForm(data)
+        self.assertTrue(form.is_valid())
+        form.save()
+
+        users = User.objects.exclude(username='test')
+        self.assertEquals(users.count(), 1)
