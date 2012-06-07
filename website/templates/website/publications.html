@@ -42,8 +42,8 @@
 <dl>
 	<dt><a href='{% url website:publications %}?filter=publication&search={{ search }}'
 	{% ifequal filter 'publication' %} class='selected' {% endifequal %}>Publicações</a></dt>
-	<dt><a href='{% url website:publications %}?filter=publics&search={{ search }}'
-	{% ifequal filter 'publics' %} class='selected' {% endifequal %}>Puuublics</a></dt>
+	<dt><a href='{% url website:publications %}?filter=puuublic&search={{ search }}'
+	{% ifequal filter 'puuublic' %} class='selected' {% endifequal %}>Puuublics</a></dt>
 	<dt><a href='{% url website:publications %}?filter=people&search={{ search }}'
 	{% ifequal filter 'people' %} class='selected' {% endifequal %}>Pessoas</a></dt>
 </dl>
@@ -78,7 +78,7 @@
 {% show_pages %}
 {% endif %}
 
-{% if filter == 'publics' %}
+{% if filter == 'puuublic' %}
 {% paginate pub_list %}
 {% for pub in pub_list %}
 		<article>

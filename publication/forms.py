@@ -21,10 +21,7 @@ class SearchForm(forms.Form):
 
     def get_result_queryset(self):
         query = Q()
-        if not self.cleaned_data:
-            raise forms.ValidationError('Form need be clear')
-
-        value = self.cleaned_data['search']
+        value = self.data.get('search', '')
         _filter = self.data.get('filter', 'publication')
 
         if _filter == 'publication':
@@ -35,7 +32,7 @@ class SearchForm(forms.Form):
 
             return Publication.objects.select_related('themes', 'tags').filter(query)
 
-        if _filter == 'publics':
+        if _filter == 'puuublic':
             query |= Q(title__icontains=value)
 
             return Theme.objects.filter(query)
