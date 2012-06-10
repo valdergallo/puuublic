@@ -9,11 +9,23 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-
+from django.db.models import Q
+from django.core.urlresolvers import reverse
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(\
             attrs={'placeholder': '******'}), required=True)
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        email = self.cleaned_data.get('email')
+        user_exists = User.objects.filter(Q(username = username) \
+                | Q(email = email))
+
+        if user_exists:
+            raise forms.ValidationError(u'Usuário já existe')
+
+        return self.cleaned_data
 
     class Meta:
         model = User

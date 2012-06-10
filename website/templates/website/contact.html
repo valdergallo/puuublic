@@ -11,8 +11,6 @@
 		<form action="{% url website:contato %}" name='form_contact'
         class="form_contact" method="POST" enctype="multipart/form-data" onsubmit="return false">
             {% csrf_token %}
-			<div id='errorMsg'>
-			</div>
 			<div class="form_right">
 				<p>
 			        <label for="id_message" title="{{ form.message.help_text }}">Mensagem:</label>
@@ -43,14 +41,10 @@
 			</div>
 		</form>
 	</article>
-
     <!-- modal content -->
-    <div id="modal-content">
+    <div id="modal">
+        <h2 class="alert">Puublic</h2>
+        <p></p>
     </div>
-
-    <!-- preload the images -->
-    <div style='display:none'>
-        <img src='{{STATIC_URL}}image/x.png' alt='' />
-    </div
 </section>
 {% endblock wrapper %}

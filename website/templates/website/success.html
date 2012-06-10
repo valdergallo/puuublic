@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n thumbnail %}
+
+{% block wrapper %}
+<section >
+    <article>
+    </article>
+        <script type="text/javascript">
+            //TODO: carregar modal em algum lugar
+            alert('{{ msg }}');
+        </script>
+        <h1>{{ msg}}</h1>
+        <div id="modal">
+            <h2 class="confirm">Puuublic</h2>
+            <p></p>
+        </div>
+    </article>
+</section>
+<hr>
+{% endblock wrapper %}
+
+{% block js %}
+{{ block.super }}
+{% endblock js %}

@@ -41,7 +41,7 @@ class Blog(DefaultGeoFields):
     tie = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, null=True, blank=True)
     message = models.TextField()
-    image = models.ImageField(upload_to='Publication/%Y/%m/%d')
+    image = models.ImageField(upload_to='publication/%Y/%m/%d')
     category = models.ManyToManyField(Category)
 
     objects = BlogManager()

@@ -148,6 +148,9 @@ AUTH_PROFILE_MODULE = 'friendship.UserProfile'
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_HOST = 'localhost'
+
+
+
 DEFAULT_FROM_EMAIL = 'valdergallo@gmail.com'
 LOGIN_REDIRECT_URL = '/'
 

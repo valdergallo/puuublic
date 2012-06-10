@@ -12,6 +12,7 @@ from django.db import models
 
 from core.models import DefaultFields
 
+import hashlib
 
 class Group(models.Model):
     name = models.CharField(max_length=100)
@@ -53,6 +54,8 @@ class UserProfile(DefaultFields):
 def create_user_profile(sender, instance, created, **kwargs):
     "Signal to auto create user"
     if created:
-        UserProfile.objects.create(user=instance)
+        #gerar token aqui?
+        token = hashlib.md5(instance.email).hexdigest()
+        UserProfile.objects.create(user=instance,token=token)
 
 post_save.connect(create_user_profile, sender=User)

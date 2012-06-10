@@ -11,9 +11,11 @@ from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('website.views',
     url(r'^$', 'home', name='home'),
+    url(r'^activate/(?P<user_id>\d+)/(?P<token>\w+)/$', 'activate_user',name='activate_user'),
     url(r'^publications/$', 'publications', name='publications'),
     url(r'^dashboard/(?P<username>\w+)/$', 'dashboard', name='dashboard'),
     url(r'^ajax_login/$', 'ajax_login', name='ajax_login'),
+    url(r'^ajax_signup/$', 'ajax_signup', name='ajax_signup'),
     url(r'^logout/$', 'weblogout', name='weblogout'),
     url(r'^novidades/$', 'novidades', name='novidades'),
     url(r'^institucional/$', 'institucional', name='institucional'),

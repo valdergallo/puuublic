@@ -80,17 +80,23 @@ Autenticado -.-
         <div>
             Crie uma conta agora mesmo. É rápido e de graça.
         </div>
-        <form name='signup_form' method='POST' action='.'>
+        <form id="id_signup_form" name='signup_form' method='POST' action='{% url website:ajax_signup %}'
+        onsubmit="return false">
             {% csrf_token %}
+            <ul class="signupErrors">
+
+            </ul>
             <ul class="register_form">
                 {{ register_form.as_ul }}
                 <li>
-                    <button type='submit' class='send_large'>
-                        Enviar
-                    </button>
+                    <input type='submit' class='send_large' value="Enviar" />
                 </li>
             </ul>
         </form>
+        <div id="modal">
+            <h2 class="confirm">Puuublic</h2>
+            <p></p>
+        </div>
     </article>
 </section>
 <hr>

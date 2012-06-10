@@ -15,6 +15,7 @@ from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 
 from publication.forms import SearchForm
 from friendship.forms import RegisterForm, LoginForm
@@ -33,7 +34,7 @@ def home(request):
     must_popular_publication_list = Publication.objects.must_popular(page=page)
     last_publication_list = Publication.objects.lastest_five()
 
-    register_form = RegisterForm(request.POST or None)
+    register_form = RegisterForm()
     login_form = LoginForm(request.POST or None)
     search_form = SearchForm(request.POST or None)
 
@@ -47,6 +48,80 @@ def home(request):
                      "last_publication_list": last_publication_list,
                      }
                   )
+
+def ajax_signup(request):
+    p = {}
+    errors = []
+    status = False
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            created = create_user(form.cleaned_data)
+            status = True
+            msg = u"Enviamos um email para %s" % form.cleaned_data['email']
+            msg += u" com as instruções para ativação da sua conta."
+            msg += u" Por favor confira sua caixa de entrada"
+        else:
+            errors = form.errors
+            msg = u"Erro no Cadastro, favor corrigir"
+
+        return HttpResponse(json.dumps({'status':status,'msg':msg,'errors':errors}),mimetype="application/json")
+
+
+def create_user(data):
+    """
+    Cria o usuário
+    """
+    first_name = data['first_name']
+    last_name = data['last_name']
+    email = data['email']
+    username = data['username']
+    password = data['password']
+
+    user = User()
+    user.first_name = first_name
+    user.last_name = last_name
+    user.email = email
+    user.username = username
+    user.set_password(password)
+    user.is_active = False
+    try:
+        user.save()
+        profile = user.get_profile()
+        link = reverse('activate_user', args=[user.id, profile.token])
+        msg = u"""
+        Link para ativação: %(link)s
+        """ % link
+
+        send_mail('[pubblic:contact] Email de ativação de conta - Puuublic', msg, user.email,
+            'ellisonleao@gmail.com')
+    except:
+        return False
+
+    return True
+
+
+def activate_user(request,user_id,token):
+    """
+    Verifica e ativa o user
+    """
+    user = get_object_or_404(User,pk=int(user_id))
+    profile = user.get_profile()
+
+    if token == profile.token:
+        if user.is_active:
+            msg = u"Usuário já ativado"
+        else:
+            user.is_active = True
+            user.save()
+            msg = u"Usuário Ativado. Faça o login com seu usuário e senha"
+    else:
+        msg = u"Erro na ativação"
+
+    return render(request,"website/success.html",
+        {'msg':msg, }
+    )
+
 
 
 def publications(request):
@@ -166,11 +241,13 @@ def contato(request):
             form.send_email()
             #reset form
             form = ContactForm()
-            form.sent = u"Sua mensagem foi enviada com sucesso"
-            return HttpResponse(json.dumps({'status':True,'msg':form.sent}))
+            sent = u"Sua mensagem foi enviada com sucesso"
+            sent += u"<br/> Responderemos o mais rápido possível"
+            sent += u"<br/> Obrigado pelo contato"
+            return HttpResponse(json.dumps({'status':True,'msg':sent}))
         else:
-            errors = [form.errors]
-            return HttpResponse(json.dumps({'status':False,'errors':errors}))
+            error = u"Erro no envio. Cheque os dados"
+            return HttpResponse(json.dumps({'status':False,'msg':error}))
     return render(request,
                     "website/contact.html",
                     {'form': form}
