@@ -30,5 +30,9 @@ class ContactForm(forms.ModelForm):
         Mensagem: %(message)s
         """ % (self.instance.__dict__)
 
-        send_mail('[pubblic:contact] Contact Message', msg, self.instance.email,
+        return send_mail('[pubblic:contact] Contact Message', msg, self.instance.email,
             settings.ADMINS, fail_silently=True)
+
+    def save(self, *args, **kwargs):
+        self.send_email(self)
+        super(ContactForm, self).save(*args, **kwargs)

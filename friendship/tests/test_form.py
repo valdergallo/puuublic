@@ -113,5 +113,6 @@ class TestForm(TestCase):
 
         users = User.objects.exclude(username='test')
         self.assertEquals(users.count(), 1)
+        self.assertFalse(users[0].is_active)
         self.assertEquals(len(mail.outbox), 1)
         self.assertEquals(mail.outbox[0].subject, '[pubblic:contact] Email de ativação de conta - Puuublic')

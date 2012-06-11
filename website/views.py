@@ -55,8 +55,7 @@ def ajax_signup(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            if form.send_email():
+            if form.save():
                 status = True
                 msg = u"Enviamos um email para %s" % form.cleaned_data['email']
                 msg += u" com as instruções para ativação da sua conta."
@@ -207,14 +206,16 @@ def contato(request):
     form = ContactForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-            form.save()
-            form.send_email()
-            #reset form
-            form = ContactForm()
-            sent = u"Sua mensagem foi enviada com sucesso"
-            sent += u"<br/> Responderemos o mais rápido possível"
-            sent += u"<br/> Obrigado pelo contato"
-            return HttpResponse(json.dumps({'status':True,'msg':sent}))
+            if form.save():
+                #reset form
+                form = ContactForm()
+                sent = u"Sua mensagem foi enviada com sucesso"
+                sent += u"<br/> Responderemos o mais rápido possível"
+                sent += u"<br/> Obrigado pelo contato"
+                return HttpResponse(json.dumps({'status':True,'msg':sent}))
+            else:
+                return HttpResponse(json.dumps({'status':True,'msg':
+                    'Erro ao envio o e-mail'}))
         else:
             error = u"Erro no envio. Cheque os dados"
             return HttpResponse(json.dumps({'status':False,'msg':error}))
