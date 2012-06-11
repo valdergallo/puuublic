@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 
+
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(\
             attrs={'placeholder': '******'}), required=True)
@@ -36,6 +37,38 @@ class RegisterForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'placeholder': 'Email'}),
             'username': forms.TextInput(attrs={'placeholder': u'Usuário'}),
         }
+
+    def create_user(self):
+        """
+        Cria o usuário
+        """
+        if not self.cleaned_data:
+            self.is_valid()
+
+        first_name = self.cleaned_data['first_name']
+        last_name = self.cleaned_data['last_name']
+        email = self.cleaned_data['email']
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+
+        user = User()
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.username = username
+        user.set_password(password)
+        user.is_active = False
+        user.save()
+        profile = user.get_profile()
+        link = reverse('activate_user', args=[user.id, profile.token])
+        msg = u"""
+        Link para ativação: %(link)s
+        """ % link
+
+        return send_mail('[pubblic:contact] Email de ativação de conta - Puuublic',
+            msg,
+            user.email,
+            'ellisonleao@gmail.com')
 
 
 class LoginForm(forms.ModelForm):

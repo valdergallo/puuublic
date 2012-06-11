@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 
+
 class ContactForm(forms.ModelForm):
     "Register contact form and send email"
     class Meta:

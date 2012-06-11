@@ -56,49 +56,19 @@ def ajax_signup(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            created = create_user(form.cleaned_data)
-            status = True
-            msg = u"Enviamos um email para %s" % form.cleaned_data['email']
-            msg += u" com as instruções para ativação da sua conta."
-            msg += u" Por favor confira sua caixa de entrada"
+            if form.create_user():
+                status = True
+                msg = u"Enviamos um email para %s" % form.cleaned_data['email']
+                msg += u" com as instruções para ativação da sua conta."
+                msg += u" Por favor confira sua caixa de entrada"
+            else:
+                status = False
+                msg += u"Erro ao enviar o e-mail"
         else:
             errors = form.errors
             msg = u"Erro no Cadastro, favor corrigir"
 
         return HttpResponse(json.dumps({'status':status,'msg':msg,'errors':errors}),mimetype="application/json")
-
-
-def create_user(data):
-    """
-    Cria o usuário
-    """
-    first_name = data['first_name']
-    last_name = data['last_name']
-    email = data['email']
-    username = data['username']
-    password = data['password']
-
-    user = User()
-    user.first_name = first_name
-    user.last_name = last_name
-    user.email = email
-    user.username = username
-    user.set_password(password)
-    user.is_active = False
-    try:
-        user.save()
-        profile = user.get_profile()
-        link = reverse('activate_user', args=[user.id, profile.token])
-        msg = u"""
-        Link para ativação: %(link)s
-        """ % link
-
-        send_mail('[pubblic:contact] Email de ativação de conta - Puuublic', msg, user.email,
-            'ellisonleao@gmail.com')
-    except:
-        return False
-
-    return True
 
 
 def activate_user(request,user_id,token):
