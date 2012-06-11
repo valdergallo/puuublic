@@ -11,6 +11,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django_dynamic_fixture import G
 from friendship.forms import LoginForm, RegisterForm
+from django.core import mail
 
 
 class TestForm(TestCase):
@@ -92,3 +93,25 @@ class TestForm(TestCase):
 
         users = User.objects.exclude(username='test')
         self.assertEquals(users.count(), 1)
+
+    def test_form_registration_and_create_user_send_one_email(self):
+        """
+        Test user registration
+        """
+        data = {
+        'username': 'username_test',
+        'password': 'password_test',
+        'first_name': 'first_name_test',
+        'last_name': 'last_name_test',
+        'email': 'email@test.com'
+        }
+
+        data['email'] = 'email@test.com'
+        form = RegisterForm(data)
+        self.assertTrue(form.is_valid())
+        form.save()
+
+        users = User.objects.exclude(username='test')
+        self.assertEquals(users.count(), 1)
+        self.assertEquals(len(mail.outbox), 1)
+        self.assertEquals(mail.outbox[0].subject, '[pubblic:contact] Email de ativação de conta - Puuublic')

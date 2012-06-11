@@ -201,7 +201,7 @@ TINYMCE_GZ = True
 
 if 'test' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3', 'NAME': '::memory::'}
-    del AUTH_PROFILE_MODULE
+    #del AUTH_PROFILE_MODULE
 
 
 try:

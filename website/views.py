@@ -15,7 +15,6 @@ from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.core.mail import send_mail
 
 from publication.forms import SearchForm
 from friendship.forms import RegisterForm, LoginForm
@@ -56,7 +55,8 @@ def ajax_signup(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            if form.create_user():
+            form.save()
+            if form.send_email():
                 status = True
                 msg = u"Enviamos um email para %s" % form.cleaned_data['email']
                 msg += u" com as instruções para ativação da sua conta."

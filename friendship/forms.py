@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 
 
 class RegisterForm(forms.ModelForm):
@@ -38,37 +39,32 @@ class RegisterForm(forms.ModelForm):
             'username': forms.TextInput(attrs={'placeholder': u'Usuário'}),
         }
 
-    def create_user(self):
+    def password_clean(self):
+        password = self.instance.set_password(self.cleaned_data['password'])
+        return password
+
+    @staticmethod
+    def send_email(user):
         """
         Cria o usuário
         """
-        if not self.cleaned_data:
-            self.is_valid()
-
-        first_name = self.cleaned_data['first_name']
-        last_name = self.cleaned_data['last_name']
-        email = self.cleaned_data['email']
-        username = self.cleaned_data['username']
-        password = self.cleaned_data['password']
-
-        user = User()
-        user.first_name = first_name
-        user.last_name = last_name
-        user.email = email
-        user.username = username
-        user.set_password(password)
-        user.is_active = False
-        user.save()
         profile = user.get_profile()
-        link = reverse('activate_user', args=[user.id, profile.token])
+        link = reverse('website:activate_user',
+            args=[user.id, profile.token])
         msg = u"""
         Link para ativação: %(link)s
-        """ % link
+        """ % {'link': link}
 
         return send_mail('[pubblic:contact] Email de ativação de conta - Puuublic',
             msg,
             user.email,
-            'ellisonleao@gmail.com')
+            ['ellisonleao@gmail.com'])
+
+    def save(self, *args, **kwargs):
+        self.instance.is_active = False
+        user = super(RegisterForm, self).save(*args, **kwargs)
+        self.send_email(user)
+
 
 
 class LoginForm(forms.ModelForm):
