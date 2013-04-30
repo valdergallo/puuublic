@@ -1,0 +1,25 @@
+{% extends 'website/base.html' %}
+{% load i18n %}{% load static %}
+
+{% block main %}
+    <div class="signin">
+        {% include "users/messages.html" %}
+        <div class="website-form">
+            <h2 class="brown">{% trans "Fill the follow fields to signin" %}</h2>
+
+            <form action="" method="post">
+                <ul class="form">
+                    {% csrf_token %}
+                    {{ form.as_ul }}
+                    <li class="forget"><a
+                            href="{% url users-reset-password %}">{% trans "Forgotten your password?" %}</a></li>
+                    <li class="create"><a href="{% url users-signup %}">{% trans "Create account" %}</a></li>
+                    <li>
+                        <button class="slick red">{% trans "Sign In" %}</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% load i18n thumbnail %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container puuublic-menu">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/">
+                <img src="{{ STATIC_URL }}img/puuublic_logo2.png" alt="Puuublic"  />
+            </a>
+            <div class="nav-collapse collapse">
+                {% if user.is_authenticated %}
+                <ul class="nav">
+                    <li class="border"><a href="{% url website:dashboard %}"><i class="icon-home"></i>{% trans 'Inicio' %}</a></li>
+                    <li class="border"><a href="{% url website:publication_add %}"><i class="icon-pencil"></i>{% trans 'Publicar' %}</a></li>
+                    <li class="#"><a href="{% url website:theme_add %}"><i class="icon-file"></i>{% trans 'Criar Puuublic' %}</a></li>
+                    <li class="right">
+                        <div class="nav-search"> 
+                            <form action="{% url website:publications %}" method="GET">
+                                {{ search_form.search }}
+                                <input class="lupa" type="image" src="{{ STATIC_URL }}img/lupa.png" width="18" height="18">
+                            </form> 
+                        </div>
+                    </form>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle no-border-right" href="#">Conta <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a tabindex="-1" href="{{ user.get_profile.get_absolute_url }}">Perfil</a></li>
+                            <li><a tabindex="-1" href="{% url website:acc_config %}">Configurar</a></li>
+                            <li><a tabindex="-1" href="{% url website:weblogout %}">Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {% else %}
+                <div class="nav-search"> 
+                    <form action="{% url website:publications %}" method="GET">
+                        {{ search_form.search }}
+                        <input class="lupa" type="image" src="{{ STATIC_URL }}img/lupa.png" width="18" height="18">
+                    </form> 
+                </div>
+                <form id="loginUser" class="navbar-form pull-right" method="POST" action="{% url website:ajax_login %}" onsubmit="return false;">
+                    <input class="span2" type="text" name="username" placeholder="Email">
+                    <input class="span2" type="password" name="password" placeholder="Senha">
+                    <button type="submit" class="grey-button">Entrar</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% if not request.user.is_authenticated %}
+<div class="navbar">
+    <div class="navbar-inner create-account">
+        <div class="container">
+                <div class="span8">
+                    <strong>Crie sua conta e descubra o jeito mais legal de contar e acompanhar as novidades</strong>
+                    <p class="p-create-account">Crie páginas públicas, publique textos, fotos, vídeos e comentários. Crie sua conta agora. É de graça!</p>
+                </div>
+                <div class="span">
+                    <button class="green-button" onclick="window.location='/'">Criar Conta</button>
+                </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+

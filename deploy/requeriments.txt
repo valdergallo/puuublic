@@ -1,0 +1,31 @@
+Django==1.4
+Fabric==1.4.2
+MySQL-python==1.2.3
+PIL==1.1.7
+Pillow==1.7.7
+South==0.7.4
+argparse==1.2.1
+coverage==3.5.1
+distribute==0.6.24
+django-ckeditor==3.6.2.1
+django-crispy-forms==1.1.3
+django-debug-toolbar==0.9.4
+django-dynamic-fixture==1.6.1
+django-endless-pagination==1.1
+django-filebrowser==3.4.2
+django-grappelli==2.3.8
+django-nose==1.1
+-e git://github.com/artofhuman/django-simple-captcha.git@ae4838e6cb142621f2b8a37cd0e6647f814584c8#egg=django_simple_captcha-dev
+django-taggit==0.9.3
+-e git://github.com/kennu/django-varnish@c8eb119083d39b6d428e3fe96195c16e557249d9#egg=django_varnish-dev
+ipdb==0.6.1
+ipython==0.12.1
+nose==1.1.2
+pycrypto==2.6
+-e git://github.com/kennu/python-varnish@f9f77dcbe4aebac13e5d86c9652341f6a08ec82c#egg=python_varnish-dev
+raven==2.0.7.1
+readline==6.2.4.1
+simplejson==2.6.1
+sorl-thumbnail==11.12
+ssh==1.7.14
+wsgiref==0.1.2

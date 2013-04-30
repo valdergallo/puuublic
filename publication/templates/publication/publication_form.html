@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block extrajs %}
+{{ publication_form.media }}
+{% endblock %}
+
+{% block main %}
+<div class="container publication-add">
+    <div class="row">
+        {% if publication_form.errors %}
+        <div class="alert alert-error">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <h4 class="alert-heading">Alguns erros foram encontrados</h4>
+            <ul>
+            {% for field in publication_form %}
+            {% if field.errors %}
+            <li>{{ field.errors|striptags }}</li>
+            {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <form action="." method="POST"  enctype="multipart/form-data">
+        <div class="span12">
+            <h2>Quais as novidades?</h2>
+                <hr/>
+                {% csrf_token %}
+                <label for="id_theme_name"><i class="icon-file"></i> Escolha um Puuublic</label>
+                {{ publication_form.theme_name }}
+                <label for="id_theme_name"><i class="icon-pencil"></i> Escolha um Título</label>
+                {{ publication_form.title }}
+                <label for="id_theme_name"><i class="icon-pencil"></i> Digite o texto</label>
+                {{ publication_form.message }}
+                <p></p>
+        </div>
+        <div class="span12">
+            <div class="row">
+                <div class="span7">
+                {{ publication_form.image }}
+                </div>
+                <div class="span5 config-right">
+                    <button class="green-button large" type="submit">Publicar</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<br/>
+{% endblock  %}

@@ -1,0 +1,12 @@
+[
+  {
+    "pk": 1,
+    "model": "captcha.captchastore",
+    "fields": {
+      "challenge": "JQDG",
+      "hashkey": "08788ef9ac9bc50326717a2d2c9398a0cebf286a",
+      "response": "jqdg",
+      "expiration": "2012-12-10T23:46:11"
+    }
+  }
+]

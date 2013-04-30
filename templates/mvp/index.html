@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- <link rel="stylesheet" href="css/bootstrap-responsive.min.css"> -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/mvp.css">
+        <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container puuublic-menu">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#">
+                        <img src="img/puuublic_logo.png" alt="Puuublic" />
+                    </a>
+                    <div class="nav-collapse collapse">
+                    <!--
+                        <ul class="nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    -->
+                        <form class="navbar-form pull-right">
+                            <input class="span2" type="text" placeholder="Email">
+                            <input class="span2" type="password" placeholder="Senha">
+                            <button type="submit" class="grey-button">Entrar</button>
+                            <br/>
+                            <a class="right forgot-pass" href="#">Esqueceu sua senha</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-unit">
+            <div class="container">
+                <div class="row right">
+                    <p>Ainda não tem uma conta? Crie agora mesmo.</p>
+                </div>
+                <div class="row"></div>
+                <div class="row">
+                    <div class="span5">
+                        <h1>Quais as novidades?</h1>
+                        <p class="about">Conte as novidades e fique por dentro do que te interessa.
+                        <br/>Crie páginas públicas e compartilhe textos, fotos e vídeos</p>
+                        <div class="home-search"> 
+                            <p>Procure no Puuublic</p>
+                            <form action=".">
+                                <input type="text" class="large">
+                                <input type="image" src="img/lupa.png">
+                            </form> 
+                        </div>
+                    </div>
+                    <div class="span no-margin-left right">
+                        <form class="form-horizontal" id="id_signup_form" name='signup_form' method='POST' action='/ajax_signup/' onsubmit="return false">
+                            <div class="control-group">
+                                <label class="control-label" for="first_name">Nome</label>
+                                <div class="controls">
+                                    <input type="text" name="first_name" /><br />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="last_name">Sobrenome</label>
+                                <div class="controls">
+                                    <input type="text" name="last_name" /><br />
+                                </div>
+                            </div>  
+                            
+                            <div class="control-group">
+                                <label class="control-label" for="email">Email</label>
+                                <div class="controls">
+                                    <input type="text" name="email" /><br />
+                                </div>
+                            </div>                           
+                            
+                            <div class="control-group">
+                                <label class="control-label" for="username">Usuário</label>
+                                <div class="controls">
+                                    <input type="text" name="username" /><br />
+                                </div>
+                            </div>   
+                            
+                            <div class="control-group">
+                                <label class="control-label" for="password">Senha</label>
+                                <div class="controls">
+                                    <input type="password" name="password" /><br />
+                                    <br/>
+                                    <button class="green-button large">Criar Conta</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="terms">
+                            <p>Ao clicar em "Criar Conta" você estará afirmando que concorda<br />
+                            com a <a href="#">Licença de uso do Puuublic</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="span12 recent no-margin-left">
+                    <h2>Publicações mais recentes</h2>
+                    <div class="row border-top">
+                        <div class="span picture">
+                            <figure>
+                                <img src="http://placehold.it/39x39"/>                
+                            </figure>
+                        </div>
+                        <div class="span6">
+                            <p>Lorem ipsum deroasd asdlkmasdasdlk asdjas;dla sdpaosd asdhasd asda sdoiajsd asdoij asdoijasd asd</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div> <!-- /container -->
+        <hr>
+        <div class="container">
+            <footer>
+                <ul>
+                    <li><a href="#">Novidades</a></li>
+                    <li><a href="#">Institucional</a></li>
+                    <li><a href="#">Termos</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="http://cysman.com">Cysman Group ©</a></li>
+                </ul>
+            </footer>
+        </div>
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
