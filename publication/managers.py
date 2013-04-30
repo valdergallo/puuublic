@@ -20,7 +20,7 @@ class TagManager(ActiveManager):
     def register(self, values):
         from publication.models import Publication, PublicationTag, Tag
 
-        tags = list(set(re.split(',| |-|/|\"|\'', values)))  # split value
+        tags = list(set(re.split(',| |-|/|\"|\'|\\n', values)))  # split value
         tags = [x for x in tags if x]  # clear empty values
         for tag in tags:
             tag, _ = Tag.objects.get_or_create(value=slugify(tags))

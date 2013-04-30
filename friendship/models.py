@@ -14,6 +14,7 @@ from core.models import DefaultFields
 
 import hashlib
 
+
 class Group(models.Model):
     name = models.CharField(max_length=100)
 

@@ -21,7 +21,7 @@ class DefaultFields(models.Model):
     active = models.BooleanField(default=True, db_index=True)
 
     objects = ActiveManager()
-    canceleds = CanceledManager()
+    cancels = CanceledManager()
 
     class Meta:
         abstract = True
@@ -34,6 +34,9 @@ class DefaultGeoFields(DefaultFields):
     """
     lat = models.FloatField(null=True, blank=True, db_index=True)
     lon = models.FloatField(null=True, blank=True, db_index=True)
+
+    objects = ActiveManager()
+    cancels = CanceledManager()
 
     class Meta:
         abstract = True

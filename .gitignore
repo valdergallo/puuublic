@@ -6,3 +6,8 @@
 media*
 htmlcov*
 *.pyc
+*.log
+*.pot
+*.pyc
+local_settings.py
+.DS_Store
