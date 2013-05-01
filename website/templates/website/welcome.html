@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container margin-top-big">
+  <div class="row center">
+    <div class="span12">
+      <h2 class="red lead">Bem-vindo ao Puuublic!</h2>
+      <p>No Puuublic você pode publicar textos, fotos, vídeos e comentários sobre qualquer assunto em milhares de páginas públicas que chamamos de puuublics. Você pode criar uma quantidade ilimitada de puuublics sobre quaisquer assuntos. Por exemplo, você pode criar um puuublic sobre sua cidade, bairro, escola, empresa, hobby, profissão, artista favorito ou qualquer outro assunto.</p>
+    </div>
+  </div>
+  <br/>
+  <hr />
+  <br/>
+  <div class="row margin-bottom">
+    <div class="span6">
+      <a class="pull-left margin-top">
+        <img src="{{ STATIC_URL}}img/welcome1.png"/>
+      </a>
+      <div class="span4">
+        <p class="red welcome-heading">Encontre os puuublics</p>
+        <p>Encontre facilmente puuublics, pessoas e publicações do seu interesse digitanto algo na barra de pesquisa.</p>
+      </div>
+    </div>
+    <div class="span6">
+      <a class="pull-left margin-top">
+        <img src="{{ STATIC_URL }}img/welcome2.png"/>
+      </a>
+      <div class="span4">
+        <p class="red welcome-heading">Comente as publicações</p>
+        <p>Encontre facilmente puuublics, pessoas e publicações do seu interesse digitanto algo na barra de pesquisa.</p>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <br/>
+  <div class="row margin-bottom">
+    <div class="span6">
+      <a class="pull-left margin-top">
+        <img src="{{ STATIC_URL }}img/welcome3.png"/>
+      </a>
+      <div class="span4">
+        <p class="red welcome-heading">Crie novos puuublics</p>
+        <p>Você também pode criar páginas públicas sobre os mais variados assuntos. Crie um puuublic para sua cidade, artista favorito ou qualquer outro tema.</p>
+      </div>
+    </div>
+    <div class="span6">
+      <a class="pull-left margin-top">
+        <img src="{{ STATIC_URL }}img/welcome4.png"/>
+      </a>
+      <div class="span4">
+        <p class="red welcome-heading">Siga seus favoritos</p>
+        <p>Com o botão "Favoritar" fica fácil acompanhar seus puuublics de seu interesse na sua página inicial.</p>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <br/>
+  <div class="row margin-bottom">
+    <div class="span6">
+      <a class="pull-left margin-top">
+        <img src="{{ STATIC_URL }}img/welcome5.png"/>
+      </a>
+      <div class="span4">
+        <p class="red welcome-heading">Publique você também</p>
+        <p>Conte novidades para todo mundo publicando textos, fotos e vídeos em qualquer puuublic criado por um usuário.</p>
+      </div>
+    </div>
+    <div class="span6">
+      <a class="pull-left margin-top">
+        <img src="{{ STATIC_URL }}img/welcome6.png"/>
+      </a>
+      <div class="span4">
+        <p class="red welcome-heading">Fique atento às novidades</p>
+        <p>Estamos constatemente adicionando novas funcionalidades e fazendo alterações para tornar o Puuublic ainda melhor</p>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row center">
+    <div class="span12">
+      <a class="red-button large" href="{% url website:dashboard %}">Ok! Vamos continuar</a>
+    </div>
+  </div>
+</div>
+<br/>
+<br/>
+<br/>
+{% endblock  %}

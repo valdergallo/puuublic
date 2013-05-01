@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load i18n thumbnail default_image endless %}
+
+{% block main %}
+<div class="container config">
+    {% if acc_config_form.errors or edit_user_form.errors %}
+    <div class="alert alert-error">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+        <h4 class="alert-heading">Alguns erros foram encontrados</h4>
+        <ul>
+        {% for field in acc_config_form %}
+        {% if field.errors %}
+        <li>{{ field.errors|striptags }}</li>
+        {% endif %}
+        {% endfor %}
+        {% for field in edit_user_form %}
+        {% if field.errors %}
+        <li>{{ field.errors|striptags }}</li>
+        {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <h2>Configurações</h2>
+    <hr/>
+    <div class="row">
+        <br/>
+        <form enctype="multipart/form-data" method='POST' action='.'>
+        <div class="span6">
+            {% csrf_token %}
+            <label for="id_first_name">Nome</label>
+            {{ edit_user_form.first_name }}
+            
+            <label for="id_data_bourn">Data de Nascimento</label>
+            {{ acc_config_form.birthday }}
+            
+            <label for="id_country">País</label>
+            {{ acc_config_form.country }}
+
+ 
+        </div>
+        <div class="span6">
+            <label for="id_last_name">Sobrenome</label>
+            {{ edit_user_form.last_name }}
+
+            <label for="id_gender">Gênero</label>
+            {{ acc_config_form.gender }}
+        
+            <label for="id_city">Cidade</label>
+            {{ acc_config_form.city }}
+        
+        </div>
+    </div>
+    <hr class="config-hr" />
+    <div class="row">
+        <div class="span6">
+            <label for="id_image">Adicione uma foto no seu perfil</label>
+            {{ acc_config_form.image }}
+        </div>
+        <div class="span6">
+            <label for="id_url">Página Pessoal</label>
+            {{ acc_config_form.url }}
+        </div>
+        <div class="span6">
+            <label for="id_nickname">Apelido Puuublic</label>
+            {{ acc_config_form.nickname }}
+            <br/>
+            <span>Seu endereço ficará: <span class="nickname-preview">http://</span>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="span12">
+            <p>{{ acc_config_form.newsletter }} Deseja receber newsletter com novidades?</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12 config-right">
+            <input type="submit" class="grey-button" value="Salvar" />
+        </div>
+    </div>
+  <span>Para encerrar sua conta, envie um email para <a href="mailto:contact@puuublic.com?subject=Quero+encerrar+minha+conta">contact@puuublic.com</a>.
+  <br/>
+</form>
+{% endblock  %}
+

@@ -1,0 +1,231 @@
+/*
+NEW CSS
+*/
+
+.green-button{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #ffffff;
+    padding: 10px 20px;
+    background: -moz-linear-gradient(
+        top,
+        #88c66f 0%,
+        #47b64e 10%,
+        #47b64e);
+    background: -webkit-gradient(
+        linear, left top, left bottom, 
+        from(#88c66f),
+        color-stop(0.10, #47b64e),
+        to(#47b64e));
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #449043;
+    -moz-box-shadow:
+        0px 0px 0px rgba(000,000,000,0),
+        inset 0px 0px 0px rgba(255,255,255,0);
+    -webkit-box-shadow:
+        0px 0px 0px rgba(000,000,000,0),
+        inset 0px 0px 0px rgba(255,255,255,0);
+    box-shadow:
+        0px 0px 0px rgba(000,000,000,0),
+        inset 0px 0px 0px rgba(255,255,255,0);
+    text-shadow:
+        0px 0px 0px rgba(000,000,000,0),
+        0px 1px 0px rgba(255,255,255,0);
+}
+
+
+.grey-button{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #4e4d50;
+    padding: 10px 20px;
+    background: -moz-linear-gradient(
+        top,
+        #ffffff 0%,
+        #f2f2f2 10%,
+        #f2f2f2);
+    background: -webkit-gradient(
+        linear, left top, left bottom, 
+        from(#ffffff),
+        color-stop(0.10, #f2f2f2),
+        to(#f2f2f2));
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #f2f2f2;
+    -moz-box-shadow:
+        0px 0px 0px rgba(000,000,000,0),
+        inset 0px 0px 0px rgba(255,255,255,0);
+    -webkit-box-shadow:
+        0px 0px 0px rgba(000,000,000,0),
+        inset 0px 0px 0px rgba(255,255,255,0);
+    box-shadow:
+        0px 0px 0px rgba(000,000,000,0),
+        inset 0px 0px 0px rgba(255,255,255,0);
+    text-shadow:
+        0px 0px 0px rgba(000,000,000,0),
+        0px 1px 0px rgba(255,255,255,0);
+}
+
+.hero-unit{
+    background:url('../img/parabolica.jpg'); 
+    background-repeat: no-repeat;
+    border-radius:0;
+    color:#fff;
+    padding-bottom:0;
+    margin-bottom:0;
+    margin-top:50px;
+}
+
+.hero-unit h1{
+    font-size:36px;
+    font-weight:normal;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin-bottom:4px;
+    margin-top:0;
+}
+
+.hero-unit .about {
+    font-size:15px;
+    margin:0;
+    line-height:20px;
+}
+
+
+footer > ul {
+    list-style-type:none;
+
+}
+
+footer > ul > li {
+    float:left;
+    padding-left:10px;
+    font-size:10px;
+}
+
+hr{
+    margin:0;
+    padding:0;
+}
+
+.navbar-inner{
+    height:97px;
+}
+
+.navbar-inverse .navbar-inner{
+    background-image:none;
+    background:#fff;
+    border:0;
+}
+
+.puuublic-menu{
+    padding-top:24px;
+}
+
+.control-label{
+    margin-right:4px;
+    font-size:12px;
+}
+
+.control-group  input[type="text"], .control-group input[type="password"]  {
+    padding:7px;
+    padding-right:4px;
+    font-size: 14px;
+    width: 319px;
+    height:15px;
+}
+
+.right {
+    float:right;
+}
+
+.center{
+   text-align:center; 
+}
+
+.no-margin-left{
+    margin-left:0;
+}
+
+.terms {
+    float:right;
+}
+.terms > p {
+    font-size:10px;
+    line-height:13px;
+    text-align:right;
+}
+
+.terms > p > a{
+    text-decoration:underline;
+    color:#fff;
+}
+
+.form-horizontal .control-group{
+    margin-bottom:4px;
+}
+
+.large{
+    width:332px;
+}
+
+.home-search{
+    margin-top:18px;
+}
+
+.home-search  > form{
+    background:#fff;
+    width:390px;
+}
+
+.home-search  > form > input{
+    margin:5px;
+    padding:4px;
+    padding-left:4px;
+    border:0;
+}
+
+.recent > h2 {
+    font-size:15px;
+    color:#2383C5;
+    font-weight:normal;
+    margin:0;
+    margin-bottom:4px;
+    margin-top:30px;
+}
+
+.recent {
+    width:580px;
+    margin-left:150px;
+    margin-bottom:30px;
+}
+
+figure{
+    margin:0;    
+}
+
+.border-top{
+    border-top:1px solid #edeeee;
+    padding-top:10px;
+}
+
+.puuublic-menu{
+    margin-top:0;    
+}
+
+.navbar .brand{
+    padding-top:0;
+}
+
+.forgot-pass{
+    font-size:13px;
+    text-decoration:underline;
+    color:#BABCBF;
+    margin-right:80px;
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom{
+    position:absolute;    
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+     xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+{% for url in urlset %}
+  <url>
+    <loc>{{ url.location }}</loc>
+    <news:news>
+      <news:publication>
+        <news:name>{{ url.item.theme.title|title }}</news:name>
+        <news:language>pt-BR</news:language>
+      </news:publication>
+      <news:genres>PressRelease, Blog</news:genres>
+      <news:publication_date>{{ url.item.created_at|date:"Y-m-d"}}</news:publication_date>
+      <news:title>{{ url.item.title|title }}</news:title>
+      <news:keywords>puuublic, internet</news:keywords>
+    </news:news>
+   </url>
+{% endfor %}
+</urlset>

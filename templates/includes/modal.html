@@ -1,0 +1,66 @@
+<!-- recover -->
+<div class="modal hide fade" id="recover-modal" tabindex="-1" role="dialog" aria-labelledby="recoverModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <hr class="red-line"/>
+        <h3 id="recoverModalLabel">Recuperação de senha</h3>
+    </div>
+    <div class="modal-body">
+        <div id="loading" style="display:none"><strong>Carregando...</strong></div>
+        <form id="recover-form" method="POST" action="{% url website:ajax_recover %}" onsubmit="return false">
+            <ul>
+                <li>
+                    <input type="text" name="email" placeholder="Digite seu email.." />
+                    <ul class="recover-errors"></ul>
+                </li>
+                <li>
+                    <input type="submit" class="grey-button medium" value="Enviar"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+<!-- signin -->
+<div class="modal hide fade" id="signin-modal" tabindex="-1" role="dialog" aria-labelledby="signinModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <hr class="red-line"/>
+        <div id="signinModalLabel"><i class="icon-remove"></i><span>Erro no Login</span></h3></div>
+    </div>
+    <div class="modal-body">
+        <div id="loading" style="display:none"><strong>Carregando...</strong></div>
+        <ul class="errors"></ul>
+    </div>
+</div>
+
+
+
+<!-- Error -->
+<div class="modal hide fade" id="error-modal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <hr class="red-line"/>
+       <div id="errorModalLabel"><i class="icon-remove"></i><span>Erro no cadastro</span></div>
+    </div>
+    <div class="modal-body">
+        <div id="loading" style="display:none"><strong>Carregando...</strong></div>
+        <ul class="errors"></ul>
+    </div>
+</div>
+
+
+<!-- Sent --> 
+<div class="modal hide fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <hr class="green-line"/>
+     <div id="successLabel"><i class="icon-ok"></i><span></span></div>
+    </div>
+    <div class="modal-body">
+        <p></p>
+    </div>
+    <div class="modal-footer">
+        <button class="gray-button" data-dismiss="modal" aria-hidden="true">Fechar</button>
+    </div>
+</div>

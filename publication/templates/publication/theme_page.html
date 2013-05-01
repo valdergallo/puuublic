@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load i18n thumbnail default_image endless user_favorited %}
+
+{% block title %}
+Puuublic - {{ theme.title|capfirst }}
+{% endblock %}
+
+{% block extra_meta %}
+<meta name="author" content="{{ theme.user.get_full_name|title }}"/>
+<meta name="description" content="Conte as novidades sobre {{ theme.title|title }}">
+<meta name="keywords" content="html, puuublic, perfil, {{ theme.title }}">
+{% endblock %}
+
+
+
+{% block ogtags %}
+<!-- OG -->
+<meta property="og:image" content="http://puuublic.com/static/img/oglogo.png"/>
+<meta property="og:title" content="{{ theme.title|capfirst }}"/>
+<meta property="og:description" content="Conte as novidades sobre {{ theme.title|capfirst }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Puuublic"/>
+<meta property="og:url" content="{{ theme.url }}"/>
+<meta itemprop="name" content="{{ theme.title|capfirst }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:url" value="{{ theme.url }}">
+<meta name="twitter:title" value="{{ theme.title|capfirst }}">
+{% endblock%}
+
+
+{% block main %}
+<div class="container theme-page">
+    <div class="row">
+        <div class="span">
+            <h2>{{ theme.title|capfirst }}</h2>
+            <hr/>
+            <p>Quais são as novidades de {{ theme.title|capfirst }}?</p>
+            {% include 'includes/social.html' %}
+            {% if user.is_authenticated %}
+            <button class="green-button" onclick="javascript:window.location='{% url website:publication_add %}?theme={{theme.slug}}'">Publicar</button>
+            {% if user|hasfavorite:theme.id %}
+            <button class="btn btn-large btn-primary" id="favorite" key="{{ theme.id }}">Favoritado</button>
+            {% else %}
+            <button class="green-button" id="favorite" key="{{ theme.id }}">Favoritar</button>
+            {% endif %}
+            {% endif %}
+            <small>{{ theme.description }}</small>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="span12 recent">
+            <h2>Publicações recentes</h2>
+            <div class="row">
+                {% for pub in pub_list %}
+                <div class="publication border-top">
+                    <div class="span1 picture">
+                        <figure>
+                            {% thumbnail pub.user.get_profile.image "40" crop="center" as im %}
+                            <img src="{{ im.url }}" alt="pub.user" width="{{ im.width }}" height="{{ im.height }}"/>
+                            {% empty %}
+                            <img src="{% random_image %}" title="{{ pub.title }}" width="40">
+                            {% endthumbnail %}                
+                        </figure>
+                    </div>
+                    <div class="span">
+                        <span class="pub-title"><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></span>
+                        <div>
+                            <p class="small">{{ pub.updated_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{% url website:publications_user pub.user.id %}">{{ pub.user.get_full_name }}</a></p>
+                        </div> 
+                    </div>
+                </div>
+            {% empty %}
+            </div>
+            <div class="row">
+                <div class="span">
+                    <figure>
+                    <img src="{{ STATIC_URL}}/img/logo-small.png" />
+                    </figure>
+                </div>
+                <div class="span">
+                    <h4>Este Puuublic está bem vazio, não é mesmo? Aproveite, você pode ser o primeiro a publicar aqui.</h4>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+{% endblock  %}
