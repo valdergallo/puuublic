@@ -1,45 +1,53 @@
 {% extends 'base.html' %}
 
-{% block main %}
-<div class="container contato">
-	<div class="row">
-        <div class="span">
-            <h2>Contato</h2>
-            <hr/>
-            <br/>
-		    <p>Quer fazer reclamações, tem uma sugestão para melhorar o site ou quer nos enviar uma pergunta?<br>
-		    Então mande-nos uma mensagem sobre esses e outros assuntos, estamos sempre ouvindo os usuários e fazendo o possível para responder rapidamente. Ou se preferir envie um e-mail para <a href="mailto:contact@puuublic.com">contact@puuublic.com</a></p>
-	    </div>
-    </div>
-	<div class="row">
-        <form action="{% url website:contato %}" id="formContact" method="POST" onsubmit="return false">
-            <div class="span">
-                {% csrf_token %}
-                    <label for="id_name" title="{{ form.name.help_text }}">Nome*</label>
-                    {{ form.name }}
-                    <label for="id_city" title="{{ form.city.help_text }}">Cidade</label>
-                    {{ form.city }}
-                    <label for="id_email" title="{{ form.email.help_text }}">E-mail*</label>
-                    {{ form.email }}
-                    <label for="id_fone" title="{{ form.fone.help_text }}">Telefone</label>
-                    {{ form.fone }}
-                    <br/>
-                    <span>{{ form.fone.help_text }}</span>
-            </div>
-            <div class="span">
-                <label for="id_message" title="{{ form.message.help_text }}">Mensagem</label>
-                {{ form.message }}
-                <div class="row">
-                    <div class="span">
-                        <span>*Preenchimento obrigatório</span>
-                    </div>
-                    <div class="span right">
-                        <input type="submit" class="green-button" value="Enviar" />
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<br/>
-{% endblock  %}
+{% block wrapper %}
+<section>
+	<h2>Contato</h2>
+	<article>
+		Quer fazer reclamações, tem uma sugestão para melhorar o site ou quer nos enviar uma pergunta?<br>
+		Então mande-nos uma mensagem sobre esses e outros assuntos, estamos sempre ouvindo os usuários e fazendo o possível para responder rapidamente. Ou se preferir envie um e-mail para <a href="mailto:contact@puuublic.com">contact@puuublic.com</a>
+	</article>
+	<article>
+		<form action="" name='form_contact' class="form_contact" method="POST" enctype="multipart/form-data">{% csrf_token %}
+			<div id='errorMsg'>
+				{{ form.non_field_errors }}
+                {% if form.sent %}
+                <ul>
+                    <li class="success">{{form.sent}}</li>
+                </ul>
+                {% endif %}
+			</div>
+			<div class="form_right">
+				<p>
+			        <label for="id_message" title="{{ form.message.help_text }}">Mensagem:</label>
+			        {{ form.message }}
+				</p>
+				<p>
+					<span>*Preenchimento obrigatório</span>
+					<input type="submit" value="Enviar &rarr;">
+				</p>
+			</div>
+			<div class="form_left">
+			    <p>
+			        <label for="id_name" title="{{ form.name.help_text }}">Nome*:</label>
+			        {{ form.name }}
+					{{ form.name.errors }}
+				</p>
+				<p>
+			        <label for="id_city" title="{{ form.city.help_text }}">Cidade:</label>
+			        {{ form.city }}
+				</p>
+				<p>
+			        <label for="id_email" title="{{ form.email.help_text }}">E-mail*:</label>
+			        {{ form.email }}
+					{{ form.email.errors }}
+				</p>
+				<p>
+			        <label for="id_fone" title="{{ form.fone.help_text }}">Telefone:</label>
+			        {{ form.fone }}
+				</p>
+			</div>
+		</form>
+	</article>
+</section>
+{% endblock wrapper %}
