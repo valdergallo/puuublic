@@ -28,7 +28,7 @@ def home(request):
     page = request.REQUEST.get('page', 1)
 
     if request.user.is_authenticated():
-        return redirect(reverse('website:home_user', args=[request.user]))
+        return redirect(reverse('website:dashboard', args=[request.user]))
 
     must_popular_publication_list = Publication.objects.must_popular(page=page)
     last_publication_list = Publication.objects.lastest_five()
@@ -49,7 +49,62 @@ def home(request):
                   )
 
 
-def home_user(request, username):
+def publications(request):
+    "List all publications"
+    search = request.POST.get('search', '')
+    page = request.REQUEST.get('page', 1)
+
+    search_form = SearchForm(request.POST or None)
+
+    if request.method == 'POST':
+        if search_form.is_valid():
+            pub_list = search_form.get_result_queryset()
+    else:
+        pub_list = Publication.objects.all().order_by('-rated_count', '-updated_at')
+
+    pub_last_update = pub_list.order_by('-updated_at')[0:10]
+
+    return render(request,
+                  "website/publications.html",
+                    {
+                    "search": search,
+                    "search_form": search_form,
+                    "pub_list": pub_list,
+                    "pub_last_update": pub_last_update,
+                    "page": page
+                     }
+                  )
+
+
+def dashboard(request, username):
+    "Following list"
+    search = request.POST.get('search', '')
+    page = request.REQUEST.get('page', 1)
+    get_user = get_object_or_404(User, username=username)
+
+    search_form = SearchForm(request.POST or None)
+
+    if request.method == 'POST':
+        if search_form.is_valid():
+            pub_list = search_form.get_result_queryset()
+    else:
+        pub_list = Publication.objects.filter(user__in=get_user.following.all()).order_by('-rated_count', '-updated_at')
+
+    pub_last_update = pub_list.order_by('-updated_at')[0:10]
+
+    return render(request,
+                  "website/publications.html",
+                    {
+                    "search": search,
+                    "search_form": search_form,
+                    "pub_list": pub_list,
+                    "pub_last_update": pub_last_update,
+                    "page": page
+                     }
+                  )
+
+
+def publications_user(request, username):
     "Starting page with login"
     search = request.POST.get('search', '')
     get_user = get_object_or_404(User, username=username)
@@ -63,7 +118,7 @@ def home_user(request, username):
         pub_list = get_user.publications_set.all().order_by('-rated_count', '-updated_at')
 
     return render(request,
-                  "website/home_user.html",
+                  "website/publications_user.html",
                     {
                     "get_user": get_user,
                     "search": search,
@@ -103,16 +158,17 @@ def contato(request):
     "Contato without login"
 
     form = ContactForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        form.send_email()
-        #reset form
-        form = ContactForm()
-        form.sent = u"Sua mensagem foi enviada com sucesso"
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            form.send_email()
+            #reset form
+            form = ContactForm()
+            form.sent = u"Sua mensagem foi enviada com sucesso"
 
     return render(request,
-                "website/contact.html",
-                {'form': form}
+                    "website/contact.html",
+                    {'form': form}
                 )
 
 
