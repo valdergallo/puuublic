@@ -8,14 +8,10 @@
 		Então mande-nos uma mensagem sobre esses e outros assuntos, estamos sempre ouvindo os usuários e fazendo o possível para responder rapidamente. Ou se preferir envie um e-mail para <a href="mailto:contact@puuublic.com">contact@puuublic.com</a>
 	</article>
 	<article>
-		<form action="" name='form_contact' class="form_contact" method="POST" enctype="multipart/form-data">{% csrf_token %}
+		<form action="{% url website:contato %}" name='form_contact'
+        class="form_contact" method="POST" enctype="multipart/form-data" onsubmit="return false">
+            {% csrf_token %}
 			<div id='errorMsg'>
-				{{ form.non_field_errors }}
-                {% if form.sent %}
-                <ul>
-                    <li class="success">{{form.sent}}</li>
-                </ul>
-                {% endif %}
 			</div>
 			<div class="form_right">
 				<p>
@@ -24,14 +20,13 @@
 				</p>
 				<p>
 					<span>*Preenchimento obrigatório</span>
-					<input type="submit" value="Enviar &rarr;">
+					<input type="submit" value="Enviar &rarr;" />
 				</p>
 			</div>
 			<div class="form_left">
 			    <p>
 			        <label for="id_name" title="{{ form.name.help_text }}">Nome*:</label>
 			        {{ form.name }}
-					{{ form.name.errors }}
 				</p>
 				<p>
 			        <label for="id_city" title="{{ form.city.help_text }}">Cidade:</label>
@@ -40,7 +35,6 @@
 				<p>
 			        <label for="id_email" title="{{ form.email.help_text }}">E-mail*:</label>
 			        {{ form.email }}
-					{{ form.email.errors }}
 				</p>
 				<p>
 			        <label for="id_fone" title="{{ form.fone.help_text }}">Telefone:</label>
@@ -49,5 +43,14 @@
 			</div>
 		</form>
 	</article>
+
+    <!-- modal content -->
+    <div id="modal-content">
+    </div>
+
+    <!-- preload the images -->
+    <div style='display:none'>
+        <img src='{{STATIC_URL}}image/x.png' alt='' />
+    </div
 </section>
 {% endblock wrapper %}

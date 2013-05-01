@@ -165,7 +165,10 @@ def contato(request):
             #reset form
             form = ContactForm()
             form.sent = u"Sua mensagem foi enviada com sucesso"
-
+            return HttpResponse(json.dumps({'status':True,'msg':form.sent}))
+        else:
+            errors = [form.errors]
+            return HttpResponse(json.dumps({'status':False,'errors':errors}))
     return render(request,
                     "website/contact.html",
                     {'form': form}

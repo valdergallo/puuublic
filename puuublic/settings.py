@@ -2,6 +2,8 @@
 import os, sys
 BASEDIR = os.path.realpath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
+print BASEDIR
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -148,11 +150,14 @@ AUTH_PROFILE_MODULE = 'friendship.UserProfile'
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_HOST = 'localhost'
-
-
-
 DEFAULT_FROM_EMAIL = 'valdergallo@gmail.com'
 LOGIN_REDIRECT_URL = '/'
+
+INTERNAL_IPS = ('127.0.0.1',)
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS':False
+}
 
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
@@ -199,12 +204,16 @@ TINYMCE_COMPRESSOR = True
 TINYMCE_FILEBROWSER = True
 TINYMCE_GZ = True
 
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
+)
+
 if 'test' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3', 'NAME': '::memory::'}
-    #del AUTH_PROFILE_MODULE
+    del AUTH_PROFILE_MODULE
 
-
-try:
-    execfile(os.path.join(BASEDIR, 'puuublic/settings_local.py'))
-except IOError:
-    pass
