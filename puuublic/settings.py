@@ -1,12 +1,12 @@
 # -*- coding: utf8 -*-
-import os
+import os, sys
 BASEDIR = os.path.realpath(os.path.join(os.path.dirname(__file__), os.path.pardir))
-SITE_URL = 'http://puuublic.com'
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
+    ('Valder Gallo', 'valdergallo@gmail.com'),
     (u'Ellison Leao', 'ellisonleao@gmail.com'),
 )
 
@@ -14,10 +14,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'puuublicprod',
-        'USER': 'puuublic',  # Not used with sqlite3.
-        'PASSWORD': 'puuublic_p@ss',  # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASEDIR, 'db', 'puuublic.sqlite'),
+        'USER': '',  # Not used with sqlite3.
+        'PASSWORD': '',  # Not used with sqlite3.
         'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',  # Set to empty string for default. Not used with sqlite3.
     },
@@ -33,8 +33,6 @@ USE_TZ = False
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = os.path.join(BASEDIR, 'media')
-CKEDITOR_UPLOAD_PATH = MEDIA_ROOT
-CKEDITOR_RESTRICT_BY_USER = True
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -77,8 +75,8 @@ SECRET_KEY = '2l+i-5to%g7l-5t3j*#uc7uu#iudn8zf+h0u=f@nzpy4%jfj-%'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.app_directories.Loader',
     'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
 
@@ -88,7 +86,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'core.middleware.DeleteSessionOnLogoutMiddleware',
     #'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
@@ -101,7 +98,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
-    "website.context_processors.global_includes",
 )
 
 ROOT_URLCONF = 'puuublic.urls'
@@ -122,128 +118,91 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.sitemaps',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.humanize',
     #admin
-    #'grappelli',
+    'grappelli',
+    'tinymce',
     'filebrowser',
-    'taggit',
-    'ckeditor',
     #admin default
-    'suit',
     'django.contrib.admin',
     'django.contrib.admindocs',
     #projet apps
     'puuublic',
     'core',
-    'gunicorn',
     'publication',
     'friendship',
     'website',
     #plugins
     'sorl.thumbnail',
     'endless_pagination',
-    'captcha',
-    #'debug_toolbar',
-    'south',
+    'debug_toolbar',
+    'django_dynamic_fixture',
+    'coverage',
+    #'south',
+    #'registration', #TODO: make this work
 )
-
-AUTHENTICATION_BACKENDS = (
-    'puuublic.backends.EmailAuth',
-)
-
-CAPTCHA_NOISE_FUNCTIONS = None
-#SENTRY_DSN = 'https://00b195f8daa041e9a8a704f1857a43c0:db2564599ed345f798ecc8fc0882e024@app.getsentry.com/3344'
 
 AUTH_PROFILE_MODULE = 'friendship.UserProfile'
 
-#CKEDITOR
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': [
-            [      'Undo', 'Redo',
-              '-', 'Bold', 'Italic', 'Underline',
-              '-', 'Link', 'Unlink',
-              '-', 'Youtube', 'Vimeo',
-              '-', 'Preview',
-            ],
-        ],
-        'width': 945,
-        'height': 350,
-        'toolbarCanCollapse': False,
-        'linkShowTargetTab': False,
-        'linkShowAdvancedTab': False,
-        'extraPlugins': 'youtube,vimeo',
-        'language': 'pt-br',
-    }
-}
+#registration
+ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_HOST = 'localhost'
 
 
-#EMAIL_HOST = 'localhost'
-NO_REPLY_EMAIL = 'noreply@puuublic.com'
 
-#SMTP Definitions
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'noreply@puuublic.com'
-EMAIL_HOST_PASSWORD = 'tchuca32'
-EMAIL_PORT = 587
-
-
-DEFAULT_FROM_EMAIL = 'noreply@puuublic.com'
+DEFAULT_FROM_EMAIL = 'valdergallo@gmail.com'
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/'
 
-MAX_UPLOAD_SIZE = 3 * 1024 * 1024 # 3MB
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
-#LOGGING                                                                        
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
     },
     'handlers': {
-        'null': {
-            'level': 'DEBUG',
-            'class': 'django.utils.log.NullHandler',
-        },
-        'console':{
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
         'mail_admins': {
             'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
-        'django': {
-            'handlers': ['null'],
-            'propagate': True,
-            'level': 'INFO',
-        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
-            'propagate': False,
+            'propagate': True,
         },
     }
 }
+
+COVERAGE_MODULES = (
+                    'Publication',
+                    'core',
+                    'friendship',
+                    'website',
+                    )
+
 
 DDF_DEFAULT_DATA_FIXTURE = 'sequential'
 DDF_NUMBER_OF_LAPS = 1
 DDF_USE_LIBRARY = False
 DDF_VALIDATE_ARGS = True
+
+TINYMCE_JS_URL = MEDIA_URL + 'tiny_mce/tiny_mce.js'
+TINYMCE_JS_ROOT = MEDIA_URL + 'tiny_mce'
+TINYMCE_COMPRESSOR = True
+TINYMCE_FILEBROWSER = True
+TINYMCE_GZ = True
+
+if 'test' in sys.argv:
+    DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3', 'NAME': '::memory::'}
+    #del AUTH_PROFILE_MODULE
+
 
 try:
     execfile(os.path.join(BASEDIR, 'puuublic/settings_local.py'))
