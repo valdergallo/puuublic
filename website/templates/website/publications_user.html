@@ -1,84 +1,87 @@
-{% extends 'base_2col.html' %}
-{% load i18n thumbnail default_image endless %}
+{% extends 'base.html' %}
+{% load i18n thumbnail default_image endless humanize %}
+
+{% block title %}
+Puuublic - Perfil de {{ get_user.get_full_name }}
+{% endblock %}
+
+{% block extra_meta %}
+<meta name="author" content="{{ get_user.get_full_name|title }}"/>
+<meta name="description" content="Puuublic - Perfil de {{ get_user.get_full_name }}">
+<meta name="keywords" content="html, puuublic, perfil, {{ get_user.first_name }}">
+{% endblock %}
 
 
+{% block ogtags %}
+<!-- OG -->
+{% if get_user.get_profile.image %}
+{% thumbnail get_user.get_profile.image "200x200" crop="center" as im %} 
+<meta property="og:image" content="http://puuublic.com{{ im.url }}"/>
+{% endthumbnail %}
+{% else %}
+<meta property="og:image" content="{% random_image %}"/>
+{% endif %}
+<meta property="og:title" content="Puuublic - Perfil de {{ get_user.get_full_name|title }}"/>
+<meta property="og:type" content="profile"/>
+{% if get_user.get_profile.nickname %}
+<meta property="profile:username" content="{{ get_user.get_profile.nickname }}"/>
+{% else %}
+<meta property="profile:username" content="{{ get_user.get_profile.email }}"/>
+{% endif %}
+<meta property="profile:first_name" content="{{ get_user.first_name }}"/>
+<meta property="profile:last_name" content="{{ get_user.last_name }}"/>
+<meta property="og:url" content="{{ get_user.get_profile.url }}"/>
+{% endblock %}
 
-{% block aside %}
-
-		<h4>{{ get_user.get_full_name|default:user|capfirst }} </h4>
-		<div>Puuublics favoritados: </div>
-		<div>Pessoas favoritadas: </div>
-		<div>Leitores: </div>
-		<div>Publicationações: </div>
-		<div>Visualizações: </div>
-		<br>
-		<strong>Quem é {{ get_user.get_full_name|default:user|capfirst }}</strong>
-		<div>{{ get_user.get_profile.about }}</div>
-		{# <br> #}
-		{# 	 	<strong>Localização</strong> #}
-		{# 		<div><a href="about">#</a></div> #}
-		<br>
-		<strong>Página pessoal</strong>
-		<div><a href="{{ get_user.get_profile.url }}" >{{ user.get_profile.url }}</a></div>
-
-{% endblock aside %}
-
-{% block wrapper %}
-<article>
-	<table width='600px'>
-		<tr>
-			<td width='80px'>
-				<figure>
-				{% if get_user.get_profile.image %}
-					<img src="{{ get_user.get_profile.image.url }}" title="{{ get_user.username }}" width='67'>
-				{% else %}
-					<img src="{% random_image %}" title="{{ get_user.username }}" width='67'>
-				{% endif %}
-				</figure>
-			</td>
-			<td>
-				<h4><a href="{{ get_user.get_absolute_url }}">{{ get_user.get_full_name|default:user|capfirst }}</a></h4>
-				<div>Quais as novidades de {{ get_user.get_full_name|default:user|capfirst }}</div>
-				<a href="{{ get_user.get_profile.url|default:'#' }}" target='_blank'>{{ get_user.get_profile.url }}</a>
-				<div style='float:right'>
-					{% if user.is_authenticated %}
-					 <!-- TODO: if not follow -->
-						<button>adicionar aos favoritos</button>
-					<!-- TODO: show is folling -->
-					{% endif %}
-				</div>
-			</td>
-		</tr>
-	</table>
-</article>
-<br/>
-<h5>Publicationações recentes</h5>
-<hr/>
-
-{% paginate pub_list %}
-{% for pub in pub_list %}
-		<article>
-			{% thumbnail pub.image "40" as im %}
-			<figure>
-				<img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
-			</figure>
-			{% empty %}
-			<figure>
-				<img src="{% random_image %}" title="{{ pub.title }}" width="40">
-			</figure>
-			{% endthumbnail %}
-				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></h4>
-				<h5>{{ pub.tie }}</h5>
-				<div class='small article_footer'>Divulgado em {{ pub.created_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
-		</article>
-		{% if not forloop.last %}
-		<hr>
-		{% endif %}
-	{% empty %}
-		<article>
-			<h4> Nenhum Puuublic cadastrado {% if search %} para {{ search }} {% endif %} </h4>
-		</article>
-{% endfor %}
-{% show_pages %}
-
-{% endblock wrapper %}
+{% block main %}
+<div class="container user-page">
+    <div class="row" itemscope itemtype="http://schema.org/Person">
+        <div class="span">
+            {% if get_user.get_profile.image %}
+            {% thumbnail get_user.get_profile.image "67x67" crop="center" as im %} 
+            <img itemprop="image" src="{{ im.url }}" title="{{ get_user.get_username }}" width="67" height="67"/>
+            {% endthumbnail %}
+            {% else %}
+            <img itemprop="image" src="{% random_image %}" title="{{ get_user.get_username }}" width='67'>
+            {% endif %}
+        </div>
+        <div class="span">
+          <h4 itemprop="name"><a itemprop="url" href="{{ get_user.get_profile.get_absolute_url }}">{{ get_user.get_full_name|default:get_user|capfirst }}</a></h4>
+            {% if get_user.get_profile.url %}
+            <p>{{ get_user.get_profile.url|urlize }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+    {% paginate pub_list %}
+        <div class="span12">
+            <h2>Publicações  mais recentes</h2>
+            {% for pub in pub_list %}
+            <div class="publication border-top">
+                <div class="span1 picture">
+                    <figure>
+                        {% thumbnail pub.user.get_profile.image "37x37" crop="center" as im %}
+                        <img src="{{ im.url }}" alt="pub.user" width="{{ im.width }}" height="{{ im.height }}"/>
+                        {% empty %}
+                        <img src="{% random_image %}" title="{{ pub.title }}" width="40">
+                        {% endthumbnail %}                
+                    </figure>
+                </div>
+                <div class="span">
+                    <p class="pub-title"><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></p>
+                    <div>
+                      <p class="small">{{ pub.updated_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user.get_full_name }}</a> no puuublic <a href="{{ pub.theme.get_absolute_url }}">{{ pub.theme }}</a></p>
+                    </div> 
+                </div>
+                {% if get_user == request.user %}
+                <div class="span">
+                    <button class="green-button" onclick="window.location='{% url website:edit_publication pub.theme.slug pub.slug %}'">Editar</button>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% show_pages %}
+</div>
+{% endblock  %}

@@ -1,56 +1,51 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block js %}
-	{{ block.super }}
-	<script src="{{ STATIC_URL }}tiny_mce/tiny_mce_src.js"></script>
-	<script src="{{ STATIC_URL }}tiny_mce/plugins/youtube/editor_plugin_src.js"></script>
-	
-	<script language='javascript'>
-		tinyMCE.init({
-		        mode : "textareas",
-				theme : "advanced",
-				plugins: 'fullscreen, safari, vimeo, youtube',
-				language: "pt",
+{% block extrajs %}
+{{ publication_form.media }}
+{% endblock %}
 
-				theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,bullist,numlist,|,blockquote,|,link,unlink,|,image,youtube,vimeo,|,fullscreen,code",
-				theme_advanced_buttons2 : "",
-				theme_advanced_buttons3 : "",
-
-				extended_valid_elements : "a[href|target=_blank],strong/b,div[align],br,iframe[*]",
-				convert_urls: false,
-				process_html: true,
-
-				theme_advanced_toolbar_location : "top",
-				theme_advanced_toolbar_align : "left",
-				theme_advanced_statusbar_location : "none",
-				theme_advanced_resizing : false,
-		});
-		
-		tinyMCE_GZ = tinyMCE;
-	</script>
-{% endblock js %}
-
-{% block wrapper %}
-<aside class="col_right_form">
-	<h4>Quais as novidades?</h4>
-	<p>Algumas dicas podem ajudá-lo a responder essa pergunta. Primeiro, tome cuidado com o título,  ele deve contextualizar o leitor sobre o tema geral e estimular a leitura. Seja objetivo e procure incluir palavras que definam o conteúdo da Publicationação.</p>
-	<p>E o mais importante: a prática leva à perfeição.</p>
-	<p>A qualidade do seu texto irá evoluir com a prática, assim como as possibilidades de se expressar. Além disso, exercitar a escrita pode ser muito prazeroso. O que está esperando? Mãos à obra e bons textos.Caso use textos de outros autores, lembre-se sempre de citar seus nomes no final da Publicationação, assim você evita problemas autorais.</p>
-	<p>Use vídeos de curta duração, divida-os em partes se necessário, pois nem todos os seus leitores possuem acesso à Internet de alta velocidade.</p>
-	<p>Use imagens para complementar as informações. Elas são um elemento essencial de persuasão.</p>
-	<p>Escreva em blocos. Na medida do possível restrinja cada parágrafo a uma idéia, como foi feito nesse texto que você lê agora.</p>
-	<p>Depois de esclarecer as questões principais, descreva os aspectos secundários. Não há limite para a extensão do texto, desde que ele seja de fácil entendimento e interesse ao leitor.</p>
-	<p>Seja sucinto no texto. Aborde o aspecto mais importante do que deseja falar logo no primeiro parágrafo. Deixe claro qual o assunto, quando ocorreu, quem envolveu, como, onde e o porquê.</p>
-</aside>
-
-<section class="form_publication">
-<h4>Crie uma nova Publicação</h4>
-<form action="{% url publication:publication_add %}" method="POST" name="publication_add" enctype="multipart/form-data" >
-	{% csrf_token %}
-    {{ publication_form.as_p }}
-    <button type="submit">Publicar</button>
-</form>
-</section>
-
-{% endblock wrapper %}
+{% block main %}
+<div class="container publication-add">
+    <div class="row">
+        {% if publication_form.errors %}
+        <div class="alert alert-error">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <h4 class="alert-heading">Alguns erros foram encontrados</h4>
+            <ul>
+            {% for field in publication_form %}
+            {% if field.errors %}
+            <li>{{ field.errors|striptags }}</li>
+            {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <form action="." method="POST"  enctype="multipart/form-data">
+        <div class="span12">
+            <h2>Quais as novidades?</h2>
+                <hr/>
+                {% csrf_token %}
+                <label for="id_theme_name"><i class="icon-file"></i> Escolha um Puuublic</label>
+                {{ publication_form.theme_name }}
+                <label for="id_theme_name"><i class="icon-pencil"></i> Escolha um Título</label>
+                {{ publication_form.title }}
+                <label for="id_theme_name"><i class="icon-pencil"></i> Digite o texto</label>
+                {{ publication_form.message }}
+                <p></p>
+        </div>
+        <div class="span12">
+            <div class="row">
+                <div class="span7">
+                {{ publication_form.image }}
+                </div>
+                <div class="span5 config-right">
+                    <button class="green-button large" type="submit">Publicar</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<br/>
+{% endblock  %}

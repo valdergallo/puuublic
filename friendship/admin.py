@@ -8,7 +8,7 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 """
 
 from django.contrib import admin
-from models import UserProfile, Group, Private, Follow
+from models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 
@@ -26,7 +26,3 @@ class UserAdmin(AuthUserAdmin):
 admin.site.unregister(User)
 # register new user admin
 admin.site.register(User, UserAdmin)
-
-admin.site.register(Group)
-admin.site.register(Private)
-admin.site.register(Follow)

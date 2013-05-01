@@ -1,62 +1,208 @@
-{% load i18n %}
+{% load i18n thumbnail default_image endless %}
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="pt-BR">
 <head>
     <meta charset='UTF-8'/>
+    <meta name="google-site-verification" content="6qB7DMaU71CEg6gSjNxo-ACXMKyPYxRQuT3-qjK11L4" />
     {% block meta %}
-        <meta name="description" content="Puuublic">
-        <meta name="keywords" content="HTML, tags, commands">
+    <meta name="viewport" content="width=device-width">
+    <meta name=”robots” content="all">
+    <meta name="distribution" content="global">
+    <meta name="document" content="resource-type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="pt" name="language">
+    <meta content="pt-BR" name="content-language">
     {% endblock meta %}
-	<meta name="generator" content="TextMate http://macromates.com/">
+    {% block extra_meta %}
+    <meta name="description" content="Puuublic - Quais as novidades?">
+    <meta name="keywords" content="HTML, tags, commands">
+    {% endblock %}
+    <meta property="fb:admins" content="847295023">
+    {% block ogtags %}
+    <!-- OG -->
+    <meta property="og:image" content="http://puuublic.com/static/img/oglogo.png"/>
+    <meta property="og:title" content="Puuublic - Quais as novidades?"/>
+    <meta property="og:description" content="Conte as novidades e fique por dentro do que te interessa. Crie páginas públicas e compartilhe textos, fotos e vídeos." />
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Puuublic"/>
+    <meta property="og:url" content="http://puuublic.com"/>
+    {% endblock %}
+    {% block seo %}
+
+    {% endblock %}
     <title>{% block title %}Puuublic {% endblock title %}</title>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/header.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/typography.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/hack.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/section.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/button.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/form.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/footer.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/modal.css" type="text/css"/>
-	{% block js %}
-	<script src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>
-    <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
-	<script src="{{ STATIC_URL }}js/base.js"></script>
-	<script src="{{ STATIC_URL }}js/django.js"></script>
-	<!--[if lt IE 9]>
-	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	{% endblock js %}
-	{% block extra_header %}
+    <link title="Puuublic - Feed" href="htttp://puuublic.com/atom/" type="application/atom+xml" rel="alternate">
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/mvp.css" type="text/css"/>
+    {% block js %}
+    <script>
+      var analytics=analytics||[];analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["identify","track","pageview","ab"];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])},
+      analytics.load("tsb35odt0o");
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
+    <script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/plugins.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery-ui.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tools.min.js"></script>
+    <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% endblock js %}
+    {% block extrajs %}
+    {% endblock %}
+    {% block extra_header %}
     {% endblock %}
 </head>
-<body id="index" class="home">
-{% block body %}
-<header id="navebar">
-    {% block nav %}
-        <nav>
-            {% include 'nav.html' %}
-        </nav>
-    {% endblock nav %}
-    {% block account %}
-    {% endblock account %}
-</header>
-<section id="wrapper">
-	{% if messages %}
-	<ul id="errorMsg">
-	    {% for message in messages %}
-	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-	    {% endfor %}
-	</ul>
-	{% endif %}
-    {% block wrapper %}
-    {% endblock wrapper %}
-</section>
-{% endblock body %}
-<footer>
+<body>
+    {% include 'includes/facebook.html' %}
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
+    {% if request.path == '/'  %}
+    {% include 'includes/navindex.html'%}
+    {% else %}
+    {% include 'includes/nav.html'%}
+    {% endif %}
+    {% block main %}
+    <div class="hero-unit">
+        <div class="container">
+            <div class="row home-right">
+                <p>Ainda não tem uma conta? Crie agora mesmo.</p>
+            </div>
+            <div class="row"></div>
+            <div class="row">
+                <div class="span5">
+                    <h1>Quais as novidades?</h1>
+                    <p class="about">Conte as novidades para todos e acompanhe o que te interessa.
+                    Consiga audiência rapidamente publicando nas páginas públicas e acompanhe de perto os assuntos e pessoas mais interessantes.</p>
+                    <div class="home-search"> 
+                        <p>Procure no Puuublic</p>
+                        <form action="{% url website:publications %}" method="get">
+                            {{ search_form.search }} 
+                            <input type="image" src="{{ STATIC_URL }}img/lupa.png">
+                        </form> 
+                    </div>
+                </div>
+                <div class="span no-margin-left home-right">
+                  <form class="form-horizontal" id="id_signup_form" name='signup_form' method='POST' action='/ajax_signup/' data-redirect="{% url website:welcome %}" onsubmit="return false">
+                        {% csrf_token %}
+                        {% for field in register_form %}
+                        {% if not forloop.last %}
+                        <div class="control-group">
+                            <label class='control-label'>{{ field.label }}</label>
+                            <div class="controls">
+                                {{ field }}
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="control-group">
+                            <label class='control-label'>{{ field.label }}</label>
+                            <div class="controls">
+                                {{ field }}
+                              <p class='js-captcha-refresh'>
+                                <a href="#">Atualizar Imagem</a>
+                              </p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        <div class="control-group">
+                            <div class="controls">
+                                <button class="green-button large">Criar Conta</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="terms">
+                        <p>Ao clicar em "Criar Conta" você estará afirmando que concorda<br />
+                        com a <a href="{% url website:termos %}">Licença de uso do Puuublic</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span12 home">
+                <h2>Publicações mais recentes</h2>
+                <div class="row">
+                    {% for pub in last_publication_list %}
+                    <div class="publication border-top">
+                        <div class="span1 picture">
+                            <figure>
+                                {% thumbnail pub.user.get_profile.image "37x37" crop="center" as im %}
+                                <img src="{{ im.url }}" alt="pub.user" width="{{ im.width }}" height="{{ im.height }}"/>
+                                {% empty %}
+                                <img src="{% random_image %}" title="{{ pub.title }}" width="40">
+                                {% endthumbnail %}                
+                            </figure>
+                        </div>
+                        <div class="span6">
+                            <span class="pub-title"><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></span>
+                            <div>
+                                <p class="small">{{ pub.updated_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user.get_full_name }}</a> no puuublic <a href="{{ pub.theme.get_absolute_url }}">{{ pub.theme }}</a>  </p>
+                            </div> 
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endblock %}
+    <hr>
     {% block footer %}
-    {% include 'footer.html' %}
-    {% endblock footer %}
-</footer>
+    <div class="container">
+        <footer>
+            <ul>
+                <li><a href="{% url website:publications_user  1 %}">Novidades</a></li>
+                <li><a href="{% url website:institucional %}">Institucional</a></li>
+                <li><a href="{% url website:termos %}#">Termos</a></li>
+                <li><a href="{% url website:contato %}#">Contato</a></li>
+                <li><a href="#">Puuublic ©</a></li>
+            </ul>
+        </footer>
+    </div>
+    {% endblock %}
+    {% include 'includes/modal.html' %}
+    <script type="text/javascript" src="http://sawpf.com/1.0.js"></script>    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
+    <script src="{{ STATIC_URL }}js/jquery-ui.min.js"></script>
+    <script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/plugins.js"></script>
+    <script src="{{ STATIC_URL }}js/main.js"></script>
+    <script src="{{ STATIC_URL }}js/django.js"></script>
+    <script src="https://raw.github.com/mathiasbynens/jquery-placeholder/master/jquery.placeholder.min.js" />
+    {% block lower_scripts %}
+    {% endblock %}
+    <script type="text/javascript">
+      var analytics=analytics||[];analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["identify","track","trackLink","trackForm","trackClick","trackSubmit","pageview","ab","alias"];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
+      analytics.load("n89xfjfzgt");
+    </script> 
+    <script type="text/javascript">
+      var uvOptions = {};
+      (function() {
+        var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+        uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/rd3MPYEEyuKqz8PqoXXWA.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+      })();
+    </script>
+    <script type="text/javascript">
+      window.___gcfg = {lang: 'pt-BR'};
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+    <script src="http://platform.linkedin.com/in.js" type="text/javascript"></script>
 </body>
 </html>

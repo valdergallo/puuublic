@@ -3,7 +3,7 @@
 from __future__ import with_statement
 import os
 import sys
-from fabric.api import cd, run, prefix, task, env
+from fabric.api import cd, run, prefix, task, env, sudo
 from fabric.colors import yellow, green
 from contextlib import contextmanager as _contextmanager
 
@@ -12,13 +12,14 @@ sys.path.append(BASEDIR)
 os.environ['DJANGO_SETTINGS_MODULE'] = 'puuublic.settings'
 
 # globals
-env.hosts = ['stage.puuublic.com']
+env.hosts = ['204.62.12.78']
+env.port = 70
 env.project = 'puuublic'
-env.user = 'valder'
-env.password = 'v11a82'
+env.user = 'ellison'
+env.password = 'cabeca1985'
 #/home/valder/stage.puuublic.com
-env.path = '~/stage.puuublic.com/puuublic/'
-env.activate = 'source ~/.virtualenvs/puuublic-pack/bin/activate'
+env.path = '/opt/www/puuublic.com/puuublic/'
+env.activate = 'source /home/ellison/envs/puuublic/bin/activate'
 env.colors = True
 env.format = True
 
@@ -53,22 +54,29 @@ def install_packages():
 def reset_db():
     "Reset database"
     with virtualenv():
-        dabase_path = os.path.join(env.path, 'db', 'puuublic.sqlite')
-        try:
-            run("rm %s" % dabase_path)
-        except:
-            print green('Database File doest not exist')
+        run('mysql -u puuublic -p puuublic_p@ss \
+            -e "drop database puuublicprod; \
+            create database puuublicprod default charset utf8;" ')
         run('python manage.py syncdb')
 
 
 @task
-def migrate_db():
+def sync_and_migrate():
     "Migrate database"
     with virtualenv():
         print(yellow('Migrate database'))
-        run('python manage.py migrate')
+        run('../manage.py syncdb')
+        run('../manage.py migrate')
         print(green('Done'))
 
+
+
+@task
+def collectstatic():
+    with virtualenv():
+        print(yellow('Running collectstatic'))
+        run('../manage.py collectstatic --noinput')
+        print(green('Done'))
 
 @task
 def pull():
@@ -78,7 +86,7 @@ def pull():
         run("git checkout -f")
         print(green('Done'))
         print(yellow('Pull files from server'))
-        run("git pull")
+        run("git pull origin master")
         print(green('Done'))
         run("git log -n 1")
         print(green('Done'))
@@ -89,7 +97,7 @@ def restart():
     "Restart webserver"
     with virtualenv():
         print(yellow('Restart server'))
-        run("touch ../tmp/restart.txt")
+        sudo("supervisorctl restart puuublic")
         print(green('Done'))
 
 
@@ -104,6 +112,8 @@ def uninstall(package):
 def deploy():
     "Send files to server and restart webserver"
     pull()
+    sync_and_migrate()
+    collectstatic()
     restart()
 
 

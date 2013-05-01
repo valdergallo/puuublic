@@ -9,54 +9,60 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from core.models import DefaultFields
-
-import hashlib
-
-
-class Group(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __unicode__(self):
-        return self.name
-
-
-class Private(models.Model):
-    group = models.ForeignKey(Group, related_name='private_groups')
-    can_see = models.BooleanField(default=True)
-
-
-class Follow(DefaultFields):
-    owner = models.ForeignKey(User, related_name='followers')
-    friend = models.ForeignKey(User, related_name='following')
-
-    def __unicode__(self):
-        return self.owner
-
 
 class UserProfile(DefaultFields):
     "Extending User with DefaultFields"
     user = models.OneToOneField(User)
-    image = models.ImageField(upload_to="profile/%Y/%m/%d")
+    image = models.ImageField(upload_to="profile/%Y/%m/%d",
+                              blank=True, null=True)
     url = models.URLField(null=True, blank=True)
     about = models.TextField(null=True, blank=True)
-    newsletter = models.BooleanField(default=True)
-    date_bourn = models.DateField(null=True, blank=True)
-    token = models.CharField(max_length=255, null=True, blank=True)
-    token_dev = models.CharField(max_length=255, null=True, blank=True)
+    newsletter = models.BooleanField(
+        verbose_name="Deseja receber newsletter com novidades?",
+        blank=True,
+        default=True
+    )
+    birthday = models.DateField(verbose_name=u"Aniversário",
+                                null=True, blank=True)
+    country = models.CharField(max_length=100, verbose_name=u"País",
+                               blank=True, null=True)
+    city = models.CharField(max_length=200, verbose_name=u"Cidade",
+                            blank=True, null=True)
+
+    nickname = models.CharField(max_length=100, verbose_name=u'Url de Perfil',
+                                blank=True, null=True)
 
     objects = models.Manager()
 
-    def get_absolute_url(self):
-        return '/u/%s/' % self.user.username
 
+    @property
+    def get_url(self):
+        if self.user.get_profile().url:
+            return self.url
+        return self.user.get_profile().get_absolute_url()
+
+
+    def get_absolute_url(self):
+        if self.nickname:
+            ident = self.nickname
+        else:
+            ident = self.user.id
+        return reverse('website:publications_user', kwargs={
+            'user_id': ident }
+        )
+
+    def profile_url(self):
+        if self.url:
+            return self.url
+        return self.get_absolute_url()
 
 def create_user_profile(sender, instance, created, **kwargs):
     "Signal to auto create user"
     if created:
         #gerar token aqui?
-        token = hashlib.md5(instance.email).hexdigest()
-        UserProfile.objects.create(user=instance,token=token)
+        UserProfile.objects.create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)

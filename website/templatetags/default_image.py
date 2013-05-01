@@ -18,13 +18,13 @@ def random_image():
     Usage:  <img src='{% random_image %}'>
     """
     CHOICE_DEFAULT = (
-        '/static/image/Avatar-Amarelo-67.png',
-        '/static/image/Avatar-Azul-Claro-67.png',
-        '/static/image/Avatar-Azul-Escuro-67.png',
-        '/static/image/Avatar-Azul-Medio-67.png',
-        '/static/image/Avatar-Roxo-67.png',
-        '/static/image/Avatar-Verde-67.png',
-        '/static/image/Avatar-Vermelho-67.png',
+        '/static/img/Avatar-Amarelo-67.png',
+        '/static/img/Avatar-Azul-Claro-67.png',
+        '/static/img/Avatar-Azul-Escuro-67.png',
+        '/static/img/Avatar-Azul-Medio-67.png',
+        '/static/img/Avatar-Roxo-67.png',
+        '/static/img/Avatar-Verde-67.png',
+        '/static/img/Avatar-Vermelho-67.png',
     )
 
     return choice(CHOICE_DEFAULT)

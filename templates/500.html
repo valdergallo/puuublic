@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% trans "error 500" %}{% endblock title %}
-{% block wrapper %}
-    <p><strong>{% trans "Error 500" %}</strong></p>
-{% endblock wrapper %}
+{% block title %}{% trans "Erro interno" %}{% endblock title %}
+{% block main %}
+    <p><strong>{% trans "Ocorreu um erro no servidor, tente novamente mais tarde" %}</strong></p>
+{% endblock  %}

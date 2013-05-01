@@ -1,96 +1,56 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-models.py
-
-Created by Valder Gallo on 2012-01-29.
 Copyright (c) 2012 valdergallo. All rights reserved.
 """
-#!/usr/bin/env python
-# encoding: utf-8
+
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
+from django.conf import settings
+from django.template.defaultfilters import slugify
 from core.models import DefaultFields, DefaultGeoFields
-from publication.managers import TagManager, PublicationManager, CommentManager
+from publication.managers import PublicationManager, CommentManager
 from website.templatetags.default_image import random_image
+from taggit.managers import TaggableManager
 
 
-class Liked(DefaultFields):
-    user = models.ForeignKey(User, related_name='users_liked')
-    publication = models.ForeignKey('Publication', related_name='publications_liked')
-
-    def __unicode__(self):
-        return self.user
-
-
-class Foward(DefaultFields):
-    user = models.ForeignKey(User, related_name='users_foward')
-    publication = models.ForeignKey('Publication', related_name='publications_foward')
-
-    def __unicode__(self):
-        return self.user
-
-
-class Watched(DefaultFields):
-    user = models.ForeignKey(User, related_name='users_watched')
-    publication = models.ForeignKey('Publication', related_name='publications_watched')
-
-    def __unicode__(self):
-        return self.user
-
-
-class Rated(DefaultFields):
-    user = models.ForeignKey(User, related_name='users_rated')
-    publication = models.ForeignKey('Publication', related_name='publications_rated')
-
-    def __unicode__(self):
-        return self.user
-
-
-class Alert(DefaultFields):
-    message = models.TextField()
-    user = models.ForeignKey(User, related_name='users_alert')
-    publication = models.ForeignKey('Publication', related_name='publications_alert')
-
-    def __unicode__(self):
-        return self.message
-
-
-class Tag(DefaultFields):
-    value = models.CharField(max_length=100)
-
-    def __unicode__(self):
-        return self.value
-
-
-class PublicationTag(DefaultFields):
-    tag = models.ForeignKey(Tag)
-    publication = models.ForeignKey('Publication', related_name='tags_set')
-
-    objects = TagManager()
-
-    def __unicode__(self):
-        return self.tag.value
-
+class Favorites(DefaultGeoFields):
+    user = models.ForeignKey(User)
+    theme = models.ForeignKey('Theme')
+    __unicode__ = lambda self: u'{} favoritou {}'.format(self.user, self.theme)
 
 class Theme(DefaultGeoFields):
-    "This is messages from one Puuublic"
-    user = models.ForeignKey(User, related_name='themes_set')
+    user = models.ForeignKey(User)
     title = models.CharField(max_length=255)
-    url = models.SlugField(max_length=30, null=True, blank=True, db_index=True)
+    slug = models.SlugField(max_length=255)
+    #url = models.SlugField(max_length=30, null=True, blank=True, db_index=True)
 
     def __unicode__(self):
-        return self.title
+        return self.title.title()
 
+    def url(self):
+        return "{}{}".format(settings.SITE_URL,self.get_absolute_url())
+
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('website:theme_page',(),{
+            'theme_slug': self.slug
+        })
 
 class Publication(DefaultGeoFields):
     "This is messages from one Publication"
-    theme = models.ForeignKey(Theme, related_name='themes_set')
+    theme = models.ForeignKey(Theme, related_name='publications', \
+        verbose_name=u"Tema",help_text=u"(selecione o tema da sua publicação)")
     user = models.ForeignKey(User, related_name='publications_set')
-    title = models.CharField(max_length=255)
-    message = models.TextField()
-    image = models.ImageField(upload_to='publication/%Y/%m/%d', null=True, blank=True)
+    title = models.CharField(max_length=255,verbose_name=u"Título")
+    message = models.TextField(verbose_name=u"Mensagem")
+    slug = models.SlugField(max_length=200)
+    image = models.ImageField(verbose_name=u"Imagem da Publicação",upload_to='publication/%Y/%m/%d', null=True, blank=True)
+    tags = TaggableManager(verbose_name=u"Tags da Publicação",help_text=u"(separe por vírgulas)",blank=True)
     published = models.BooleanField(default=True)
 
     #replicate count
@@ -101,7 +61,7 @@ class Publication(DefaultGeoFields):
     objects = PublicationManager()
 
     class Meta:
-        get_latest_by = ('updated_at',)
+        get_latest_by = ('-created_at',)
 
     def __unicode__(self):
         return self.title
@@ -109,12 +69,35 @@ class Publication(DefaultGeoFields):
     def image_default(self):
         return random_image()
 
+
+    def url(self):
+        return "{}{}".format(settings.SITE_URL,self.get_absolute_url())
+
     @models.permalink
     def get_absolute_url(self):
-        return ('publication:publication_detail', (), {
+        return ('website:publication_detail', (), {
+                'theme_slug': self.theme.slug ,
                 'publication_slug': self.slug or 'pub',
-                'publication_id': self.id,
             })
+
+
+
+#publication signal
+@receiver(pre_save, sender=Publication)
+def check_slug(sender, instance, **kwargs):
+    try:
+        obj = Publication.objects.get(pk=instance.pk)
+    except Publication.DoesNotExist:
+        pass
+    else:
+        if not obj.slug == slugify(instance.title):
+            nslug = slugify(instance.title)
+            c = 0
+            while Publication.objects.filter(theme=obj.theme,slug=nslug).count() > 0:
+                c += 1
+                nslug = '%s-%d'%(nslug, c)
+            instance.slug = nslug
+
 
 
 class PublicationImage(DefaultFields):

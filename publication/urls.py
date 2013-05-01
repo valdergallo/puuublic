@@ -9,8 +9,3 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 
 from django.conf.urls.defaults import patterns, url
 
-urlpatterns = patterns('publication.views',
-    url(r'^add/$', 'publication_add', name='publication_add'),
-    url(r'^theme_add/$', 'theme_add', name='theme_add'),
-    url(r'^detail/(?P<publication_id>\d+)/(?P<publication_slug>\w+)/$', 'publication_detail', name='publication_detail'),
-)

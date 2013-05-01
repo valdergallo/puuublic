@@ -1,64 +1,104 @@
 {% extends 'base.html' %}
-{% load i18n thumbnail default_image %}
+{% load i18n thumbnail default_image endless %}
+{% block title%}
+Puuublic - {{ publication.title|title }}
+{% endblock%}
 
-{% block wrapper %}
-<aside class="col_right_form">
-    <section class="recently_publication_list">
-        <h4>Publicationações mais recentes</h4>
-        {% for pub in user.Publications.must_popular %}
-        <article>
-            {% thumbnail pub.image "38" as im %}
+{% block extra_meta %}
+<meta name="author" content="{{ get_user.get_full_name|title }}"/>
+<meta name="description" content="{{ publication.title }}">
+<meta name="keywords" content="html, puuublic, {{ publication.theme.title}}, {{publication.title}}">
+{% endblock %}
+
+{% block ogtags %}
+{% if publication.image %} 
+{% thumbnail publication.image "200x200" as im %}
+<meta property="og:image" content="http://puuublic.com{{ im.url }}"/>
+{% endthumbnail %}
+{% endif %}
+<meta property="og:title" content="{{ publication.title }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Puuublic"/>
+<meta property="og:url" content="{{ publication.url }}"/>
+<meta property="article:author" content="{{ get_user.get_full_name|title }}">
+<meta property="article:section" content="{{ publication.theme.title|capfirst }}">
+{% endblock %}
+
+{% block seo %}
+<meta itemprop="name" content="{{ publication.title }}">
+<meta itemprop="description" content="{{ publication.title }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:url" value="{{ publication.url }}">
+<meta name="twitter:title" value="{{ publication.title }}">
+{% if publication.image %}
+{% thumbnail publication.image "320x200" as im %}
+<meta name="twitter:image" value="http://puuublic.com{{ im.url }}">
+{% endthumbnail %}
+{% endif %}
+{% endblock%}
+
+
+{% block main %}
+<div class="container publication-page" >
+    <div class="row">
+        <div class="span12" itemscope itemtype="http://schema.org/Article">
+          <h2 itemprop="name">{{ publication.title }}</h2>
+          <p class="small">
+          <time itemprop="datePublished" datetime="{{ publication.updated_at|date:"Y-m-d"}}">
+          {{ publication.updated_at|date:"d/m/Y"}}
+          </time> 
+          às {{ publication.updated_at|date:"H:i:s"}} por <a rel="author" itemprop="author" alt="{{ publication.user.get_full_name|title }}" href="{{ publication.user.get_profile.get_absolute_url }}">{{ publication.user.get_full_name }}</a> no puuublic <span itemprop="articleSection"><a href="{{ publication.theme.get_absolute_url }}">{{publication.theme.title|capfirst}}</a></span></p>
+            {% include 'includes/social.html' %}
+            {% if publication.image %}
             <figure>
-                <img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
+                {% thumbnail publication.image "400" as im %}
+                <img itemprop="thumbnailUrl" src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" />
+                {% endthumbnail %}
             </figure>
-            {% empty %}
-            <figure>
-                <img src="{% random_image %}" title="{{ pub.title }}" width="38">
-            </figure>
-            {% endthumbnail %}
-            <h5>{{ pub.title }}</h5>
-            {{ pub.message|truncatewords_html:9 }}
-            <div align="right">
-                no puuublic <a href="#">{{ pub.user.username }}</a>
+            {% endif %}
+            <br/>
+            <div itemprop="articleBody">
+              {{ publication.message|safe }}
             </div>
-        </article>
-        {% endfor %}
-    </section>
-</aside>
-<section class="form_publication">
-    <h1>{{ publication.title }}</h1>
-    {% thumbnail Publication.image "950x200" as im %}
-    <figure>
-        <img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
-    </figure>
-    {% endthumbnail %}
-    {{ publication.message|safe }}
-    <div class="edit_bar">
-        EDIT BAR
+            {% if user.is_authenticated %}
+            <h3>Comente esta Publicação </h3>
+            <form action="" method="post" name="form_comment" id="id_form_comment">{% csrf_token %}
+                {{ form_comment.message }}
+                <button type="submit" class="green-button">
+                    Enviar
+                </button>
+            </form>
+            {% endif %}
+        </div>
     </div>
-    <h4> Commentar esta Publicationação </h4>
-    <form action="" name="form_comment" id="id_form_comment">
-        {{ form_comment.as_p }}
-        <button type="submit">
-            Enviar
-        </button>
-    </form>
-    <section class="comments">
-        <h4>Comentários ({{ publication.comments.count|default:0 }})</h4>
-        {% for comment in Publication.comments.last_ten %}
-        <article>
-            {% thumbnail comment.user.get_profile.image "67" as im %}
-            <figure>
-                <img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
-            </figure>
-            {% empty %}
-            <figure>
-                <img src="{{ default.image.url }}" title="{{ pub.title }}" width="{{ default.image.width }}" height="{{ default.image.height }}">
-            </figure>
-            {% endthumbnail %}
-            {{ comment.message }}
-        </article>
-        {% endfor %}
-    </section>
-</section>
-{% endblock wrapper %} 
+    <div class="row">
+        <div class="span12">
+            <h3 style="font-size:13px">Comentários ({{ comments.count|default:0 }})</h3>
+            {% paginate comments %}
+            {% for comment in comments %}
+            <div class="row comments">
+                 <div class="span">
+                {% thumbnail comment.user.get_profile.image "37x37" crop="center" as im %}
+                <figure>
+                    <a href="{% url website:publications_user comment.user.id %}">
+                        <img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
+                    </a>
+                </figure>
+                {% empty %}
+                <figure>
+                    <a href="{% url website:publications_user comment.user.id %}">
+                    <img src="{% random_image %}" title="{{ pub.title }}" width="37" height="37" >
+                    </a>
+                </figure>
+                {% endthumbnail %}
+                </div>
+                <div class="span6">
+                {{ comment.message|urlize }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<br/>
+{% endblock  %} 

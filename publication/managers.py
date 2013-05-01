@@ -15,20 +15,6 @@ from django.core.paginator import Paginator
 from core.managers import ActiveManager
 
 
-class TagManager(ActiveManager):
-
-    def register(self, values):
-        from publication.models import Publication, PublicationTag, Tag
-
-        tags = list(set(re.split(',| |-|/|\"|\'|\\n', values)))  # split value
-        tags = [x for x in tags if x]  # clear empty values
-        for tag in tags:
-            tag, _ = Tag.objects.get_or_create(value=slugify(tags))
-            publication = Publication.objects.get(id=self.core_filters.get('publication__id'))
-            PublicationTag.objects.get_or_create(tag=tag, publication=publication)
-        return tags
-
-
 class PublicationManager(ActiveManager):
 
     def must_popular(self, page=1, limit=10):
@@ -39,6 +25,8 @@ class PublicationManager(ActiveManager):
 
     def lastest_five(self):
         return self.all().order_by('-updated_at')[0:5]
+    def lastest_fifteen(self):
+        return self.all().order_by('-updated_at')[0:15]
 
 
 class DefaltImageManager(models.Manager):

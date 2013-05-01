@@ -1,118 +1,132 @@
-{% extends 'base_2col.html' %}
+{% extends 'base.html' %}
 {% load i18n thumbnail default_image endless %}
+{% block main %}
+<div class="container user-page">
+    {% if search %}
+    <div class="row">
+        <div class="span12">
+            <h2>Pesquisa: <strong>{{ search }}</strong> </h2>
+            <small>Encontrados: {{ result.count }} resultado{{ result.count|pluralize }}</small>
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#publications" data-toggle="tab">Publicações</a></li>
+              <li><a href="#messages" data-toggle="tab">Puuublics</a></li>
+              <li><a href="#people" data-toggle="tab">Pessoas</a></li>
+            </ul>
+            
+            <!-- conteudo -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="publications">
+                    <div class="span">
+                        {% for i in result.publications %}
+                        <div class="row search-result">
+                            <div class="span no-margin-left">
+                                {% thumbnail i.user.get_profile.image "37x37" crop="center" as im %}
+                                <figure><img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}"></figure>
+                                {% empty %}
+                                <figure><img src="{% random_image %}" title="{{ pub.title }}" width="37" height="37"></figure>
+                                {% endthumbnail %}
+                            </div>
+                            <div class="span">
+                                <h4><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></h4>
+                                <h5>{{ i.tie }}</h5>
+                                <p class="small">{{ i.updated_at|date:"d/m/Y"}} às {{ i.updated_at|date:"H:i:s"}} por <a href="{{ i.user.get_profile.get_absolute_url }}">{{ i.user.get_full_name }}</a> no puuublic <a href="{{ i.theme.get_absolute_url }}">{{ i.theme }}</a></p>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="row">
+                            <div class="span">
+                                <figure>
+                                <img src="{{ STATIC_URL}}/img/logo-small.png" />
+                                </figure>
+                            </div>
+                            <div class="span6">
+                                <h4>Sem resultados</h4>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="tab-pane" id="messages">
+                    <div class="span">
+                        {% for i in result.themes %}
+                        <div class="row search-result">
+                            <div class="span">
+                                <h4><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></h4>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="row">
+                            <div class="span">
+                                <figure>
+                                <img src="{{ STATIC_URL}}/img/logo-small.png" />
+                                </figure>
+                            </div>
+                            <div class="span">
+                                <h4>Sem resultados</h4>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="tab-pane" id="people">
+                    <div class="span">
+                        {% for i in result.people %}
+                        <div class="row search-result">
+                            <div class="span no-margin-left">
+                                {% thumbnail i.get_profile.image "37" crop="center" as im %}
+                                <figure><img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}"></figure>
+                                {% empty %}
+                                <figure><img src="{% random_image %}" title="{{ pub.title }}" width="37" height="37"></figure>
+                                {% endthumbnail %}
+                            </div>
+                            <div class="span6">
+                              <h4><a href="{{ i.get_profile.get_absolute_url }}">{{ i.get_full_name|default:i|capfirst }}</a></h4>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="row">
+                            <div class="span">
+                                <figure>
+                                <img src="{{ STATIC_URL}}/img/logo-small.png" />
+                                </figure>
+                            </div>
+                            <div class="span6">
+                                <h4>Sem resultados</h4>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
 
-
-
-{% block aside %}
-<h5>Publicationações mais recentes</h5>
-<hr/>
-{% for pub in pub_last_update %}
-		<article>
-			{% thumbnail pub.image "40" as im %}
-			<figure>
-				<img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
-			</figure>
-			{% empty %}
-			<figure>
-				<img src="{% random_image %}" title="{{ pub.title }}" width="40">
-			</figure>
-			{% endthumbnail %}
-				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></h4>
-				<h5>{{ pub.tie }}</h5>
-				<div class='small article_footer'>Divulgado em {{ pub.updated_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
-		</article>
-		{% if not forloop.last %}
-		<hr>
-		{% endif %}
-	{% empty %}
-		<article>
-			Nenhum Puuublic cadastrado
-		</article>
-{% endfor %}
-
-{% endblock aside %}
-
-{% block wrapper %}
-{% if not search %}
-<h5>Publicationações Populares</h5>
-{% else %}
-<h3>Pesquisa: {{ search }}</h3>
-<span class='mini'> Aproximadamente {{ pub_list.count }} resultado{{ pub_list|pluralize:'s' }}</span>
-<br/>
-<dl>
-	<dt><a href='{% url website:publications %}?filter=publication&search={{ search }}'
-	{% ifequal filter 'publication' %} class='selected' {% endifequal %}>Publicações</a></dt>
-	<dt><a href='{% url website:publications %}?filter=puuublic&search={{ search }}'
-	{% ifequal filter 'puuublic' %} class='selected' {% endifequal %}>Puuublics</a></dt>
-	<dt><a href='{% url website:publications %}?filter=people&search={{ search }}'
-	{% ifequal filter 'people' %} class='selected' {% endifequal %}>Pessoas</a></dt>
-</dl>
-{% endif %}
-<hr/>
-
-{% if not filter or filter == 'publication' %}
-{% paginate pub_list %}
-{% for pub in pub_list %}
-		<article>
-			{% thumbnail pub.image "40" as im %}
-			<figure>
-				<img src="{{ im.url }}" title="{{ pub.title }}" width="{{ im.width }}" height="{{ im.height }}">
-			</figure>
-			{% empty %}
-			<figure>
-				<img src="{% random_image %}" title="{{ pub.title }}" width="40">
-			</figure>
-			{% endthumbnail %}
-				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></h4>
-				<h5>{{ pub.tie }}</h5>
-				<div class='small article_footer'>Divulgado em {{ pub.updated_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
-		</article>
-		{% if not forloop.last %}
-		<hr>
-		{% endif %}
-	{% empty %}
-		<article>
-			<h4 class='no_result'> Desculpe, sua pesquisa não resultou nenhum resultado {% if search %} para {{ search }} {% endif %} </h4>
-		</article>
-{% endfor %}
-{% show_pages %}
-{% endif %}
-
-{% if filter == 'puuublic' %}
-{% paginate pub_list %}
-{% for pub in pub_list %}
-		<article>
-				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></h4>
-				<h5>{{ pub.title }}</h5>
-				<div class='small article_footer'>Divulgado em {{ pub.updated_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user }}</a></div>
-		</article>
-		{% if not forloop.last %}
-		<hr>
-		{% endif %}
-	{% empty %}
-		<article>
-			<h4 class='no_result'> Desculpe, sua pesquisa não resultou nenhum resultado {% if search %} para {{ search }} {% endif %} </h4>
-		</article>
-{% endfor %}
-{% show_pages %}
-{% endif %}
-
-{% if filter == 'people' %}
-{% paginate pub_list %}
-{% for pub in pub_list %}
-		<article>
-				<h4><a href="{{ pub.get_absolute_url }}">{{ pub.first_name }} {{ pub.last_name }}</a></h4>
-				<h5>{{ pub.first_name }} {{ pub.last_name }}</h5>
-		</article>
-		{% if not forloop.last %}
-		<hr>
-		{% endif %}
-	{% empty %}
-		<article>
-			<h4 class='no_result'> Desculpe, sua pesquisa não resultou nenhum resultado {% if search %} para {{ search }} {% endif %} </h4>
-		</article>
-{% endfor %}
-{% show_pages %}
-{% endif %}
-
-{% endblock wrapper %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %} 
+    <div class="row">
+        <div class="span12">
+            <h2>Publicações recentes</h2>
+            <div class="row">
+                {% for pub in pub_last_update %}
+                <div class="publication border-top">
+                    <div class="span1 picture">
+                        <figure>
+                            {% thumbnail pub.user.get_profile.image "37x37" crop="center" as im %}
+                            <img itemprop="image" src="{{ im.url }}" alt="{{ pub.user }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                            {% empty %}
+                            <img src="{% random_image %}" title="{{ pub.title }}" width="40">
+                            {% endthumbnail %}                
+                        </figure>
+                    </div>
+                    <div class="span">
+                        <p class="pub-title"><a href="{{ pub.get_absolute_url }}">{{ pub.title }}</a></p>
+                        <div>
+                          <p class="small">{{ pub.updated_at|date:"d/m/Y"}} às {{ pub.updated_at|date:"H:i:s"}} por <a href="{{ pub.user.get_profile.get_absolute_url }}">{{ pub.user.get_full_name }}</a> no puuublic <a href="{{ pub.theme.get_absolute_url }}">{{ pub.theme }}</a></p>
+                        </div> 
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock  %}

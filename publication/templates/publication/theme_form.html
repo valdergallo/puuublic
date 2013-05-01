@@ -1,34 +1,36 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block js %}
-	{{ block.super }}
-{% endblock js %}
-
-{% block wrapper %}
-<aside class="col_right_form">
-	<h4>Quais as novidades?</h4>
-	<p>Algumas dicas podem ajudá-lo a responder essa pergunta. Primeiro, tome cuidado com o título,  ele deve contextualizar o leitor sobre o tema geral e estimular a leitura. Seja objetivo e procure incluir palavras que definam o conteúdo da Publicationação.</p>
-	<p>E o mais importante: a prática leva à perfeição.</p>
-	<p>A qualidade do seu texto irá evoluir com a prática, assim como as possibilidades de se expressar. Além disso, exercitar a escrita pode ser muito prazeroso. O que está esperando? Mãos à obra e bons textos.Caso use textos de outros autores, lembre-se sempre de citar seus nomes no final da Publicationação, assim você evita problemas autorais.</p>
-	<p>Use vídeos de curta duração, divida-os em partes se necessário, pois nem todos os seus leitores possuem acesso à Internet de alta velocidade.</p>
-	<p>Use imagens para complementar as informações. Elas são um elemento essencial de persuasão.</p>
-	<p>Escreva em blocos. Na medida do possível restrinja cada parágrafo a uma idéia, como foi feito nesse texto que você lê agora.</p>
-	<p>Depois de esclarecer as questões principais, descreva os aspectos secundários. Não há limite para a extensão do texto, desde que ele seja de fácil entendimento e interesse ao leitor.</p>
-	<p>Seja sucinto no texto. Aborde o aspecto mais importante do que deseja falar logo no primeiro parágrafo. Deixe claro qual o assunto, quando ocorreu, quem envolveu, como, onde e o porquê.</p>
-</aside>
-
-<section class="form_publication">
-<h4>Crie uma nova Publicação</h4>
-<form action="{% url publication:publication_add %}" method="POST" name="publication_add" enctype="multipart/form-data" >
-	{% csrf_token %}
-    {{ theme_form.as_p }}
-    <div class='auto_url'>
-    	<p>O endereço desse puuublic será:</p>
-    	<a href='#'>http://</a>
+{% block main %}
+<div class="container theme-add">
+	<h2>Crie um novo Puuublic</h2>
+    <hr/>
+    <p>Escolha um nome que defina bem o assunto e lembre-se que puuublics são páginas públicas, e todos poderão publicar nelas.</p>
+    <br/>
+    {% if theme_slug %}
+    <h3>Você pode criar o tema {{ theme_slug }} agora! Preencha o formulário abaixo e clique em criar.</h3>
+    {% endif %}
+    <div class="row">
+        <div class="span12">
+            <p><i class="icon-file"></i> Digite o nome do novo puuublic</p>
+            <form id="themeForm" action="{% url website:theme_add %}" method="POST" onsubmit="return false" >
+                {% csrf_token %}
+                {{ theme_form.title }}
+        </div>
     </div>
-    <button type="submit">Salvar</button>
-</form>
-</section>
-
-{% endblock wrapper %}
+    <div class="row">
+        <div class="span6">
+             <div class='auto_url'>
+                <p>O endereço deste puuublic será:</p>
+                <a href='#'>http://puuublic.com/</a>
+            </div>
+        </div>
+        <div class="span6 config-right">
+            <span class="remaining"></span> 
+            <button class="green-button" type="submit">Criar</button>
+        </div>
+        </form>
+    </div>
+</div>
+<br/>
+{% endblock  %}

@@ -8,14 +8,10 @@ Copyright (c) 2012 valdergallo. All rights reserved.
 """
 
 from django.contrib import admin
-from models import Tag, Publication, PublicationImage, Comment
+from models import Publication, PublicationImage, Comment,Theme
 
 
 class Admin(admin.ModelAdmin):
-    pass
-
-
-class TagAdmin(admin.ModelAdmin):
     pass
 
 
@@ -25,7 +21,7 @@ class PublicationAdmin(admin.ModelAdmin):
         return ("id__iexact", "name__icontains",)
 
 
-admin.site.register(Tag, TagAdmin)
 admin.site.register(Publication, PublicationAdmin)
 admin.site.register(PublicationImage)
 admin.site.register(Comment)
+admin.site.register(Theme)
